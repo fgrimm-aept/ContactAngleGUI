@@ -1,11 +1,14 @@
+from gui.loadui import UI
 from PyQt5 import QtWidgets
-from main_window_cleaned import UiMainWindow
+import sys
 
-if __name__ == "__main__":
-    import sys
+
+def main():
     app = QtWidgets.QApplication(sys.argv)
-    main_window = QtWidgets.QMainWindow()
-    ui = UiMainWindow(main_window)
-    ui.setup_ui()
-    main_window.show()
-    sys.exit(app.exec_())
+    ui_window = UI()
+    ui_window.show()
+    app.exec_()
+
+
+if __name__ == '__main__':
+    main()
