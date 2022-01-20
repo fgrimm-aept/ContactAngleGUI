@@ -1,3 +1,5 @@
+#/usr/bin/env python3
+
 from gui.loadui import UI
 from PyQt5 import QtWidgets
 import sys

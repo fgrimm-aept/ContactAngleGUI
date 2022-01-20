@@ -8,7 +8,7 @@ class UI(QtWidgets.QMainWindow):
         super().__init__()
 
         # load the ui file
-        path = Path(Path.cwd(), 'ui', 'main_window.ui')
+        path = Path(Path.cwd(), 'ui', 'settings_groupbox.ui')
         uic.loadUi(path, self)
 
         # define our widgets
