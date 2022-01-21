@@ -7,7 +7,7 @@ from picamera import PiCamera
 
 
 class UI(QtWidgets.QMainWindow):
-    RESIZED = QtCore.pyqtSignal(bool)
+    RESIZED = QtCore.pyqtSignal()
     PREVIEW_POS = (630, 161, 1280, 720)
 
     def __init__(self):
@@ -150,16 +150,10 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.setDisabled(False)
 
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
-        if self.cam.preview is None:
-            self.RESIZED.emit(False)
-        else:
-            self.RESIZED.emit(True)
+        self.RESIZED.emit()
 
-    def resize_window(self, flag):
+    def resize_window(self):
         self.showMaximized()
-        if flag:
-            self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
-            self.preview_button.setChecked(True)
 
 
 class WorkerThread(QtCore.QThread):
