@@ -94,7 +94,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.iso = value
 
     def start_preview(self):
-        self.cam.start_preview(fullscreen=False, window=(630, 50, 1280, 764))
+        self.cam.start_preview(fullscreen=False, window=(630, 100, 1280, 764))
 
     def stop_preview(self):
         self.cam.stop_preview()
