@@ -124,7 +124,7 @@ class UI(QtWidgets.QMainWindow):
 
     def preview(self):
         if self.preview_button.isChecked():
-            self.cam.start_preview(fullscreen=False, window=(630, 180, 1280, 720))
+            self.cam.start_preview(fullscreen=False, window=(630, 160, 1280, 720))
         else:
             self.cam.stop_preview()
 
