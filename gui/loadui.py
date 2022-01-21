@@ -145,14 +145,23 @@ class UI(QtWidgets.QMainWindow):
 
         self.groupbox_profile = self.findChild(QtWidgets.QWidget, 'profile_groupbox')
 
-        # labels
+        # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
+        self.profile_name_combo_box = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
 
-        # push buttons
+        # set profile names connections
+        for file in self.paths['profiles'].glob('*.json'):
+            self.profile_name_combo_box.addItem(file.stem, file)
+
+        self.profile_name_combo_box.addItem()
+
+        # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
+        self.load_profile_button = self.findChild(QtWidgets.QPushButton, 'load_profile_button')
 
         # push buttons connections
         self.save_profile_button.clicked.connect(self.save_profile)
+        self.load_profile_button.clicked.connect(self.load_profile)
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
