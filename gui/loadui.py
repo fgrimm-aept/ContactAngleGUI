@@ -17,7 +17,7 @@ class UI(QtWidgets.QMainWindow):
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
         self.RESIZED.connect(self.resize_window)
-
+        print("Window Active:", self.isActiveWindow())
         self.cam = PiCamera()
         # thread
         self.worker = WorkerThread(cam=self.cam)
