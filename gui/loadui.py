@@ -2,11 +2,19 @@ import json
 import time
 from pathlib import Path
 
-from PyQt5 import QtWidgets, uic, QtCore
+from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from picamera import PiCamera
 
 
 class UI(QtWidgets.QMainWindow):
+
+    resized = QtCore.pyqtSignal()
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.resized.emit()
+
+    def resize_window(self):
+        print(self.resized)
 
     def __init__(self):
         super().__init__()
@@ -14,6 +22,7 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
+        self.resize.connect(self.resize_window)
 
         self.cam = PiCamera()
         # thread
@@ -113,8 +122,7 @@ class UI(QtWidgets.QMainWindow):
             if self.windowState() == QtCore.Qt.WindowMinimized:
                 self.cam.stop_preview()
                 self.preview_button.setChecked(False)
-            elif self.windowState() == QtCore.Qt.WindowResized:
-                print("Resized")
+
 
     def set_brightness(self, value):
         self.cam.brightness = value
