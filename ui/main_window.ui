@@ -912,6 +912,9 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
       <item row="2" column="3">
        <widget class="QPushButton" name="load_profile_button">
         <property name="sizePolicy">
@@ -1024,8 +1027,8 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>500</width>
-          <height>16777215</height>
+          <width>300</width>
+          <height>37</height>
          </size>
         </property>
         <property name="text">
@@ -1055,6 +1058,12 @@
       <item row="2" column="1">
        <widget class="QComboBox" name="load_profile_combobox">
         <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="maximumSize">
          <size>
           <width>300</width>
           <height>37</height>
