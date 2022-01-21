@@ -15,9 +15,6 @@ class UI(QtWidgets.QMainWindow):
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
 
-        self.setWindowFlag(QtCore.Qt.CustomizeWindowHint, True)
-        self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, False)
-
         self.cam = PiCamera()
         # thread
         self.worker = WorkerThread(cam=self.cam)
@@ -113,8 +110,9 @@ class UI(QtWidgets.QMainWindow):
     def changeEvent(self, event: QtCore.QEvent) -> None:
         print(event.type())
         if event.type() == QtCore.QEvent.WindowStateChange:
-            self.cam.stop_preview()
-            self.preview_button.setChecked(False)
+            if self.windowState == QtCore.Qt.WindowMinimized:
+                self.cam.stop_preview()
+                self.preview_button.setChecked(False)
 
     def set_brightness(self, value):
         self.cam.brightness = value
