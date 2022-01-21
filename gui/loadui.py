@@ -113,6 +113,8 @@ class UI(QtWidgets.QMainWindow):
             if self.windowState() == QtCore.Qt.WindowMinimized:
                 self.cam.stop_preview()
                 self.preview_button.setChecked(False)
+            elif self.windowState() == QtCore.Qt.WindowResized:
+                print("Resized")
 
     def set_brightness(self, value):
         self.cam.brightness = value
