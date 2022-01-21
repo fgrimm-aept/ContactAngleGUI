@@ -12,6 +12,7 @@ def main():
     ui_window = UI()
     ui_window.showMaximized()
     app.exec_()
+    print(ui_window.settings)
 
 
 if __name__ == '__main__':
