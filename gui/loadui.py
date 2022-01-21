@@ -21,6 +21,7 @@ class UI(QtWidgets.QMainWindow):
                          'contrast': self.cam.contrast,
                          'saturation': self.cam.saturation,
                          'iso': 0}
+        print(self.settings)
         self.paths = {'settings': Path(Path.cwd(), 'settings'),
                       'pictures': Path(Path.cwd(), 'pictures')}
         for path in self.paths.values():
