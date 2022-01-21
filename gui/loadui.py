@@ -1,5 +1,5 @@
 from pathlib import Path
-# from picamera import PiCamera
+from picamera import PiCamera
 from time import sleep
 
 from PyQt5 import QtWidgets, uic
@@ -14,7 +14,7 @@ class UI(QtWidgets.QMainWindow):
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
 
-        # self.cam = PiCamera()
+        self.cam = PiCamera()
 
         # define our widgets
 
