@@ -21,8 +21,11 @@ class UI(QtWidgets.QMainWindow):
                          'contrast': self.cam.contrast,
                          'saturation': self.cam.saturation,
                          'iso': 0}
-        self.settings_path = Path(Path.cwd(), 'settings')
-        self.default_settings = Path(self.settings_path, 'default.json')
+        self.paths = {'settings': Path(Path.cwd(), 'settings'),
+                      'pictures': Path(Path.cwd(), 'pictures')}
+        for path in self.paths.values():
+            path.mkdir(parents=True, exist_ok=True)
+        self.default_settings = Path(self.paths['settings'], 'default.json')
         try:
             with open(f'{self.default_settings}', 'r') as f:
                 self.settings = json.load(f)
