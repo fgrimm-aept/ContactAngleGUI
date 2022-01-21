@@ -12,9 +12,6 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
-        self.setLayout(QtWidgets.QVBoxLayout())
-        self.sl = QtWidgets.QSlider(QtCore.Qt.Horizontal)
-        self.layout().addWidget(self.sl)
 
         self.cam = PiCamera()
 
