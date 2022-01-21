@@ -151,9 +151,9 @@ class UI(QtWidgets.QMainWindow):
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         if self.cam.preview is None:
-            self.resized.emit(False)
+            self.RESIZED.emit(False)
         else:
-            self.resized.emit(True)
+            self.RESIZED.emit(True)
 
     def resize_window(self, flag):
         self.showMaximized()
