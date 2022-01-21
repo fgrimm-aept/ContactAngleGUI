@@ -273,6 +273,7 @@ class UI(QtWidgets.QMainWindow):
         all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
                         for i in range(self.iso_combobox.count())]
         for i, elem in enumerate(all_elements):
+            print(elem, self.current_settings['iso'])
             if elem == self.current_settings['iso']:
                 self.iso_combobox.setCurrentIndex(i)
                 break
