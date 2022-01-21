@@ -148,7 +148,6 @@ class UI(QtWidgets.QMainWindow):
         # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combo_box = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
-        self.set_profile_combo_box()
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
@@ -165,6 +164,11 @@ class UI(QtWidgets.QMainWindow):
         self.RESIZED.connect(self.resize_window)
         self.installEventFilter(self)
 
+        # set UI
+        self.start_preview()
+        self.set_profile_combo_box()
+
+
     def save_profile(self):
 
         self.current_settings = {'brightness': self.brightness_spinbox.value(),
@@ -172,7 +176,6 @@ class UI(QtWidgets.QMainWindow):
                                  'contrast': self.contrast_spinbox.value(),
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentData()}
-        print(self.current_settings)
         profile_name = self.profile_name_line_edit.text()
         if not profile_name:
             msg = QtWidgets.QMessageBox()
@@ -184,7 +187,7 @@ class UI(QtWidgets.QMainWindow):
             return
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
-            json.dump(self.current_settings, save_file, indent=4)
+            json.dump(self.current_settings, save_file)
         self.set_profile_combo_box()
 
     def set_profile_combo_box(self):
