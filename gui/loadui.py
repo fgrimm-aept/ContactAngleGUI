@@ -158,8 +158,8 @@ class UI(QtWidgets.QMainWindow):
         if not profile_name:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
-            msg.setText("Please set a profile name.")
-            msg.setInformativeText('No Profile Name set. Saving aborted.')
+            msg.setText('No Profile Name set.')
+            msg.setInformativeText('Please choose a profile name to save settings.')
             msg.setWindowTitle("Profile Error")
             msg.exec_()
             return
