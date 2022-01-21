@@ -151,7 +151,8 @@ class UI(QtWidgets.QMainWindow):
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
-        for file in self.paths['profiles'].glob('*.json'):
+        files = sorted(self.paths['profiles'].glob('*.json'))
+        for file in files:
             print(file)
             self.profile_name_combo_box.addItem(file.stem, file)
 
