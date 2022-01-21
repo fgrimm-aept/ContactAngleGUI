@@ -109,7 +109,7 @@ class UI(QtWidgets.QMainWindow):
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
         print(event.type())
-        if event.type() == QtCore.QEvent.WindowStateChange.WindowMinimized:
+        if event.type() == QtCore.QEvent.WindowStateChange:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
         if event.type() == QtCore.QEvent.ResizeEvent:
