@@ -150,6 +150,7 @@ class UI(QtWidgets.QMainWindow):
         self.profile_name_combo_box = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
 
         # set profile names connections
+        self.profile_name_line_edit.returnPressed.connect(self.save_profile)
         for file in self.paths['profiles'].glob('*.json'):
             self.profile_name_combo_box.addItem(file.stem, file)
 
