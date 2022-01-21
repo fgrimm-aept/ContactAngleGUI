@@ -1,3 +1,4 @@
+import time
 from pathlib import Path
 
 from PyQt5 import QtWidgets, uic
@@ -99,6 +100,6 @@ class UI(QtWidgets.QMainWindow):
         self.cam.stop_preview()
 
     def take_pic(self):
-        self.cam.start_preview()
+        time.sleep(5)
         self.cam.capture('foo.jpg')
-        self.cam.stop_preview()
+
