@@ -773,14 +773,17 @@
      </item>
     </layout>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QPushButton" name="take_pic_push_button">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>450</y>
-      <width>211</width>
-      <height>111</height>
+      <x>220</x>
+      <y>460</y>
+      <width>261</width>
+      <height>101</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Take Picture</string>
     </property>
    </widget>
   </widget>

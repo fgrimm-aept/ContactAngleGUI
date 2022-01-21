@@ -1,6 +1,7 @@
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, QtCore, uic
 from pathlib import Path
-
+from picamera import PiCamera
+from time import sleep
 
 class UI(QtWidgets.QMainWindow):
 
@@ -10,6 +11,9 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'settings_groupbox.ui')
         uic.loadUi(path, self)
+
+        # threads
+        self.threads = {}
 
         # define our widgets
 
@@ -64,3 +68,47 @@ class UI(QtWidgets.QMainWindow):
         # iso connections
         self.iso_slider.valueChanged['int'].connect(self.iso_spinbox.setValue)
         self.iso_spinbox.valueChanged['int'].connect(self.iso_slider.setValue)
+
+        # take pic push button
+        self.take_pic_push = self.findChild(QtWidgets.QPushButton, 'take_pic_push_button')
+
+        # take pic connections
+        self.take_pic_push.clicked.connect(self.take_pic)
+
+    def take_pic(self):
+        self.threads[1] = ThreadClass()
+        self.threads[1].start()
+        self.threads[1].any_signal.connect(self.my_function)
+        self.take_pic_push.setEnabled(False)
+
+    def pic_taken(self):
+        self.threads[1].stop()
+        self.take_pic_push.setEnabled(True)
+
+    def my_function(self, counter):
+
+        cnt = counter
+        index = self.sender().index
+        if index == 1:
+            print("Taking picture")
+
+
+class ThreadClass(QtCore.QThread):
+
+    any_signal = QtCore.pyqtSignal(bool)
+
+    def __init__(self):
+        super().__init__()
+        self.is_running = True
+        self.cam = PiCamera()
+
+    def run(self):
+        self.cam.start_preview()
+        sleep(2)
+        self.cam.capture('foo.jpg')
+        self.cam.stop_preview()
+
+    def stop(self):
+        self.is_running = False
+        self.cam.close()
+        self.terminate()
