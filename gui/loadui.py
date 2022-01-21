@@ -174,5 +174,4 @@ class WorkerThread(QtCore.QThread):
 
     def run(self):
         time.sleep(5)
-        print(self.cam.brightness)
         self.cam.capture('foo.jpg')
