@@ -115,13 +115,8 @@ class UI(QtWidgets.QMainWindow):
             print("Changed Window State?")
         if event.type() == QtCore.QEvent.WindowStateChange:
             if event.oldState() and QtCore.Qt.WindowMinimized:
-                print('QtCore')
-                print(event.type())
                 self.cam.stop_preview()
                 self.preview_button.setChecked(False)
-            if event.oldState() and QtCore.Qt.WindowActive:
-                print("Active or not?")
-                print(event.type())
 
     def set_brightness(self, value):
         self.cam.brightness = value
