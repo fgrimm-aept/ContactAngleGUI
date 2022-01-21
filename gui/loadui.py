@@ -13,11 +13,14 @@ class UI(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
+        # PiCamera init
+        self.cam = PiCamera()
+
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
         self.RESIZED.connect(self.resize_window)
-        self.cam = PiCamera()
+
         # thread
         self.worker = WorkerThread(cam=self.cam)
         self.settings = {'brightness': self.cam.brightness,
