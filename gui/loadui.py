@@ -23,7 +23,6 @@ class UI(QtWidgets.QMainWindow):
                          'contrast': self.cam.contrast,
                          'saturation': self.cam.saturation,
                          'iso': self.cam.iso}
-        print(self.settings)
         self.paths = {'settings': Path(Path.cwd(), 'settings'),
                       'pictures': Path(Path.cwd(), 'pictures')}
         for path in self.paths.values():
@@ -147,4 +146,5 @@ class WorkerThread(QtCore.QThread):
 
     def run(self):
         time.sleep(5)
+        print(self.cam.brightness)
         self.cam.capture('foo.jpg')
