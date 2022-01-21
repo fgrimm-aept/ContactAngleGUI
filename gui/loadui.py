@@ -155,9 +155,9 @@ class UI(QtWidgets.QMainWindow):
                                  'iso': self.iso_combobox.currentData()}
 
         profile_name = self.profile_name_lineedit.text()
-        path = Path(self.paths['profiles'], profile_name)
+        path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
-            json.dump(self.current_settings, save_file)
+            json.dump(self.current_settings, save_file, indent=4)
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
