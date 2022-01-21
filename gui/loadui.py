@@ -111,3 +111,5 @@ class UI(QtWidgets.QMainWindow):
         self.cam.start_preview()
         sleep(5)
         self.cam.capture('foo.jpg')
+        self.cam.stop_preview()
+        self.start_preview()
