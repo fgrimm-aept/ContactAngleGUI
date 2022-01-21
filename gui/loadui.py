@@ -157,7 +157,7 @@ class UI(QtWidgets.QMainWindow):
         profile_name = self.profile_name_lineedit.text()
         if not profile_name:
             msg = QtWidgets.QErrorMessage()
-            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            # msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.setText('No Profile Name set.')
 
             msg.setWindowTitle("Profile Error")
