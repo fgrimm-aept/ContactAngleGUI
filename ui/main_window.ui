@@ -120,7 +120,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Take a picture</string>
+         <string>Take A Picture</string>
         </property>
        </widget>
       </item>
@@ -145,7 +145,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Load last picture</string>
+         <string>Load Last Picture</string>
         </property>
        </widget>
       </item>
@@ -911,14 +911,14 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="profile_name_label">
         <property name="text">
          <string>Profile Name:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="profile_name_lineedit">
         <property name="text">
          <string/>
         </property>
