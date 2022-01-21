@@ -153,7 +153,7 @@ class UI(QtWidgets.QMainWindow):
                                  'contrast': self.contrast_spinbox.value(),
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentData()}
-
+        print(self.current_settings)
         profile_name = self.profile_name_lineedit.text()
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
