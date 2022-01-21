@@ -11,14 +11,13 @@ class UI(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # thread
-        self.worker = WorkerThread()
-
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
 
         self.cam = PiCamera()
+        # thread
+        self.worker = WorkerThread(cam=self.cam)
         self.settings = {'brightness': self.cam.brightness,
                          'sharpness': self.cam.sharpness,
                          'contrast': self.cam.contrast,
@@ -140,7 +139,11 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.setDisabled(False)
 
 
-class WorkerThread(QtCore.QThread, UI):
+class WorkerThread(QtCore.QThread):
+
+    def __init__(self, cam):
+        super().__init__()
+        self.cam = cam
 
     def run(self):
         time.sleep(5)
