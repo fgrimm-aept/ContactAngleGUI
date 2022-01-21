@@ -116,9 +116,6 @@ class UI(QtWidgets.QMainWindow):
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
-        if not self.isActiveWindow() or not self.isMaximized():
-            self.cam.stop_preview()
-            self.preview_button.setChecked(False)
         if event.type() == QtCore.QEvent.WindowStateChange:
             if event.oldState() and QtCore.Qt.WindowMinimized:
                 self.cam.stop_preview()
