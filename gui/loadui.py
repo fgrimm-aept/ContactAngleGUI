@@ -66,14 +66,7 @@ class UI(QtWidgets.QMainWindow):
         self.saturation_slider.valueChanged[int].connect(self.set_saturation)
 
         # iso
-        self.iso_slider = self.findChild(QtWidgets.QSlider, 'iso_slider')
-        self.iso_spinbox = self.findChild(QtWidgets.QSpinBox, 'iso_spinbox')
-        self.iso_label = self.findChild(QtWidgets.QLabel, 'iso_label')
-
-        # iso connections
-        self.iso_slider.valueChanged[int].connect(self.iso_spinbox.setValue)
-        self.iso_spinbox.valueChanged[int].connect(self.iso_slider.setValue)
-        self.iso_slider.valueChanged[int].connect(self.set_iso)
+        self.iso_combobox = self.findChild(QtWidgets.QComboBox, 'iso_combobox')
 
         # push buttons
         self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
@@ -101,7 +94,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.iso = value
 
     def start_preview(self):
-        self.cam.start_preview(fullscreen=False, window=(1000, 500, 800, 640))
+        self.cam.start_preview(fullscreen=False, window=(940, 70, 800, 640))
         sleep(2)
 
     def stop_preview(self):
