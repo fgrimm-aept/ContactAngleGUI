@@ -7,7 +7,8 @@ from picamera import PiCamera
 
 
 class UI(QtWidgets.QMainWindow):
-    resized = QtCore.pyqtSignal()
+    RESIZED = QtCore.pyqtSignal(bool)
+    PREVIEW_POS = (630, 161, 1280, 720)
 
     def __init__(self):
         super().__init__()
@@ -15,7 +16,7 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
-        self.resized.connect(self.resize_window)
+        self.RESIZED.connect(self.resize_window)
 
         self.cam = PiCamera()
         # thread
@@ -136,7 +137,7 @@ class UI(QtWidgets.QMainWindow):
 
     def preview(self):
         if self.preview_button.isChecked():
-            self.cam.start_preview(fullscreen=False, window=(630, 161, 1280, 720))
+            self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
         else:
             self.cam.stop_preview()
 
@@ -149,10 +150,16 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.setDisabled(False)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
-        self.resized.emit()
+        if self.cam.preview is None:
+            self.resized.emit(False)
+        else:
+            self.resized.emit(True)
 
-    def resize_window(self):
+    def resize_window(self, flag):
         self.showMaximized()
+        if not flag:
+            self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
+            self.preview_button.setChecked(True)
 
 
 class WorkerThread(QtCore.QThread):
