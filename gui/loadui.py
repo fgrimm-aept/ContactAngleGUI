@@ -160,7 +160,7 @@ class UI(QtWidgets.QMainWindow):
             msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.setText('No Profile Name set.')
 
-            msg.setWindowTitle("Profile Error")
+            msg.setWindowTitle("Error")
             msg.exec_()
             return
         path = Path(self.paths['profiles'], f'{profile_name}.json')
