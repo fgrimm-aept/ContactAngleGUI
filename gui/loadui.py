@@ -1,3 +1,4 @@
+import json
 import time
 from pathlib import Path
 
@@ -15,6 +16,19 @@ class UI(QtWidgets.QMainWindow):
         uic.loadUi(path, self)
 
         self.cam = PiCamera()
+        self.settings = {'brightness': self.cam.brightness,
+                         'sharpness': self.cam.sharpness,
+                         'contrast': self.cam.contrast,
+                         'saturation': self.cam.saturation,
+                         'iso': 0}
+        self.settings_path = Path(Path.cwd(), 'settings')
+        self.default_settings = Path(self.settings_path, 'default.json')
+        try:
+            with open(f'{self.default_settings}', 'r') as f:
+                self.settings = json.load(f)
+        except FileNotFoundError:
+            with open(f'{self.default_settings}', 'w') as f:
+                json.dump(self.settings, f)
 
         # define our widgets
 
@@ -76,6 +90,8 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.addItem("640", 640)
         self.iso_combobox.addItem("800", 800)
 
+        # iso connections
+        self.iso_combobox.activated.connect(self.set_iso)
 
         # push buttons
         self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
@@ -111,4 +127,3 @@ class UI(QtWidgets.QMainWindow):
     def take_pic(self):
         time.sleep(5)
         self.cam.capture('foo.jpg')
-
