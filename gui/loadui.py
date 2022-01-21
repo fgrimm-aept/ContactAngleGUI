@@ -129,9 +129,12 @@ class UI(QtWidgets.QMainWindow):
         self.load_pic_button.clicked.connect(self.load_pic)
         self.reset_button.clicked.connect(self.reset_values)
 
-        # Picture Groupbox #
+        # Profile Groupbox #
 
         self.groupbox_profile = self.findChild(QtWidgets.QWidget, 'profile_groupbox')
+
+        # labels
+        self.profile_name_lineedit = self.findChild(QtWidgets.QLineEdit, 'profile_name_lineedit')
 
         # push buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
@@ -151,7 +154,7 @@ class UI(QtWidgets.QMainWindow):
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentData()}
 
-        profile_name = self.profile_label.currentText()
+        profile_name = self.profile_name_lineedit.text()
         path = Path(self.paths['profiles'], profile_name)
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file)
