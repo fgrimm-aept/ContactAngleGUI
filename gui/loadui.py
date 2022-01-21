@@ -14,7 +14,6 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
-        self.setFixedSize(self.size())
 
         self.cam = PiCamera()
         # thread
@@ -109,6 +108,7 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.clicked.connect(self.take_pic)
 
     def changeEvent(self, a0: QtCore.QEvent) -> None:
+        print(a0)
         if a0.type() == QtCore.QEvent.WindowStateChange:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
