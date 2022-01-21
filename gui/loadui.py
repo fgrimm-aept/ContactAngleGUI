@@ -185,6 +185,7 @@ class UI(QtWidgets.QMainWindow):
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file, indent=4)
+        self.profile_name_combo_box.addItem(profile_name, path)
 
     def load_profile(self):
         pass
