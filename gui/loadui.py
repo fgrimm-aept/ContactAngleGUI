@@ -155,6 +155,14 @@ class UI(QtWidgets.QMainWindow):
                                  'iso': self.iso_combobox.currentData()}
         print(self.current_settings)
         profile_name = self.profile_name_lineedit.text()
+        if not profile_name:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Please set a profile name.")
+            msg.setInformativeText('No Profile Name set. Saving aborted.')
+            msg.setWindowTitle("Profile Error")
+            msg.exec_()
+            return
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file, indent=4)
