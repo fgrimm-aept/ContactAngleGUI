@@ -194,7 +194,7 @@ class UI(QtWidgets.QMainWindow):
 
     def load_profile(self):
         path = self.profile_name_combo_box.currentData()
-        with open(path, 'w') as load_file:
+        with open(path, 'r') as load_file:
             self.current_settings = json.load(load_file)
         self.set_values()
 
