@@ -153,8 +153,6 @@ class UI(QtWidgets.QMainWindow):
         for file in self.paths['profiles'].glob('*.json'):
             self.profile_name_combo_box.addItem(file.stem, file)
 
-        self.profile_name_combo_box.addItem()
-
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
         self.load_profile_button = self.findChild(QtWidgets.QPushButton, 'load_profile_button')
