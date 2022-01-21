@@ -95,7 +95,7 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.addItem("800", 800)
 
         # iso connections
-        self.iso_combobox.activated['str'].connect(self.set_iso)
+        self.iso_combobox.activated.connect(self.set_iso)
 
         # push buttons
         self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
