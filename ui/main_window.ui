@@ -918,7 +918,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="profile_name_lineedit">
+       <widget class="QLineEdit" name="profile_name_line_edit">
         <property name="text">
          <string/>
         </property>
@@ -946,6 +946,16 @@
       </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>730</y>
+      <width>381</width>
+      <height>231</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -986,12 +996,12 @@
   </action>
   <action name="actionLoad">
    <property name="text">
-    <string>&amp;Load</string>
+    <string>&amp;Load profile</string>
    </property>
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>&amp;Save</string>
+    <string>&amp;Save profile</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -1005,6 +1015,11 @@
   <action name="actionContact">
    <property name="text">
     <string>&amp;Contact</string>
+   </property>
+  </action>
+  <action name="actionLoad_picture">
+   <property name="text">
+    <string>Load picture</string>
    </property>
   </action>
  </widget>

@@ -1,4 +1,5 @@
 import json
+import logging
 import time
 from pathlib import Path
 
@@ -17,7 +18,18 @@ class WorkerThread(QtCore.QThread):
         self.cam.capture('foo.jpg')
 
 
-# TODO: Statusbar mit "Was wird getan" hinzufügen
+class QPlainTextEditLogger(logging.Handler):
+    def __init__(self, parent):
+        super().__init__()
+        self.widget = QtGui.QPlainTextEdit(parent)
+        self.widget.setReadOnly(True)
+
+    def emit(self, record):
+        msg = self.format(record)
+        self.widget.appendPlainText(msg)
+
+    # TODO: add statusbar with information about what is being done
+
 
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
@@ -134,7 +146,7 @@ class UI(QtWidgets.QMainWindow):
         self.groupbox_profile = self.findChild(QtWidgets.QWidget, 'profile_groupbox')
 
         # labels
-        self.profile_name_lineedit = self.findChild(QtWidgets.QLineEdit, 'profile_name_lineedit')
+        self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
 
         # push buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
@@ -154,7 +166,7 @@ class UI(QtWidgets.QMainWindow):
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentData()}
         print(self.current_settings)
-        profile_name = self.profile_name_lineedit.text()
+        profile_name = self.profile_name_line_edit.text()
         if not profile_name:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
