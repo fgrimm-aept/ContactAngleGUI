@@ -82,7 +82,7 @@ class UI(QtWidgets.QMainWindow):
 
         # push buttons connections
         self.start_preview_button.clicked.connect(self.start_preview)
-        self.stop_preview_button.clicked.connec(self.stop_preview)
+        self.stop_preview_button.clicked.connect(self.stop_preview)
         self.take_pic_button.clicked.connect(self.take_pic)
 
     def set_brightness(self, value):
