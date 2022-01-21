@@ -2,7 +2,7 @@ import json
 import time
 from pathlib import Path
 
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtCore
 from picamera import PiCamera
 
 
@@ -10,6 +10,9 @@ class UI(QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
+
+        # thread
+        self.worker = WorkerThread()
 
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
@@ -120,7 +123,6 @@ class UI(QtWidgets.QMainWindow):
         self.cam.saturation = value
 
     def set_iso(self, index):
-        print(self.iso_combobox.itemData(index))
         self.cam.iso = self.iso_combobox.itemData(index)
 
     def start_preview(self):
@@ -130,5 +132,16 @@ class UI(QtWidgets.QMainWindow):
         self.cam.stop_preview()
 
     def take_pic(self):
+        self.take_pic_button.setDisabled(True)
+        self.worker.start()
+        self.worker.finished.connect(self.evt_worker_finished)
+
+    def evt_worker_finished(self):
+        self.take_pic_button.setDisabled(False)
+
+
+class WorkerThread(QtCore.QThread, UI):
+
+    def run(self):
         time.sleep(5)
         self.cam.capture('foo.jpg')
