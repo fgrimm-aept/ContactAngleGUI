@@ -199,6 +199,7 @@ class UI(QtWidgets.QMainWindow):
         path = self.profile_name_combo_box.currentData()
         with open(path, 'r') as load_file:
             self.current_settings = json.load(load_file)
+        self.profile_name_line_edit.text(path.stem)
         self.set_values()
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
