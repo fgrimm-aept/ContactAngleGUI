@@ -99,13 +99,12 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.activated.connect(self.set_iso)
 
         # push buttons
-        self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
-        self.stop_preview_button = self.findChild(QtWidgets.QPushButton, 'stop_preview_button')
+        self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
+        self.preview_button.setCheckable(True)
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
 
         # push buttons connections
-        self.start_preview_button.clicked.connect(self.start_preview)
-        self.stop_preview_button.clicked.connect(self.stop_preview)
+        self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
 
     def set_brightness(self, value):
@@ -123,11 +122,11 @@ class UI(QtWidgets.QMainWindow):
     def set_iso(self, index):
         self.cam.iso = self.iso_combobox.itemData(index)
 
-    def start_preview(self):
-        self.cam.start_preview(fullscreen=False, window=(630, 210, 1280, 720))
-
-    def stop_preview(self):
-        self.cam.stop_preview()
+    def preview(self):
+        if self.preview_button.isChecked():
+            self.cam.start_preview(fullscreen=False, window=(630, 210, 1280, 720))
+        else:
+            self.cam.stop_preview()
 
     def take_pic(self):
         self.take_pic_button.setDisabled(True)
