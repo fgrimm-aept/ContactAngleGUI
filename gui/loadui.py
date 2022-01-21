@@ -115,13 +115,15 @@ class UI(QtWidgets.QMainWindow):
         self.RESIZED.connect(self.resize_window)
         self.installEventFilter(self)
 
-    def eventFilter(self, event: 'QObject', a1: 'QEvent') -> bool:
-        if event.type() == QtCore.QEvent.WindowDeactivate:
+    def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
+        if a1.type() == QtCore.QEvent.WindowDeactivate:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
-        if event.type() == QtCore.QEvent.WindowStateChange:
+        if a1.type() == QtCore.QEvent.WindowStateChange:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
+        return False
+
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
