@@ -149,7 +149,7 @@ class UI(QtWidgets.QMainWindow):
     def evt_worker_finished(self):
         self.take_pic_button.setDisabled(False)
 
-    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+    def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
         if self.cam.preview is None:
             self.RESIZED.emit(False)
         else:
@@ -157,7 +157,7 @@ class UI(QtWidgets.QMainWindow):
 
     def resize_window(self, flag):
         self.showMaximized()
-        if not flag:
+        if flag:
             self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
             self.preview_button.setChecked(True)
 
