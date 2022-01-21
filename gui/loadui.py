@@ -120,6 +120,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.saturation = value
 
     def set_iso(self, value):
+        print(value)
         self.cam.iso = value
 
     def start_preview(self):
