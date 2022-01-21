@@ -202,6 +202,9 @@ class UI(QtWidgets.QMainWindow):
         self.profile_name_line_edit.setText(path.stem)
         self.set_values()
 
+    def delete_profile(self):
+
+
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
             self.cam.stop_preview()

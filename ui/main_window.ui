@@ -20,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Contact Angle System</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
