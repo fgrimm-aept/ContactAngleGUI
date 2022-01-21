@@ -112,10 +112,9 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.clicked.connect(self.take_pic)
 
         # Window Events
-        self.RESIZED.connect(self.resize_window)
         self.installEventFilter(self)
 
-    def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
+    def eventFilter(self, a0, a1) -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
@@ -123,13 +122,6 @@ class UI(QtWidgets.QMainWindow):
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
         return False
-
-
-    # def changeEvent(self, event: QtCore.QEvent) -> None:
-    #
-    #     if event.type() == QtCore.QEvent.WindowStateChange:
-    #         self.cam.stop_preview()
-    #         self.preview_button.setChecked(False)
 
     def set_brightness(self, value):
         self.cam.brightness = value
