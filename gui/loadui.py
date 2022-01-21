@@ -14,6 +14,7 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
+        self.setFixedSize(self.size())
 
         self.cam = PiCamera()
         # thread
