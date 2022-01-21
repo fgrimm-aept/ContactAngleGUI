@@ -6,6 +6,19 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from picamera import PiCamera
 
 
+class WorkerThread(QtCore.QThread):
+
+    def __init__(self, cam):
+        super().__init__()
+        self.cam = cam
+
+    def run(self):
+        time.sleep(5)
+        self.cam.capture('foo.jpg')
+
+
+# TODO: Statusbar mit "Was wird getan" hinzufügen
+
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
     PREVIEW_POS = (630, 161, 1280, 720)
@@ -20,32 +33,33 @@ class UI(QtWidgets.QMainWindow):
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
 
-        # thread
+        # thread creation for camera
         self.worker = WorkerThread(cam=self.cam)
-        self.settings = {'brightness': self.cam.brightness,
-                         'sharpness': self.cam.sharpness,
-                         'contrast': self.cam.contrast,
-                         'saturation': self.cam.saturation,
-                         'iso': self.cam.iso}
-        self.paths = {'settings': Path(Path.cwd(), 'settings'),
+
+        # Save Cam Settings in dict
+        self.default_settings = {'brightness': self.cam.brightness,
+                                 'sharpness': self.cam.sharpness,
+                                 'contrast': self.cam.contrast,
+                                 'saturation': self.cam.saturation,
+                                 'iso': self.cam.iso}
+
+        self.current_settings = self.default_settings
+
+        # Directories Setup
+        self.paths = {'profiles': Path(Path.cwd(), 'profiles'),
                       'pictures': Path(Path.cwd(), 'pictures')}
         for path in self.paths.values():
             path.mkdir(parents=True, exist_ok=True)
-        self.default_settings = Path(self.paths['settings'], 'default.json')
-        try:
-            with open(f'{self.default_settings}', 'r') as f:
-                self.settings = json.load(f)
-        except FileNotFoundError:
-            with open(f'{self.default_settings}', 'w') as f:
-                json.dump(self.settings, f)
 
         # define our widgets
 
         # Menus #
+
         self.file_menu = self.findChild(QtWidgets.QMenu, 'menuFile')
         self.help_menu = self.findChild(QtWidgets.QMenu, 'menuHelp')
 
         # Settings Group #
+
         self.groupbox_settings = self.findChild(QtWidgets.QWidget, 'settings_groupbox')
 
         # brightness
@@ -102,18 +116,45 @@ class UI(QtWidgets.QMainWindow):
         # iso connections
         self.iso_combobox.activated.connect(self.set_iso)
 
-        # push buttons
+        # picture push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
+        self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
+        self.reset_button = self.findChild(QtWidgets.QPushButton, 'reset_button')
 
-        # push buttons connections
+        # picture push buttons connections
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
+        self.load_pic_button.clicked.connect(self.load_pic)
+        self.reset_button.clicked.connect(self.reset_values)
+
+        # Picture Groupbox #
+
+        self.groupbox_profile = self.findChild(QtWidgets.QWidget, 'profile_groupbox')
+
+        # push buttons
+        self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
+
+        # push buttons connections
+        self.save_profile_button.clicked.connect(self.save_profile)
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
         self.installEventFilter(self)
+
+    def save_profile(self):
+
+        self.current_settings = {'brightness': self.brightness_spinbox.value(),
+                                 'sharpness': self.sharpness_spinbox.value(),
+                                 'contrast': self.contrast_spinbox.value(),
+                                 'saturation': self.saturation_spinbox.value(),
+                                 'iso': self.iso_combobox.currentData()}
+
+        profile_name = self.profile_label.currentText()
+        path = Path(self.paths['profiles'], profile_name)
+        with open(path, 'w') as save_file:
+            json.dump(self.current_settings, save_file)
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
@@ -165,13 +206,12 @@ class UI(QtWidgets.QMainWindow):
     def resize_window(self):
         self.showMaximized()
 
+    def load_pic(self):
+        pass
 
-class WorkerThread(QtCore.QThread):
-
-    def __init__(self, cam):
-        super().__init__()
-        self.cam = cam
-
-    def run(self):
-        time.sleep(5)
-        self.cam.capture('foo.jpg')
+    def reset_values(self):
+        self.brightness_spinbox.setValue(self.default_settings['brightness'])
+        self.sharpness_spinbox.setValue(self.default_settings['sharpness'])
+        self.contrast_spinbox.setValue(self.default_settings['contrast'])
+        self.saturation_spinbox.setValue(self.default_settings['saturation'])
+        self.iso_combobox.setCurrentText(self.default_settings['iso'])
