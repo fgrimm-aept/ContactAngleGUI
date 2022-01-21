@@ -214,4 +214,4 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_spinbox.setValue(self.default_settings['sharpness'])
         self.contrast_spinbox.setValue(self.default_settings['contrast'])
         self.saturation_spinbox.setValue(self.default_settings['saturation'])
-        self.iso_combobox.setCurrentText(self.default_settings['iso'])
+        self.iso_combobox.setCurrentIndex(0)
