@@ -20,8 +20,7 @@ class UI(QtWidgets.QMainWindow):
                          'sharpness': self.cam.sharpness,
                          'contrast': self.cam.contrast,
                          'saturation': self.cam.saturation,
-                         'iso': 0}
-        print(self.settings)
+                         'iso': self.cam.iso}
         self.paths = {'settings': Path(Path.cwd(), 'settings'),
                       'pictures': Path(Path.cwd(), 'pictures')}
         for path in self.paths.values():
