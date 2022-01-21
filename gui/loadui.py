@@ -112,7 +112,7 @@ class UI(QtWidgets.QMainWindow):
         if event.type() == QtCore.QEvent.WindowStateChange:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
-        if event.type() == QtCore.QEvent.ResizeEvent:
+        if event.type() == QtCore.QEvent.resizeEvent:
             event.ignore()
 
     def set_brightness(self, value):
