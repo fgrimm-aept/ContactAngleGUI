@@ -186,6 +186,9 @@ class UI(QtWidgets.QMainWindow):
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file, indent=4)
 
+    def load_profile(self):
+        pass
+
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
             self.cam.stop_preview()
