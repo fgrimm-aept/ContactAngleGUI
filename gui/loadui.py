@@ -113,7 +113,7 @@ class UI(QtWidgets.QMainWindow):
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
-        self.focusOutEvent.connect(self.stop_preview)
+        self.focusChanged.connect(self.stop_preview)
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
