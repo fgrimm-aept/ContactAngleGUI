@@ -1,8 +1,7 @@
 from pathlib import Path
-from picamera import PiCamera
-from time import sleep
 
 from PyQt5 import QtWidgets, uic
+from picamera import PiCamera
 
 
 class UI(QtWidgets.QMainWindow):
@@ -95,14 +94,11 @@ class UI(QtWidgets.QMainWindow):
 
     def start_preview(self):
         self.cam.start_preview(fullscreen=False, window=(940, 70, 800, 640))
-        sleep(2)
 
     def stop_preview(self):
         self.cam.stop_preview()
 
     def take_pic(self):
         self.cam.start_preview()
-        sleep(5)
         self.cam.capture('foo.jpg')
         self.cam.stop_preview()
-
