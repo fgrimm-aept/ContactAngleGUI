@@ -117,11 +117,12 @@ class UI(QtWidgets.QMainWindow):
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
         if event.type() == QtCore.QEvent.WindowStateChange:
-            if not self.isActiveWindow():
-                self.cam.stop_preview()
-                self.preview_button.setChecked(False)
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
+
+    def focusOutEvent(self, event: QtGui.QFocusEvent) -> None:
+        self.cam.stop_preview()
+        self.preview_button.setChecked(False)
 
     def set_brightness(self, value):
         self.cam.brightness = value
