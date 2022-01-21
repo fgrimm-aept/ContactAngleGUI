@@ -111,18 +111,15 @@ class UI(QtWidgets.QMainWindow):
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
 
-        # Resize Events
+        # Window Events
         self.RESIZED.connect(self.resize_window)
+        self.focusOutEvent.connect(self.stop_preview)
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
         if event.type() == QtCore.QEvent.WindowStateChange:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
-
-    def focusOutEvent(self, event: QtGui.QFocusEvent) -> None:
-        self.cam.stop_preview()
-        self.preview_button.setChecked(False)
 
     def set_brightness(self, value):
         self.cam.brightness = value
@@ -141,9 +138,15 @@ class UI(QtWidgets.QMainWindow):
 
     def preview(self):
         if self.preview_button.isChecked():
-            self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
+            self.start_preview()
         else:
-            self.cam.stop_preview()
+            self.stop_preview()
+
+    def start_preview(self):
+        self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
+
+    def stop_preview(self):
+        self.cam.stop_preview()
 
     def take_pic(self):
         self.take_pic_button.setDisabled(True)
