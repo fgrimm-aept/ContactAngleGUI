@@ -14,7 +14,7 @@ class UI(QtWidgets.QMainWindow):
         self.resized.emit()
 
     def resize_window(self):
-        print(self.resized)
+        self.showMaximized()
 
     def __init__(self):
         super().__init__()
