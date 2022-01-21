@@ -10,7 +10,7 @@ import time
 def main():
     app = QtWidgets.QApplication(sys.argv)
     ui_window = UI()
-    ui_window.showFullScreen()
+    ui_window.showMaximized()
     app.exec_()
 
 

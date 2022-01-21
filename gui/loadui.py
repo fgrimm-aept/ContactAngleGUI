@@ -107,6 +107,10 @@ class UI(QtWidgets.QMainWindow):
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
 
+    def changeEvent(self, a0: QtCore.QEvent) -> None:
+        if a0.type() == QtCore.QEvent.WindowStateChange:
+            print("Hello World")
+
     def set_brightness(self, value):
         self.cam.brightness = value
 
