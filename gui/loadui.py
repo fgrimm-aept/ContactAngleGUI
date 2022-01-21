@@ -95,7 +95,7 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.addItem("800", 800)
 
         # iso connections
-        self.iso_combobox.activated.connect(self.set_iso)
+        self.iso_combobox.activated['str'].connect(self.set_iso)
 
         # push buttons
         self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
@@ -119,9 +119,9 @@ class UI(QtWidgets.QMainWindow):
     def set_saturation(self, value):
         self.cam.saturation = value
 
-    def set_iso(self, value):
-        print(value)
-        self.cam.iso = value
+    def set_iso(self, index):
+        print(self.iso_combobox.itemData(index))
+        self.cam.iso = self.iso_combobox.itemData(index)
 
     def start_preview(self):
         self.cam.start_preview(fullscreen=False, window=(630, 210, 1280, 720))
