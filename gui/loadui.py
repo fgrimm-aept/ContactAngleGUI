@@ -168,7 +168,6 @@ class UI(QtWidgets.QMainWindow):
         self.start_preview()
         self.set_profile_combo_box()
 
-
     def save_profile(self):
 
         self.current_settings = {'brightness': self.brightness_spinbox.value(),
@@ -270,4 +269,5 @@ class UI(QtWidgets.QMainWindow):
         all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
                         for i in range(self.iso_combobox.count())]
         print(all_elements)
+        print(self.cam.iso)
         self.iso_combobox.setCurrentIndex(0)
