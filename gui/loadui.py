@@ -15,8 +15,8 @@ class UI(QtWidgets.QMainWindow):
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
 
-        self.setWindowFlag(QtCore.Qt.CustomizeWindowHint)
-        self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint)
+        self.setWindowFlag(QtCore.Qt.CustomizeWindowHint, True)
+        self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, False)
 
         self.cam = PiCamera()
         # thread
