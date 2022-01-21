@@ -194,6 +194,7 @@ class UI(QtWidgets.QMainWindow):
         files = sorted(self.paths['profiles'].glob('*.json'), key=lambda path: path.stem.upper())
         for file in files:
             self.profile_name_combo_box.addItem(file.stem, file)
+        self.profile_name_line_edit.setText(files[0].stem)
 
     def load_profile(self):
         path = self.profile_name_combo_box.currentData()
