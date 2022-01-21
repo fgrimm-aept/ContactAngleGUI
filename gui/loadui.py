@@ -112,7 +112,7 @@ class UI(QtWidgets.QMainWindow):
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
         print(self.isActiveWindow())
-        if self.isActiveWindow():
+        if self.isActiveWindow() and self.isMaximized():
             print("Changed Window State?")
         if event.type() == QtCore.QEvent.WindowStateChange:
             if event.oldState() and QtCore.Qt.WindowMinimized:
