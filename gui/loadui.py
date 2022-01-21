@@ -148,14 +148,9 @@ class UI(QtWidgets.QMainWindow):
         # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combo_box = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
-        print(self.profile_name_combo_box.insertPolicy())
-        self.profile_name_combo_box.setInsertPolicy(QtWidgets.QComboBox.InsertAlphabetically)
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
-        files = sorted(self.paths['profiles'].glob('*.json'), key=lambda name: name.stem.upper())
-        for file in files:
-            self.profile_name_combo_box.addItem(file.stem, file)
 
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
@@ -189,10 +184,19 @@ class UI(QtWidgets.QMainWindow):
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file, indent=4)
-        self.profile_name_combo_box.addItem(profile_name, path)
+        self.set_profile_combo_box()
+
+    def set_profile_combo_box(self):
+        self.profile_name_combo_box.clear()
+        files = sorted(self.paths['profiles'].glob('*.json'), key=lambda path: path.stem.upper())
+        for file in files:
+            self.profile_name_combo_box.addItem(file.stem, file)
 
     def load_profile(self):
-        pass
+        path = self.profile_name_combo_box.currentData()
+        with open(path, 'w') as load_file:
+            self.current_settings = json.load(load_file)
+        self.set_values()
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
@@ -252,4 +256,14 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_spinbox.setValue(self.default_settings['sharpness'])
         self.contrast_spinbox.setValue(self.default_settings['contrast'])
         self.saturation_spinbox.setValue(self.default_settings['saturation'])
+        self.iso_combobox.setCurrentIndex(0)
+
+    def set_values(self):
+        self.brightness_spinbox.setValue(self.current_settings['brightness'])
+        self.sharpness_spinbox.setValue(self.current_settings['sharpness'])
+        self.contrast_spinbox.setValue(self.current_settings['contrast'])
+        self.saturation_spinbox.setValue(self.current_settings['saturation'])
+        all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
+                        for i in range(self.iso_combobox.count())]
+        print(all_elements)
         self.iso_combobox.setCurrentIndex(0)
