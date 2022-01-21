@@ -203,7 +203,7 @@ class UI(QtWidgets.QMainWindow):
         self.set_values()
 
     def delete_profile(self):
-
+        pass
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
