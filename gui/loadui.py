@@ -148,7 +148,7 @@ class UI(QtWidgets.QMainWindow):
         # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combo_box = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
-        self.profile_name_combo_box.InsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        self.profile_name_combo_box.insertPolicy(QtWidgets.QComboBox.InsertAtBottom)
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
