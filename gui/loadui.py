@@ -194,7 +194,6 @@ class UI(QtWidgets.QMainWindow):
         files = sorted(self.paths['profiles'].glob('*.json'), key=lambda path: path.stem.upper())
         for file in files:
             self.profile_name_combo_box.addItem(file.stem, file)
-        self.profile_name_line_edit.setText(files[0].stem)
 
     def load_profile(self):
         path = self.profile_name_combo_box.currentData()
@@ -273,6 +272,9 @@ class UI(QtWidgets.QMainWindow):
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
         all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
                         for i in range(self.iso_combobox.count())]
-        print(all_elements)
-        print(self.cam.iso)
-        self.iso_combobox.setCurrentIndex(0)
+        for i, elem in enumerate(all_elements):
+            if elem == self.current_settings['iso']:
+                self.iso_combobox.setCurrentIndex(i)
+                break
+        else:
+            self.iso_combobox.setCurrentIndex(0)
