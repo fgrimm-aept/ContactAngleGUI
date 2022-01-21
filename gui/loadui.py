@@ -1,7 +1,8 @@
-from PyQt5 import QtWidgets, QtCore, uic
 from pathlib import Path
-from picamera import PiCamera
+# from picamera import PiCamera
 from time import sleep
+
+from PyQt5 import QtWidgets, uic
 
 
 class UI(QtWidgets.QMainWindow):
@@ -13,7 +14,7 @@ class UI(QtWidgets.QMainWindow):
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
 
-        self.cam = PiCamera()
+        # self.cam = PiCamera()
 
         # define our widgets
 
@@ -42,6 +43,7 @@ class UI(QtWidgets.QMainWindow):
         # sharpness connections
         self.sharpness_slider.valueChanged[int].connect(self.sharpness_spinbox.setValue)
         self.sharpness_spinbox.valueChanged[int].connect(self.sharpness_slider.setValue)
+        self.sharpness_slider.valueChanged[int].connect(self.set_sharpness)
 
         # contrast
         self.contrast_slider = self.findChild(QtWidgets.QSlider, 'contrast_slider')
@@ -49,8 +51,9 @@ class UI(QtWidgets.QMainWindow):
         self.contrast_label = self.findChild(QtWidgets.QLabel, 'contrast_label')
 
         # contrast connections
-        self.contrast_slider.valueChanged['int'].connect(self.contrast_spinbox.setValue)
-        self.contrast_spinbox.valueChanged['int'].connect(self.contrast_slider.setValue)
+        self.contrast_slider.valueChanged[int].connect(self.contrast_spinbox.setValue)
+        self.contrast_spinbox.valueChanged[int].connect(self.contrast_slider.setValue)
+        self.contrast_slider.valueChanged[int].connect(self.set_contrast)
 
         # saturation
         self.saturation_slider = self.findChild(QtWidgets.QSlider, 'saturation_slider')
@@ -58,8 +61,9 @@ class UI(QtWidgets.QMainWindow):
         self.saturation_label = self.findChild(QtWidgets.QLabel, 'saturation_label')
 
         # saturation connections
-        self.saturation_slider.valueChanged['int'].connect(self.saturation_spinbox.setValue)
-        self.saturation_spinbox.valueChanged['int'].connect(self.saturation_slider.setValue)
+        self.saturation_slider.valueChanged[int].connect(self.saturation_spinbox.setValue)
+        self.saturation_spinbox.valueChanged[int].connect(self.saturation_slider.setValue)
+        self.saturation_slider.valueChanged[int].connect(self.set_saturation)
 
         # iso
         self.iso_slider = self.findChild(QtWidgets.QSlider, 'iso_slider')
@@ -67,8 +71,19 @@ class UI(QtWidgets.QMainWindow):
         self.iso_label = self.findChild(QtWidgets.QLabel, 'iso_label')
 
         # iso connections
-        self.iso_slider.valueChanged['int'].connect(self.iso_spinbox.setValue)
-        self.iso_spinbox.valueChanged['int'].connect(self.iso_slider.setValue)
+        self.iso_slider.valueChanged[int].connect(self.iso_spinbox.setValue)
+        self.iso_spinbox.valueChanged[int].connect(self.iso_slider.setValue)
+        self.iso_slider.valueChanged[int].connect(self.set_iso)
+
+        # push buttons
+        self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
+        self.stop_preview_button = self.findChild(QtWidgets.QPushButton, 'stop_preview_button')
+        self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
+
+        # push buttons connections
+        self.start_preview_button.clicked.connect(self.start_preview)
+        self.stop_preview_button.clicked.connec(self.stop_preview)
+        self.take_pic_button.clicked.connect(self.take_pic)
 
     def set_brightness(self, value):
         self.cam.brightness = value
