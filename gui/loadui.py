@@ -19,7 +19,6 @@ class UI(QtWidgets.QMainWindow):
         # load the ui file
         path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
-        self.RESIZED.connect(self.resize_window)
 
         # thread
         self.worker = WorkerThread(cam=self.cam)
@@ -111,6 +110,9 @@ class UI(QtWidgets.QMainWindow):
         # push buttons connections
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
+
+        # Resize Events
+        self.RESIZED.connect(self.resize_window)
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
