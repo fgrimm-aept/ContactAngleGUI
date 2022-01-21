@@ -67,6 +67,15 @@ class UI(QtWidgets.QMainWindow):
 
         # iso
         self.iso_combobox = self.findChild(QtWidgets.QComboBox, 'iso_combobox')
+        self.iso_combobox.addItem("Auto", 0)
+        self.iso_combobox.addItem("100", 100)
+        self.iso_combobox.addItem("200", 200)
+        self.iso_combobox.addItem("320", 320)
+        self.iso_combobox.addItem("400", 400)
+        self.iso_combobox.addItem("500", 500)
+        self.iso_combobox.addItem("640", 640)
+        self.iso_combobox.addItem("800", 800)
+
 
         # push buttons
         self.start_preview_button = self.findChild(QtWidgets.QPushButton, 'start_preview_button')
