@@ -157,7 +157,7 @@ class UI(QtWidgets.QMainWindow):
         profile_name = self.profile_name_lineedit.text()
         if not profile_name:
             msg = QtWidgets.QMessageBox()
-            msg.setBaseSize(QtCore.QSize(600, 120))
+            msg.setBaseSize(QtCore.QSize(1000, 1000))
             msg.setIcon(QtWidgets.QMessageBox.Critical)
             msg.setText('No Profile Name set.')
             msg.setInformativeText('Please choose a profile name to save settings.')
