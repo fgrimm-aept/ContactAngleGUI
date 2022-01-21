@@ -111,6 +111,7 @@ class UI(QtWidgets.QMainWindow):
 
     def changeEvent(self, event: QtCore.QEvent) -> None:
 
+        print(self.isActiveWindow())
         if self.isActiveWindow():
             print("Changed Window State?")
         if event.type() == QtCore.QEvent.WindowStateChange:
