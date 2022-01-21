@@ -3,17 +3,20 @@ from pathlib import Path
 from picamera import PiCamera
 from time import sleep
 
+
 class UI(QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
 
         # load the ui file
-        path = Path(Path.cwd(), 'ui', 'settings_groupbox.ui')
+        path = Path(Path.cwd(), 'ui', 'main_window.ui')
         uic.loadUi(path, self)
+        self.setLayout(QtWidgets.QVBoxLayout())
+        self.sl = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.layout().addWidget(self.sl)
 
-        # threads
-        self.threads = {}
+        self.cam = PiCamera()
 
         # define our widgets
 
@@ -30,8 +33,9 @@ class UI(QtWidgets.QMainWindow):
         self.brightness_label = self.findChild(QtWidgets.QLabel, 'brightness_label')
 
         # brightness connections
-        self.brightness_slider.valueChanged['int'].connect(self.brightness_spinbox.setValue)
-        self.brightness_spinbox.valueChanged['int'].connect(self.brightness_slider.setValue)
+        self.brightness_slider.valueChanged[int].connect(self.brightness_spinbox.setValue)
+        self.brightness_spinbox.valueChanged[int].connect(self.brightness_slider.setValue)
+        self.brightness_slider.valueChanged[int].connect(self.set_brightness)
 
         # sharpness
         self.sharpness_slider = self.findChild(QtWidgets.QSlider, 'sharpness_slider')
@@ -39,8 +43,8 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_label = self.findChild(QtWidgets.QLabel, 'sharpness_label')
 
         # sharpness connections
-        self.sharpness_slider.valueChanged['int'].connect(self.sharpness_spinbox.setValue)
-        self.sharpness_spinbox.valueChanged['int'].connect(self.sharpness_slider.setValue)
+        self.sharpness_slider.valueChanged[int].connect(self.sharpness_spinbox.setValue)
+        self.sharpness_spinbox.valueChanged[int].connect(self.sharpness_slider.setValue)
 
         # contrast
         self.contrast_slider = self.findChild(QtWidgets.QSlider, 'contrast_slider')
@@ -69,46 +73,29 @@ class UI(QtWidgets.QMainWindow):
         self.iso_slider.valueChanged['int'].connect(self.iso_spinbox.setValue)
         self.iso_spinbox.valueChanged['int'].connect(self.iso_slider.setValue)
 
-        # take pic push button
-        self.take_pic_push = self.findChild(QtWidgets.QPushButton, 'take_pic_push_button')
+    def set_brightness(self, value):
+        self.cam.brightness = value
 
-        # take pic connections
-        self.take_pic_push.clicked.connect(self.take_pic)
+    def set_sharpness(self, value):
+        self.cam.sharpness = value
 
-    def take_pic(self):
-        self.threads[1] = ThreadClass()
-        self.threads[1].start()
-        self.threads[1].any_signal.connect(self.my_function)
-        self.take_pic_push.setEnabled(False)
+    def set_contrast(self, value):
+        self.cam.contrast = value
 
-    def pic_taken(self):
-        self.threads[1].stop()
-        self.take_pic_push.setEnabled(True)
+    def set_saturation(self, value):
+        self.cam.saturation = value
 
-    def my_function(self, counter):
+    def set_iso(self, value):
+        self.cam.iso = value
 
-        cnt = counter
-        index = self.sender().index
-        if index == 1:
-            print("Taking picture")
-
-
-class ThreadClass(QtCore.QThread):
-
-    any_signal = QtCore.pyqtSignal(bool)
-
-    def __init__(self):
-        super().__init__()
-        self.is_running = True
-        self.cam = PiCamera()
-
-    def run(self):
-        self.cam.start_preview()
+    def start_preview(self):
+        self.cam.start_preview(fullscreen=False, window=(1000, 500, 800, 640))
         sleep(2)
-        self.cam.capture('foo.jpg')
+
+    def stop_preview(self):
         self.cam.stop_preview()
 
-    def stop(self):
-        self.is_running = False
-        self.cam.close()
-        self.terminate()
+    def take_pic(self):
+        self.cam.start_preview()
+        sleep(5)
+        self.cam.capture('foo.jpg')
