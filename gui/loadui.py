@@ -107,11 +107,13 @@ class UI(QtWidgets.QMainWindow):
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
 
-    def changeEvent(self, a0: QtCore.QEvent) -> None:
-        print(a0.type())
-        if a0.type() == QtCore.QEvent.WindowStateChange:
+    def changeEvent(self, event: QtCore.QEvent) -> None:
+        print(event.type())
+        if event.type() == QtCore.QEvent.WindowStateChange.WindowMinimized:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
+        if event.type() == QtCore.QEvent.ResizeEvent:
+            event.ignore()
 
     def set_brightness(self, value):
         self.cam.brightness = value
