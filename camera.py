@@ -5,6 +5,7 @@ from time import sleep
 from PyQt5 import QtWidgets, QtCore
 import sys
 
+
 class MainWindow(QtWidgets.QWidget):
 
     def __init__(self):
@@ -17,7 +18,7 @@ class MainWindow(QtWidgets.QWidget):
         self.layout().addWidget(self.take_pic_button)
 
         self.show()
-    
+
     def take_pic(self):
         cam = PiCamera()
         cam.resolution = (1920, 1080)
@@ -27,6 +28,7 @@ class MainWindow(QtWidgets.QWidget):
         cam.capture('foo.jpg')
 
         cam.close()
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
