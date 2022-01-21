@@ -7,14 +7,7 @@ from picamera import PiCamera
 
 
 class UI(QtWidgets.QMainWindow):
-
     resized = QtCore.pyqtSignal()
-
-    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
-        self.resized.emit()
-
-    def resize_window(self):
-        self.showMaximized()
 
     def __init__(self):
         super().__init__()
@@ -119,10 +112,9 @@ class UI(QtWidgets.QMainWindow):
     def changeEvent(self, event: QtCore.QEvent) -> None:
         print(event.type())
         if event.type() == QtCore.QEvent.WindowStateChange:
-            if self.windowState() == QtCore.Qt.WindowMinimized:
-                self.cam.stop_preview()
-                self.preview_button.setChecked(False)
 
+            self.cam.stop_preview()
+            self.preview_button.setChecked(False)
 
     def set_brightness(self, value):
         self.cam.brightness = value
@@ -152,6 +144,12 @@ class UI(QtWidgets.QMainWindow):
 
     def evt_worker_finished(self):
         self.take_pic_button.setDisabled(False)
+
+    def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
+        self.resized.emit()
+
+    def resize_window(self):
+        self.showMaximized()
 
 
 class WorkerThread(QtCore.QThread):
