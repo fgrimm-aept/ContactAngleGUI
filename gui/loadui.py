@@ -235,6 +235,7 @@ class UI(QtWidgets.QMainWindow):
     def open_directory(self):
         home_path = str(self.paths['pictures'])
         path = self.open_directory_dialog.getExistingDirectory(self, caption='Open directory', directory=home_path)
+        print(path)
 
     def save_profile(self):
 
