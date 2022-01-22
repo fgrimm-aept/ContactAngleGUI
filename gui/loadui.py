@@ -9,16 +9,14 @@ from picamera import PiCamera
 
 
 class WorkerThread(QtCore.QThread):
-
     TIMESTAMP = QtCore.pyqtSignal(str)
 
-    def __init__(self, cam, path, suffix, quality):
+    def __init__(self, obj):
         super().__init__()
-        self.cam = cam
-        self.path = path
-        self.suffix = suffix
-        self.quality = quality
-
+        self.cam = obj.cam
+        self.path = obj.pic_path
+        self.suffix = obj.pic_suffix
+        self.quality = obj.quality
 
     def run(self):
         time.sleep(5)
@@ -131,6 +129,8 @@ class UI(QtWidgets.QMainWindow):
         self.saturation_slider.valueChanged[int].connect(self.set_saturation)
 
         # iso
+        self.iso_label = self.findChild(QtWidgets.QLabel, 'iso_label')
+        self.iso_label.setAlignment(QtCore.Qt.AlignCenter)
         self.iso_combobox = self.findChild(QtWidgets.QComboBox, 'iso_combobox')
         self.iso_combobox.addItem("Auto", 0)
         self.iso_combobox.addItem("100", 100)
@@ -153,6 +153,7 @@ class UI(QtWidgets.QMainWindow):
         # quality connections
         self.quality_slider.valueChanged[int].connect(self.quality_spinbox.setValue)
         self.quality_spinbox.valueChanged[int].connect(self.quality_slider.setValue)
+        self.quality = 75
         self.quality_slider.valueChanged[int].connect(self.set_quality)
 
         # picture push buttons
@@ -169,6 +170,10 @@ class UI(QtWidgets.QMainWindow):
         self.reset_button.clicked.connect(self.reset_values)
 
         # set profile names
+        self.profile_name_save_label = self.findChild(QtWidgets.QLabel, 'profile_name_save_label')
+        self.profile_name_save_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.profile_name_load_label = self.findChild(QtWidgets.QLabel, 'profile_name_load_label')
+        self.profile_name_load_label.setAlignment(QtCore.Qt.AlignCenter)
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combobox = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
 
@@ -187,6 +192,8 @@ class UI(QtWidgets.QMainWindow):
         self.delete_profile_button.clicked.connect(self.set_profile_combobox)
 
         # picture buttons
+        self.pic_dir_label = self.findChild(QtWidgets.QLabel, 'pic_dir_label')
+        self.pic_dir_label.setAlignment(QtCore.Qt.AlignCenter)
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
         self.pic_name_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -214,14 +221,14 @@ class UI(QtWidgets.QMainWindow):
         self.set_profile_combobox()
 
         # Take Picture Events
-        pic_name = self.pic_name_line_edit.text()
-        pic_format = self.pic_format_combobox.currentText()
-        if not pic_name:
-            pic_name = 'foo'
-            pic_format = 'jpeg'
-        pic_path = Path(self.paths['pictures'], f'{pic_name}')
+        self.pic_name = self.pic_name_line_edit.text()
+        self.pic_suffix = self.pic_format_combobox.currentText()
+        if not self.pic_name:
+            self.pic_name = 'foo'
+            self.pic_format = 'jpeg'
+        self.pic_path = Path(self.paths['pictures'], f'{self.pic_name}')
         self.timestamp = ''
-        self.worker = WorkerThread(cam=self.cam, path=pic_path, suffix=pic_format, quality=self.quality_spinbox.value())
+        self.worker = WorkerThread(self)
         self.worker.TIMESTAMP.connect(self.set_timestamp)
 
     def save_profile(self):
@@ -290,7 +297,7 @@ class UI(QtWidgets.QMainWindow):
         else:
             return
 
-    def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
+    def eventFilter(self, a0: 'QtCore.QObject', a1: 'QtCore.QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
@@ -321,7 +328,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.iso = self.iso_combobox.itemData(index)
 
     def set_quality(self, value):
-        self.cam.quality = value
+        self.quality = value
 
     def preview(self):
         # self.PREVIEW_POS = (self.pos().x(),
