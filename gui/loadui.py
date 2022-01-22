@@ -212,7 +212,7 @@ class UI(QtWidgets.QMainWindow):
         except TypeError:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
-            msg.setText('No profile found.')
+            msg.setText('No profile selected.')
             msg.setWindowTitle("Error")
             msg.exec_()
             return
@@ -235,6 +235,11 @@ class UI(QtWidgets.QMainWindow):
                 path.unlink()
                 self.FILE_DELETED.emit()
             else:
+                msg = QtWidgets.QMessageBox()
+                msg.setIcon(QtWidgets.QMessageBox.Critical)
+                msg.setText('No profile selected.')
+                msg.setWindowTitle("Error")
+                msg.exec_()
                 return
         else:
             return
