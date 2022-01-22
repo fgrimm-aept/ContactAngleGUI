@@ -225,9 +225,9 @@ class UI(QtWidgets.QMainWindow):
         if ret == qm.Yes:
             if path.is_file():
                 path.unlink()
+                self.FILE_DELETED.emit()
             else:
-
-            self.FILE_DELETED.emit()
+                return
         else:
             return
 
