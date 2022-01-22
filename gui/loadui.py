@@ -9,13 +9,14 @@ from picamera import PiCamera
 
 class WorkerThread(QtCore.QThread):
 
-    def __init__(self, cam):
+    def __init__(self, obj):
         super().__init__()
-        self.cam = cam
+        self.cam = obj.cam
+        self.path = 'foo.jpg'
 
     def run(self):
         time.sleep(5)
-        self.cam.capture('foo.jpg')
+        self.cam.capture(f'{self.path}')
 
 
 class QPlainTextEditLogger(logging.Handler):
@@ -46,7 +47,7 @@ class UI(QtWidgets.QMainWindow):
         uic.loadUi(path, self)
 
         # thread creation for camera
-        self.worker = WorkerThread(cam=self.cam)
+        self.worker = WorkerThread(obj=self)
 
         # Save Cam Settings in dict
         self.default_settings = {'brightness': 50,
