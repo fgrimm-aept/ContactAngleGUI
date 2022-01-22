@@ -116,7 +116,6 @@ class UI(QtWidgets.QMainWindow):
 
         # iso
         self.iso_combobox = self.findChild(QtWidgets.QComboBox, 'iso_combobox')
-        self.iso_combobox.addItems([("Auto", 0), ("100", 100), ("200", 200), ("320", 320)])
         self.iso_combobox.addItem("Auto", 0)
         self.iso_combobox.addItem("100", 100)
         self.iso_combobox.addItem("200", 200)
@@ -127,7 +126,7 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.addItem("800", 800)
 
         # iso connections
-        self.iso_combobox.activated.connect(self.set_iso)
+        self.iso_combobox.currentIndexChanged.connect(self.set_iso)
 
         # picture push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
