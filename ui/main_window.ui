@@ -50,14 +50,14 @@
      </font>
     </property>
     <property name="title">
-     <string>Settings</string>
+     <string/>
     </property>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>591</width>
+       <width>601</width>
        <height>251</height>
       </rect>
      </property>
@@ -100,6 +100,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Reset Values</string>
         </property>
@@ -108,20 +113,20 @@
       <item row="1" column="0">
        <widget class="QLabel" name="sharpness_label">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>50</width>
-          <height>0</height>
+          <width>90</width>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
+          <width>90</width>
           <height>25</height>
          </size>
         </property>
@@ -154,13 +159,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>50</width>
-          <height>0</height>
+          <width>90</width>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
+          <width>90</width>
           <height>25</height>
          </size>
         </property>
@@ -215,20 +220,20 @@
       <item row="2" column="0">
        <widget class="QLabel" name="contrast_label">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>50</width>
-          <height>0</height>
+          <width>90</width>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
+          <width>90</width>
           <height>25</height>
          </size>
         </property>
@@ -283,20 +288,20 @@
       <item row="3" column="0">
        <widget class="QLabel" name="saturation_label">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>50</width>
-          <height>0</height>
+          <width>90</width>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
+          <width>90</width>
           <height>25</height>
          </size>
         </property>
@@ -395,7 +400,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -440,7 +445,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -485,7 +490,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -613,7 +618,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>10</pointsize>
+          <pointsize>12</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -638,20 +643,20 @@
       <item row="4" column="0">
        <widget class="QLabel" name="iso_label">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>50</width>
-          <height>0</height>
+          <width>90</width>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
+          <width>90</width>
           <height>25</height>
          </size>
         </property>
@@ -779,6 +784,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Load Settings</string>
         </property>
@@ -804,6 +814,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Profile Name:</string>
         </property>
@@ -828,6 +843,11 @@
           <width>135</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Profile Name:</string>
@@ -879,6 +899,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Save Settings</string>
         </property>
@@ -904,6 +929,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="insertPolicy">
          <enum>QComboBox::InsertAlphabetically</enum>
         </property>
@@ -928,6 +958,11 @@
           <width>150</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Delete Profile</string>
@@ -992,9 +1027,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>510</y>
+      <y>540</y>
       <width>611</width>
-      <height>221</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -1012,13 +1047,13 @@
      </font>
     </property>
     <property name="title">
-     <string>Picture</string>
+     <string/>
     </property>
     <widget class="QWidget" name="layoutWidget_2">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>130</y>
+       <y>150</y>
        <width>591</width>
        <height>82</height>
       </rect>
@@ -1056,7 +1091,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>14</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1087,7 +1122,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>14</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1118,7 +1153,7 @@
         <property name="font">
          <font>
           <family>Arial</family>
-          <pointsize>14</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1133,13 +1168,18 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>591</width>
+       <width>593</width>
        <height>39</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QLabel" name="pic_name_label">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Picture Name:</string>
         </property>
@@ -1155,13 +1195,35 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>430</width>
+          <width>280</width>
           <height>37</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>430</width>
+          <width>280</width>
+          <height>37</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="pic_format_combobox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>185</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>185</width>
           <height>37</height>
          </size>
         </property>
@@ -1179,6 +1241,142 @@
          </size>
         </property>
        </spacer>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>591</width>
+       <height>39</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="quality_label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>90</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Quality:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="quality_spinbox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>110</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>110</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="value">
+         <number>75</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="quality_slider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>365</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>365</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TicksBothSides</enum>
+        </property>
+        <property name="tickInterval">
+         <number>20</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
