@@ -171,8 +171,11 @@ class UI(QtWidgets.QMainWindow):
         self.set_profile_combobox()
 
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
-
-
+        pic_name = self.pic_name_line_edit.text()
+        if pic_name is None:
+            pic_name = 'foo.jpg'
+        pic_path = Path(self.paths['pictures'], pic_name)
+        self.worker = WorkerThread(cam=self.cam, path=pic_path)
 
     def save_profile(self):
 
@@ -259,14 +262,10 @@ class UI(QtWidgets.QMainWindow):
 
     def take_pic(self):
         # thread creation for camera
-        pic_name = self.pic_name_line_edit.text()
-        if pic_name is None:
-            pic_name = 'foo.jpg'
-        pic_path = Path(self.paths['pictures'], pic_name)
-        worker = WorkerThread(cam=self.cam, path=pic_path)
+
         self.take_pic_button.setDisabled(True)
-        worker.start()
-        worker.finished.connect(self.evt_worker_finished)
+        self.worker.start()
+        self.worker.finished.connect(self.evt_worker_finished)
 
     def evt_worker_finished(self):
         self.take_pic_button.setDisabled(False)
