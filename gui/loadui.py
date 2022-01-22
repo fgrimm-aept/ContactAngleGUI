@@ -14,7 +14,7 @@ class WorkerThread(QtCore.QThread):
     def __init__(self, obj):
         super().__init__()
         self.cam = obj.cam
-        self.path = obj.pic_path
+        self.file_path = Path(obj.pic_path, obj.pic_name)
         self.suffix = obj.pic_suffix
         self.quality = obj.quality
 
@@ -23,7 +23,7 @@ class WorkerThread(QtCore.QThread):
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
         print(self.quality)
         if self.suffix == 'jpeg':
-            self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}', quality=self.quality)
+            self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}', quality=self.quality)
         else:
             self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}')
         self.TIMESTAMP.emit(timestamp)
@@ -153,14 +153,14 @@ class UI(QtWidgets.QMainWindow):
         self.quality = 75
         self.quality_slider.valueChanged[int].connect(self.set_quality)
 
-        # picture push buttons
+        # camera push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
         self.reset_button = self.findChild(QtWidgets.QPushButton, 'reset_button')
 
-        # picture push buttons connections
+        # camera push buttons connections
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
         self.load_pic_button.clicked.connect(self.load_pic)
@@ -190,10 +190,15 @@ class UI(QtWidgets.QMainWindow):
         # picture buttons
         self.pic_dir_label = self.findChild(QtWidgets.QLabel, 'pic_dir_label')
         self.pic_dir_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_dir_line_edit')
-
         self.pic_dir_line_edit.setText(f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}")
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         self.pic_name_line_edit.setText('foo')
+        self.pic_dir_button = self.findChild(QtWidgets.QPushButton, 'pic_dir_button')
+        self.open_directory_dialog = QtWidgets.QFileDialog(self)
+        self.open_directory_dialog.setWindowTitle('Open picture save directory')
+        self.open_directory_dialog.setFileMode(QtWidgets.QFileDialog.Directory)
+        self.open_directory_dialog.setOption(QtWidgets.QFileDialog.ShowDirsOnly, True)
+        self.open_directory_dialog.setViewMode(QtWidgets.QFileDialog.Detail)
         self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
         self.pic_format_combobox = self.findChild(QtWidgets.QComboBox, 'pic_format_combobox')
         self.pic_format_combobox.addItem('jpeg', True)
@@ -208,6 +213,7 @@ class UI(QtWidgets.QMainWindow):
 
         # picture buttons connections
         self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
+        self.pic_dir_button.clicked.connect(self.open_directory)
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
@@ -221,10 +227,14 @@ class UI(QtWidgets.QMainWindow):
         # Take Picture Events
         self.pic_name = 'foo'
         self.pic_suffix = 'jpeg'
-        self.pic_path = Path(self.paths['pictures'], f'{self.pic_name}')
+        self.pic_path = Path(self.paths['pictures'])
         self.timestamp = ''
         self.worker = WorkerThread(self)
         self.worker.TIMESTAMP.connect(self.set_timestamp)
+
+    def open_directory(self):
+        home_path = str(self.paths['pictures'])
+        path = self.open_directory_dialog.getExistingDirectory(self, caption='Open directory', directory=home_path)
 
     def save_profile(self):
 
@@ -345,6 +355,7 @@ class UI(QtWidgets.QMainWindow):
         self.quality = value
 
     def preview(self):
+        # possible way to resize window and set preview window accordingly
         # self.PREVIEW_POS = (self.pos().x(),
         #                     self.pos().y(),
         #                     self.frameGeometry().width(),
@@ -363,7 +374,7 @@ class UI(QtWidgets.QMainWindow):
 
     def take_pic(self):
 
-        self.pic_name = self.pic_name_line_edit.text()
+        self.pic_name = self.pic_name_line_edit.text()  # TODO: change to grab full path
         self.pic_suffix = self.pic_format_combobox.currentText()
 
         if not self.pic_name:
@@ -381,6 +392,7 @@ class UI(QtWidgets.QMainWindow):
 
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
         self.RESIZED.emit()
+        # Possible way to be able to resize window
         # super(UI, self).resizeEvent(event)
 
     def resize_window(self):
@@ -403,11 +415,3 @@ class UI(QtWidgets.QMainWindow):
         self.contrast_spinbox.setValue(self.current_settings['contrast'])
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
         self.iso_combobox.setCurrentIndex(self.current_settings['iso'])
-        # all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
-        #                 for i in range(self.iso_combobox.count())]
-        # for i, elem in enumerate(all_elements):
-        #     if elem[1] == self.current_settings['iso']:
-        #         self.iso_combobox.setCurrentIndex(i)
-        #         break
-        # else:
-        #     self.iso_combobox.setCurrentIndex(0)
