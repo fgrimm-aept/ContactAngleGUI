@@ -10,16 +10,24 @@ from picamera import PiCamera
 
 class WorkerThread(QtCore.QThread):
 
-    def __init__(self, cam, path, suffix):
+    TIMESTAMP = QtCore.pyqtSignal(str)
+
+    def __init__(self, cam, path, suffix, quality):
         super().__init__()
         self.cam = cam
         self.path = path
         self.suffix = suffix
+        self.quality = quality
+
 
     def run(self):
         time.sleep(5)
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
-        self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}')
+        if self.suffix == 'jpeg':
+            self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}', quality=self.quality)
+        else:
+            self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}')
+        self.TIMESTAMP.emit(timestamp)
 
 
 class QPlainTextEditLogger(logging.Handler):
@@ -212,7 +220,9 @@ class UI(QtWidgets.QMainWindow):
             pic_name = 'foo'
             pic_format = 'jpeg'
         pic_path = Path(self.paths['pictures'], f'{pic_name}')
-        self.worker = WorkerThread(cam=self.cam, path=pic_path, suffix=pic_format)
+        self.timestamp = ''
+        self.worker = WorkerThread(cam=self.cam, path=pic_path, suffix=pic_format, quality=self.quality_spinbox.value())
+        self.worker.TIMESTAMP.connect(self.set_timestamp)
 
     def save_profile(self):
 
@@ -335,6 +345,11 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.setDisabled(True)
         self.worker.start()
         self.worker.finished.connect(self.evt_worker_finished)
+
+    def set_timestamp(self, timestamp):
+        print(self.timestamp)
+        self.timestamp = timestamp
+        print(self.timestamp)
 
     def evt_worker_finished(self):
         self.take_pic_button.setDisabled(False)
