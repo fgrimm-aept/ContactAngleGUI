@@ -206,8 +206,16 @@ class UI(QtWidgets.QMainWindow):
 
     def load_profile(self):
         path = self.profile_name_combobox.currentData()
-        with open(path, 'r') as load_file:
-            self.current_settings = json.load(load_file)
+        try:
+            with open(path, 'r') as load_file:
+                self.current_settings = json.load(load_file)
+        except TypeError:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText('No profile found.')
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
         self.profile_name_line_edit.setText(path.stem)
         self.set_values()
 
