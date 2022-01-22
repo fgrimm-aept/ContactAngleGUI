@@ -156,6 +156,7 @@ class UI(QtWidgets.QMainWindow):
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
         self.load_profile_button = self.findChild(QtWidgets.QPushButton, 'load_profile_button')
+        self.delete_profile_button = self.findChild(QtWidgets.QPushButton, 'delete_profile_button')
 
         # push buttons connections
         self.save_profile_button.clicked.connect(self.save_profile)
