@@ -58,7 +58,8 @@ class UI(QtWidgets.QMainWindow):
                                  'sharpness': 0,
                                  'contrast': 0,
                                  'saturation': 0,
-                                 'iso': 0}
+                                 'iso': 0,
+                                 'quality': 75}
 
         self.current_settings = self.default_settings
 
@@ -127,6 +128,16 @@ class UI(QtWidgets.QMainWindow):
         # iso connections
         self.iso_combobox.currentIndexChanged.connect(self.set_iso)
 
+        # quality
+        self.quality_slider = self.findChild(QtWidgets.QSlider, 'quality_slider')
+        self.quality_spinbox = self.findChild(QtWidgets.QSpinBox, 'quality_spinbox')
+        self.quality_label = self.findChild(QtWidgets.QLabel, 'quality_label')
+
+        # quality connections
+        self.quality_slider.valueChanged[int].connect(self.quality_spinbox.setValue)
+        self.quality_spinbox.valueChanged[int].connect(self.quality_slider.setValue)
+        self.quality_slider.valueChanged[int].connect(self.set_quality)
+
         # picture push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
@@ -169,9 +180,11 @@ class UI(QtWidgets.QMainWindow):
 
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         pic_name = self.pic_name_line_edit.text()
+        pic_format = self.pic_format_combobox.currentData()
         if not pic_name:
-            pic_name = 'foo.jpg'
-        pic_path = Path(self.paths['pictures'], pic_name)
+            pic_name = 'foo'
+            pic_format = 'jpeg'
+        pic_path = Path(self.paths['pictures'], f'{pic_name}.{pic_format}')
         self.worker = WorkerThread(cam=self.cam, path=pic_path)
 
     def save_profile(self):
@@ -264,6 +277,12 @@ class UI(QtWidgets.QMainWindow):
     def set_iso(self, index):
         self.cam.iso = self.iso_combobox.itemData(index)
 
+    def set_quality(self, value):
+        if self.pic_format_combobox.currentText() == 'jpeg':
+            self.cam.quality = value
+        else:
+            return
+
     def preview(self):
         if self.preview_button.isChecked():
             self.start_preview()
@@ -301,6 +320,7 @@ class UI(QtWidgets.QMainWindow):
         self.contrast_spinbox.setValue(self.default_settings['contrast'])
         self.saturation_spinbox.setValue(self.default_settings['saturation'])
         self.iso_combobox.setCurrentIndex(0)
+        self.quality_spinbox.setValue(self.default_settings['quality'])
 
     def set_values(self):
         self.brightness_spinbox.setValue(self.current_settings['brightness'])
