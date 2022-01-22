@@ -160,6 +160,7 @@ class UI(QtWidgets.QMainWindow):
         # push buttons connections
         self.save_profile_button.clicked.connect(self.save_profile)
         self.load_profile_button.clicked.connect(self.load_profile)
+        self.delete_profile_button.clicked.connect(self.delete_profile)
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
