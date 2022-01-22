@@ -173,7 +173,8 @@ class UI(QtWidgets.QMainWindow):
 
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         pic_name = self.pic_name_line_edit.text()
-        if pic_name is None:
+        print(pic_name)
+        if pic_name == '':
             pic_name = 'foo.jpg'
         pic_path = Path(self.paths['pictures'], pic_name)
         print(f'{pic_path}')
