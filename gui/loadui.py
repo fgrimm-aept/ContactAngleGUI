@@ -126,7 +126,6 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.addItem("800", 800)
 
         # iso connections
-        # self.iso_combobox.activated.connect(self.set_iso)
         self.iso_combobox.currentIndexChanged.connect(self.set_iso)
 
         # picture push buttons
@@ -148,10 +147,11 @@ class UI(QtWidgets.QMainWindow):
 
         # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
-        self.profile_name_combo_box = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
+        self.profile_name_combobox = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
+        self.profile_name_combobox.currentIndexChanged.connect(self.set_iso)
 
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
@@ -169,7 +169,7 @@ class UI(QtWidgets.QMainWindow):
 
         # set UI
         self.start_preview()
-        self.set_profile_combo_box()
+        self.set_profile_combobox()
 
     def save_profile(self):
 
@@ -189,23 +189,23 @@ class UI(QtWidgets.QMainWindow):
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file)
-        self.set_profile_combo_box()
+        self.set_profile_combobox()
 
-    def set_profile_combo_box(self):
-        self.profile_name_combo_box.clear()
+    def set_profile_combobox(self):
+        self.profile_name_combobox.clear()
         files = sorted(self.paths['profiles'].glob('*.json'), key=lambda path: path.stem.upper())
         for file in files:
-            self.profile_name_combo_box.addItem(file.stem, file)
+            self.profile_name_combobox.addItem(file.stem, file)
 
     def load_profile(self):
-        path = self.profile_name_combo_box.currentData()
+        path = self.profile_name_combobox.currentData()
         with open(path, 'r') as load_file:
             self.current_settings = json.load(load_file)
         self.profile_name_line_edit.setText(path.stem)
         self.set_values()
 
     def delete_profile(self):
-        profile = self.profile_name_combo_box.currentText()
+        profile = self.profile_name_combobox.currentText()
         path = Path(self.paths['profiles'], f'{profile}.json')
         qm = QtWidgets.QMessageBox()
 
@@ -216,6 +216,7 @@ class UI(QtWidgets.QMainWindow):
             path.unlink()
         else:
             return
+        self.set_profile_combobox()
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
