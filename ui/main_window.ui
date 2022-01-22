@@ -874,6 +874,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -1205,6 +1210,11 @@
           <height>37</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
        </widget>
       </item>
       <item>
@@ -1226,6 +1236,11 @@
           <width>185</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
         </property>
        </widget>
       </item>
