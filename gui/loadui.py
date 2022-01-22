@@ -140,10 +140,6 @@ class UI(QtWidgets.QMainWindow):
         self.load_pic_button.clicked.connect(self.load_pic)
         self.reset_button.clicked.connect(self.reset_values)
 
-        # Profile Groupbox #
-
-        self.groupbox_profile = self.findChild(QtWidgets.QWidget, 'profile_groupbox')
-
         # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combobox = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
