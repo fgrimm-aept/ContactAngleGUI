@@ -230,6 +230,12 @@ class UI(QtWidgets.QMainWindow):
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentIndex()}
         profile_name = self.profile_name_line_edit.text()
+        if profile_name == 'default':
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText('Can not overwrite this profile')
+            msg.setWindowTitle("Error")
+            msg.exec_()
         if not profile_name:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
