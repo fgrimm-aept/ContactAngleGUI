@@ -88,7 +88,6 @@ class UI(QtWidgets.QMainWindow):
         self.brightness_slider = self.findChild(QtWidgets.QSlider, 'brightness_slider')
         self.brightness_spinbox = self.findChild(QtWidgets.QSpinBox, 'brightness_spinbox')
         self.brightness_label = self.findChild(QtWidgets.QLabel, 'brightness_label')
-        self.brightness_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # brightness connections
         self.brightness_slider.valueChanged[int].connect(self.brightness_spinbox.setValue)
@@ -99,7 +98,6 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_slider = self.findChild(QtWidgets.QSlider, 'sharpness_slider')
         self.sharpness_spinbox = self.findChild(QtWidgets.QSpinBox, 'sharpness_spinbox')
         self.sharpness_label = self.findChild(QtWidgets.QLabel, 'sharpness_label')
-        self.sharpness_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # sharpness connections
         self.sharpness_slider.valueChanged[int].connect(self.sharpness_spinbox.setValue)
@@ -110,7 +108,6 @@ class UI(QtWidgets.QMainWindow):
         self.contrast_slider = self.findChild(QtWidgets.QSlider, 'contrast_slider')
         self.contrast_spinbox = self.findChild(QtWidgets.QSpinBox, 'contrast_spinbox')
         self.contrast_label = self.findChild(QtWidgets.QLabel, 'contrast_label')
-        self.contrast_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # contrast connections
         self.contrast_slider.valueChanged[int].connect(self.contrast_spinbox.setValue)
@@ -121,7 +118,6 @@ class UI(QtWidgets.QMainWindow):
         self.saturation_slider = self.findChild(QtWidgets.QSlider, 'saturation_slider')
         self.saturation_spinbox = self.findChild(QtWidgets.QSpinBox, 'saturation_spinbox')
         self.saturation_label = self.findChild(QtWidgets.QLabel, 'saturation_label')
-        self.saturation_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # saturation connections
         self.saturation_slider.valueChanged[int].connect(self.saturation_spinbox.setValue)
@@ -130,7 +126,6 @@ class UI(QtWidgets.QMainWindow):
 
         # iso
         self.iso_label = self.findChild(QtWidgets.QLabel, 'iso_label')
-        self.iso_label.setAlignment(QtCore.Qt.AlignCenter)
         self.iso_combobox = self.findChild(QtWidgets.QComboBox, 'iso_combobox')
         self.iso_combobox.addItem("Auto", 0)
         self.iso_combobox.addItem("100", 100)
@@ -148,7 +143,6 @@ class UI(QtWidgets.QMainWindow):
         self.quality_slider = self.findChild(QtWidgets.QSlider, 'quality_slider')
         self.quality_spinbox = self.findChild(QtWidgets.QSpinBox, 'quality_spinbox')
         self.quality_label = self.findChild(QtWidgets.QLabel, 'quality_label')
-        self.quality_label.setAlignment(QtCore.Qt.AlignCenter)
 
         # quality connections
         self.quality_slider.valueChanged[int].connect(self.quality_spinbox.setValue)
@@ -171,9 +165,7 @@ class UI(QtWidgets.QMainWindow):
 
         # set profile names
         self.profile_name_save_label = self.findChild(QtWidgets.QLabel, 'profile_name_save_label')
-        self.profile_name_save_label.setAlignment(QtCore.Qt.AlignCenter)
         self.profile_name_load_label = self.findChild(QtWidgets.QLabel, 'profile_name_load_label')
-        self.profile_name_load_label.setAlignment(QtCore.Qt.AlignCenter)
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combobox = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
 
@@ -193,10 +185,8 @@ class UI(QtWidgets.QMainWindow):
 
         # picture buttons
         self.pic_dir_label = self.findChild(QtWidgets.QLabel, 'pic_dir_label')
-        self.pic_dir_label.setAlignment(QtCore.Qt.AlignCenter)
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
-        self.pic_name_label.setAlignment(QtCore.Qt.AlignCenter)
         self.pic_format_combobox = self.findChild(QtWidgets.QComboBox, 'pic_format_combobox')
         self.pic_format_combobox.addItem('jpeg', True)
         self.pic_format_combobox.addItem('png', False)
