@@ -168,6 +168,7 @@ class UI(QtWidgets.QMainWindow):
         self.profile_name_save_label = self.findChild(QtWidgets.QLabel, 'profile_name_save_label')
         self.profile_name_load_label = self.findChild(QtWidgets.QLabel, 'profile_name_load_label')
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
+        self.profile_name_line_edit.setText('default')
         self.profile_name_combobox = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
 
         # set profile names connections
