@@ -214,6 +214,8 @@ class UI(QtWidgets.QMainWindow):
     def delete_profile(self):
 
         profile = self.profile_name_combobox.currentText()
+        if not profile:
+            return
         path = Path(self.paths['profiles'], f'{profile}.json')
         qm = QtWidgets.QMessageBox()
 
@@ -221,7 +223,10 @@ class UI(QtWidgets.QMainWindow):
                                            f'{profile}', qm.Yes | qm.No)
 
         if ret == qm.Yes:
-            path.unlink()
+            if path.is_file():
+                path.unlink()
+            else:
+
             self.FILE_DELETED.emit()
         else:
             return
