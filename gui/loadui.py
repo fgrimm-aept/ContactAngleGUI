@@ -284,7 +284,6 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_spinbox.setValue(self.current_settings['sharpness'])
         self.contrast_spinbox.setValue(self.current_settings['contrast'])
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
-        self.iso_combobox.setCurrentIndex()
         all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
                         for i in range(self.iso_combobox.count())]
         for i, elem in enumerate(all_elements):
