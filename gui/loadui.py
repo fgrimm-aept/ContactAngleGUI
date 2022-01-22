@@ -35,6 +35,7 @@ class QPlainTextEditLogger(logging.Handler):
     # TODO: add statusbar or logging field with information about what is being done
     # TODO: menu events (File, Help)
 
+
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
@@ -307,6 +308,8 @@ class UI(QtWidgets.QMainWindow):
         self.cam.quality = value
 
     def preview(self):
+        self.PREVIEW_POS = (self.pos().x(), self.pos().y(), self.frameGeometry().width(), self.frameGeometry().height())
+        print(self.PREVIEW_POS)
         if self.preview_button.isChecked():
             self.start_preview()
         else:
@@ -319,7 +322,6 @@ class UI(QtWidgets.QMainWindow):
         self.cam.stop_preview()
 
     def take_pic(self):
-        # thread creation for camera
 
         self.take_pic_button.setDisabled(True)
         self.worker.start()
@@ -329,7 +331,8 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.setDisabled(False)
 
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
-        self.RESIZED.emit()
+        # self.RESIZED.emit()
+        super(UI, self).resizeEvent(event)
 
     def resize_window(self):
         self.showMaximized()
