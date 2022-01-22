@@ -34,6 +34,7 @@ class QPlainTextEditLogger(logging.Handler):
 
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
+    FILE_DELETED = QtCore.pyqtSignal()
     PREVIEW_POS = (630, 161, 1280, 720)
 
     def __init__(self):
@@ -165,6 +166,7 @@ class UI(QtWidgets.QMainWindow):
         # Window Events
         self.RESIZED.connect(self.resize_window)
         self.installEventFilter(self)
+        self.FILE_DELETED.connect(self.set_profile_combobox)
 
         # set UI
         self.start_preview()
@@ -211,18 +213,19 @@ class UI(QtWidgets.QMainWindow):
         self.set_values()
 
     def delete_profile(self):
-        pass
-        # profile = self.profile_name_combobox.currentText()
-        # path = Path(self.paths['profiles'], f'{profile}.json')
-        # qm = QtWidgets.QMessageBox()
-        #
-        # ret = qm.question(self, 'Warning', f'Are you sure you want to delete the profile: '
-        #                                    f'{profile}', qm.Yes | qm.No)
-        #
-        # if ret == qm.Yes:
-        #     path.unlink()
-        # else:
-        #     return
+
+        profile = self.profile_name_combobox.currentText()
+        path = Path(self.paths['profiles'], f'{profile}.json')
+        qm = QtWidgets.QMessageBox()
+
+        ret = qm.question(self, 'Warning', f'Are you sure you want to delete the profile: '
+                                           f'{profile}', qm.Yes | qm.No)
+
+        if ret == qm.Yes:
+            path.unlink()
+            self.FILE_DELETED.emit()
+        else:
+            return
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
