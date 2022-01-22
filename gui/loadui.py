@@ -10,15 +10,16 @@ from picamera import PiCamera
 
 class WorkerThread(QtCore.QThread):
 
-    def __init__(self, cam, path):
+    def __init__(self, cam, path, suffix):
         super().__init__()
         self.cam = cam
         self.path = path
+        self.suffix = suffix
 
     def run(self):
         time.sleep(5)
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
-        self.cam.capture(f'{self.path}_{timestamp}')
+        self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}')
 
 
 class QPlainTextEditLogger(logging.Handler):
@@ -203,8 +204,8 @@ class UI(QtWidgets.QMainWindow):
         if not pic_name:
             pic_name = 'foo'
             pic_format = 'jpeg'
-        pic_path = Path(self.paths['pictures'], f'{pic_name}.{pic_format}')
-        self.worker = WorkerThread(cam=self.cam, path=pic_path)
+        pic_path = Path(self.paths['pictures'], f'{pic_name}')
+        self.worker = WorkerThread(cam=self.cam, path=pic_path, suffix=pic_format)
 
     def save_profile(self):
 
