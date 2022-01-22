@@ -9,11 +9,10 @@ from picamera import PiCamera
 
 class WorkerThread(QtCore.QThread):
 
-    def __init__(self, obj):
+    def __init__(self, cam, path):
         super().__init__()
-        self.cam = obj.cam
-        self.path = 'foo.jpg'
-        print(obj.__dict__)
+        self.cam = cam
+        self.path = path
 
     def run(self):
         time.sleep(5)
@@ -30,7 +29,7 @@ class QPlainTextEditLogger(logging.Handler):
         msg = self.format(record)
         self.widget.appendPlainText(msg)
 
-    # TODO: add statusbar with information about what is being done
+    # TODO: add statusbar or logging field with information about what is being done
 
 
 class UI(QtWidgets.QMainWindow):
@@ -44,11 +43,14 @@ class UI(QtWidgets.QMainWindow):
         self.cam = PiCamera()
 
         # load the ui file
-        path = Path(Path.cwd(), 'ui', 'main_window.ui')
-        uic.loadUi(path, self)
+        ui_path = Path(Path.cwd(), 'ui', 'main_window.ui')
+        uic.loadUi(ui_path, self)
 
-        # thread creation for camera
-        self.worker = WorkerThread(obj=self)
+        # Directories Setup
+        self.paths = {'profiles': Path(Path.cwd(), 'profiles'),
+                      'pictures': Path(Path.cwd(), 'pictures')}
+        for path in self.paths.values():
+            path.mkdir(parents=True, exist_ok=True)
 
         # Save Cam Settings in dict
         self.default_settings = {'brightness': 50,
@@ -58,12 +60,6 @@ class UI(QtWidgets.QMainWindow):
                                  'iso': 0}
 
         self.current_settings = self.default_settings
-
-        # Directories Setup
-        self.paths = {'profiles': Path(Path.cwd(), 'profiles'),
-                      'pictures': Path(Path.cwd(), 'pictures')}
-        for path in self.paths.values():
-            path.mkdir(parents=True, exist_ok=True)
 
         # define our widgets
 
@@ -174,6 +170,10 @@ class UI(QtWidgets.QMainWindow):
         self.start_preview()
         self.set_profile_combobox()
 
+        self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
+
+
+
     def save_profile(self):
 
         self.current_settings = {'brightness': self.brightness_spinbox.value(),
@@ -258,9 +258,15 @@ class UI(QtWidgets.QMainWindow):
         self.cam.stop_preview()
 
     def take_pic(self):
+        # thread creation for camera
+        pic_name = self.pic_name_line_edit.text()
+        if pic_name is None:
+            pic_name = 'foo.jpg'
+        pic_path = Path(self.paths['pictures'], pic_name)
+        worker = WorkerThread(cam=self.cam, path=pic_path)
         self.take_pic_button.setDisabled(True)
-        self.worker.start()
-        self.worker.finished.connect(self.evt_worker_finished)
+        worker.start()
+        worker.finished.connect(self.evt_worker_finished)
 
     def evt_worker_finished(self):
         self.take_pic_button.setDisabled(False)
