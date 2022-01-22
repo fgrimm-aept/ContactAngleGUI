@@ -1404,6 +1404,9 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the filename for the picture.&lt;/p&gt;&lt;p&gt;A timestamp will be appended at the end.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
        </widget>
       </item>
       <item row="0" column="2">
