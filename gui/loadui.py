@@ -216,7 +216,6 @@ class UI(QtWidgets.QMainWindow):
             path.unlink()
         else:
             return
-        self.set_profile_combobox()
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
