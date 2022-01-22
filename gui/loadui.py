@@ -266,6 +266,11 @@ class UI(QtWidgets.QMainWindow):
 
         profile = self.profile_name_combobox.currentText()
         if not profile:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText('No profile selected.')
+            msg.setWindowTitle("Error")
+            msg.exec_()
             return
         path = Path(self.paths['profiles'], f'{profile}.json')
         qm = QtWidgets.QMessageBox()
