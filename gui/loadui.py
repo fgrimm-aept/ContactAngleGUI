@@ -151,7 +151,7 @@ class UI(QtWidgets.QMainWindow):
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
-        self.profile_name_combobox.currentIndexChanged.connect(self.set_iso)
+        self.profile_name_combobox.currentIndexChanged.connect(self.set_profile_combobox)
 
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
@@ -162,6 +162,7 @@ class UI(QtWidgets.QMainWindow):
         self.save_profile_button.clicked.connect(self.save_profile)
         self.load_profile_button.clicked.connect(self.load_profile)
         self.delete_profile_button.clicked.connect(self.delete_profile)
+        self.delete_profile_button.clicked.connect(self.set_profile_combobox)
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
