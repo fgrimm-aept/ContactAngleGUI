@@ -207,14 +207,14 @@ class UI(QtWidgets.QMainWindow):
     def delete_profile(self):
         profile = self.profile_name_combo_box.currentText()
         qm = QtWidgets.QMessageBox()
-        qm.setWindowTitle("Warning")
-        ret = qm.question(self, '', f"Are you sure you want to delete the profile: "
-                                    f"{profile}", qm.Yes | qm.No)
+
+        ret = qm.question(self, 'Warning', f'Are you sure you want to delete the profile: '
+                                           f'{profile}', qm.Yes | qm.No)
 
         if ret == qm.Yes:
-            qm.information(self, '', f"Deleted profile {profile}")
+            qm.information(self, 'Warning', f'Deleted profile {profile}')
         else:
-            qm.information(self, '', "Nothing Changed")
+            qm.information(self, 'Warning', 'Nothing Changed')
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
