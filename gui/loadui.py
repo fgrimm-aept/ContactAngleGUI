@@ -150,7 +150,6 @@ class UI(QtWidgets.QMainWindow):
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
-        self.profile_name_combobox.cleared.connect(self.set_profile_combobox)
 
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
