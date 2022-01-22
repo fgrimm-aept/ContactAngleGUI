@@ -308,8 +308,11 @@ class UI(QtWidgets.QMainWindow):
         self.cam.quality = value
 
     def preview(self):
-        self.PREVIEW_POS = (self.pos().x(), self.pos().y(), self.frameGeometry().width(), self.frameGeometry().height())
-        print(self.PREVIEW_POS)
+        # self.PREVIEW_POS = (self.pos().x(),
+        #                     self.pos().y(),
+        #                     self.frameGeometry().width(),
+        #                     self.frameGeometry().height())
+        # print(self.PREVIEW_POS)
         if self.preview_button.isChecked():
             self.start_preview()
         else:
@@ -331,8 +334,8 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.setDisabled(False)
 
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
-        # self.RESIZED.emit()
-        super(UI, self).resizeEvent(event)
+        self.RESIZED.emit()
+        # super(UI, self).resizeEvent(event)
 
     def resize_window(self):
         self.showMaximized()
