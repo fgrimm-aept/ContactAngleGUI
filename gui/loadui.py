@@ -190,7 +190,7 @@ class UI(QtWidgets.QMainWindow):
         # picture buttons
         self.pic_dir_label = self.findChild(QtWidgets.QLabel, 'pic_dir_label')
         self.pic_dir_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_dir_line_edit')
-        self.pic_dir_line_edit.setText(f'{self.paths["pictures"]}')
+        self.pic_dir_line_edit.setText(f'{self.paths["pictures"].stem}')
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         self.pic_name_line_edit.setText('foo')
         self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
