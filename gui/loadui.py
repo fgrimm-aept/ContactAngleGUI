@@ -284,11 +284,12 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_spinbox.setValue(self.current_settings['sharpness'])
         self.contrast_spinbox.setValue(self.current_settings['contrast'])
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
-        all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
-                        for i in range(self.iso_combobox.count())]
-        for i, elem in enumerate(all_elements):
-            if elem[1] == self.current_settings['iso']:
-                self.iso_combobox.setCurrentIndex(i)
-                break
-        else:
-            self.iso_combobox.setCurrentIndex(0)
+        self.iso_combobox.setCurrentIndex(self.current_settings['iso'])
+        # all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
+        #                 for i in range(self.iso_combobox.count())]
+        # for i, elem in enumerate(all_elements):
+        #     if elem[1] == self.current_settings['iso']:
+        #         self.iso_combobox.setCurrentIndex(i)
+        #         break
+        # else:
+        #     self.iso_combobox.setCurrentIndex(0)
