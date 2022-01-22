@@ -211,11 +211,8 @@ class UI(QtWidgets.QMainWindow):
         self.set_profile_combobox()
 
         # Take Picture Events
-        self.pic_name = self.pic_name_line_edit.text()
-        self.pic_suffix = self.pic_format_combobox.currentText()
-        if not self.pic_name:
-            self.pic_name = 'foo'
-            self.pic_format = 'jpeg'
+        self.pic_name = 'foo'
+        self.pic_suffix = 'jpeg'
         self.pic_path = Path(self.paths['pictures'], f'{self.pic_name}')
         self.timestamp = ''
         self.worker = WorkerThread(self)
@@ -343,6 +340,12 @@ class UI(QtWidgets.QMainWindow):
         self.cam.stop_preview()
 
     def take_pic(self):
+
+        self.pic_name = self.pic_name_line_edit.text()
+        self.pic_suffix = self.pic_format_combobox.currentText()
+
+        if not self.pic_name:
+            self.pic_name = 'foo'
 
         self.take_pic_button.setDisabled(True)
         self.worker.start()
