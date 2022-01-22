@@ -207,6 +207,7 @@ class UI(QtWidgets.QMainWindow):
     def delete_profile(self):
         profile = self.profile_name_combo_box.currentText()
         qm = QtWidgets.QMessageBox()
+        qm.setWindowTitle("")
         ret = qm.question(self, '', f"Are you sure you want to delete the profile: "
                                     f"{profile}", qm.Yes | qm.No)
 
