@@ -124,9 +124,6 @@ class UI(QtWidgets.QMainWindow):
 
         # iso
         self.iso_combobox = self.findChild(QtWidgets.QComboBox, 'iso_combobox')
-        self.iso_combobox.lineEdit()
-        self.iso_combobox.setAlignment(QtCore.Qt.AlignCenter)
-        self.iso_combobox.setReadOnly(True)
         self.iso_combobox.addItem("Auto", 0)
         self.iso_combobox.addItem("100", 100)
         self.iso_combobox.addItem("200", 200)
@@ -166,9 +163,6 @@ class UI(QtWidgets.QMainWindow):
         # set profile names
         self.profile_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'profile_name_line_edit')
         self.profile_name_combobox = self.findChild(QtWidgets.QComboBox, 'load_profile_combobox')
-        self.profile_name_combobox.lineEdit()
-        self.profile_name_combobox.setAlignment(QtCore.Qt.AlignCenter)
-        self.profile_name_combobox.setReadOnly(True)
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
@@ -189,9 +183,6 @@ class UI(QtWidgets.QMainWindow):
         self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
         self.pic_name_label.setAlignment(QtCore.Qt.AlignCenter)
         self.pic_format_combobox = self.findChild(QtWidgets.QComboBox, 'pic_format_combobox')
-        self.pic_format_combobox.lineEdit()
-        self.pic_format_combobox.setAlignment(QtCore.Qt.AlignCenter)
-        self.pic_format_combobox.setReadOnly(True)
         self.pic_format_combobox.addItem('jpeg', True)
         self.pic_format_combobox.addItem('png', False)
         self.pic_format_combobox.addItem('gif', False)
@@ -201,6 +192,12 @@ class UI(QtWidgets.QMainWindow):
         self.pic_format_combobox.addItem('rgba', False)
         self.pic_format_combobox.addItem('bgr', False)
         self.pic_format_combobox.addItem('bgra', False)
+
+        # center text in pic_format_combobox
+        self.pic_format_combobox.setEditable(True)
+        self.pic_format_line_edit = self.pic_format_combobox.lineEdit()
+        self.pic_format_line_edit.setAlignment(QtCore.Qt.AlignCenter)
+        self.pic_format_line_edit.setReadOnly(True)
 
         # picture buttons connections
         self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
