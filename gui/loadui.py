@@ -193,12 +193,6 @@ class UI(QtWidgets.QMainWindow):
         self.pic_format_combobox.addItem('bgr', False)
         self.pic_format_combobox.addItem('bgra', False)
 
-        # center text in pic_format_combobox
-        self.pic_format_combobox.setEditable(True)
-        self.pic_format_line_edit = self.pic_format_combobox.lineEdit()
-        self.pic_format_line_edit.setAlignment(QtCore.Qt.AlignCenter)
-        self.pic_format_line_edit.setReadOnly(True)
-
         # picture buttons connections
         self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
 
