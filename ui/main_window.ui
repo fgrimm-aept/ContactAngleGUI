@@ -1461,8 +1461,11 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="toolTip">
+         <string>Set the save directory for the pictures</string>
+        </property>
         <property name="whatsThis">
-         <string>/home/pi/Desktop/ContactAngleSystem/pictures</string>
+         <string/>
         </property>
         <property name="text">
          <string/>
