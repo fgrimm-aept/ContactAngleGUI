@@ -21,6 +21,7 @@ class WorkerThread(QtCore.QThread):
     def run(self):
         time.sleep(5)
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
+        print(self.quality)
         if self.suffix == 'jpeg':
             self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}', quality=self.quality)
         else:
@@ -352,9 +353,7 @@ class UI(QtWidgets.QMainWindow):
         self.worker.finished.connect(self.evt_worker_finished)
 
     def set_timestamp(self, timestamp):
-        print(self.timestamp)
         self.timestamp = timestamp
-        print(self.timestamp)
 
     def evt_worker_finished(self):
         self.take_pic_button.setDisabled(False)
