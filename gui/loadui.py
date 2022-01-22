@@ -169,6 +169,23 @@ class UI(QtWidgets.QMainWindow):
         self.delete_profile_button.clicked.connect(self.delete_profile)
         self.delete_profile_button.clicked.connect(self.set_profile_combobox)
 
+        # picture buttons
+        self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
+        self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
+        self.pic_format_combobox = self.findChild(QtWidgets.QComboBox, 'pic_format_combobox')
+        self.pic_format_combobox.addItem('jpeg', True)
+        self.pic_format_combobox.addItem('png', False)
+        self.pic_format_combobox.addItem('gif', False)
+        self.pic_format_combobox.addItem('bmp', False)
+        self.pic_format_combobox.addItem('yuv', False)
+        self.pic_format_combobox.addItem('rgb', False)
+        self.pic_format_combobox.addItem('rgba', False)
+        self.pic_format_combobox.addItem('bgr', False)
+        self.pic_format_combobox.addItem('bgra', False)
+
+        # picture buttons connections
+        self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
+
         # Window Events
         self.RESIZED.connect(self.resize_window)
         self.installEventFilter(self)
@@ -178,9 +195,9 @@ class UI(QtWidgets.QMainWindow):
         self.start_preview()
         self.set_profile_combobox()
 
-        self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
+        # Take Picture Events
         pic_name = self.pic_name_line_edit.text()
-        pic_format = self.pic_format_combobox.currentData()
+        pic_format = self.pic_format_combobox.currentText()
         if not pic_name:
             pic_name = 'foo'
             pic_format = 'jpeg'
@@ -262,6 +279,12 @@ class UI(QtWidgets.QMainWindow):
             self.preview_button.setChecked(False)
         return False
 
+    def toggle_quality(self):
+        flag = self.pic_format_combobox.currentData()
+        self.quality_slider.setEnabled(flag)
+        self.quality_spinbox.setEnabled(flag)
+        self.quality_label.setEnabled(flag)
+
     def set_brightness(self, value):
         self.cam.brightness = value
 
@@ -278,10 +301,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.iso = self.iso_combobox.itemData(index)
 
     def set_quality(self, value):
-        if self.pic_format_combobox.currentText() == 'jpeg':
-            self.cam.quality = value
-        else:
-            return
+        self.cam.quality = value
 
     def preview(self):
         if self.preview_button.isChecked():
