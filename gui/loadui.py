@@ -13,6 +13,7 @@ class WorkerThread(QtCore.QThread):
         super().__init__()
         self.cam = obj.cam
         self.path = 'foo.jpg'
+        print(obj)
 
     def run(self):
         time.sleep(5)
