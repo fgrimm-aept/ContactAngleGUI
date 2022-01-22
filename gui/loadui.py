@@ -16,7 +16,6 @@ class WorkerThread(QtCore.QThread):
 
     def run(self):
         time.sleep(5)
-        print(f'{self.path}')
         self.cam.capture(f'{self.path}')
 
 
@@ -150,7 +149,7 @@ class UI(QtWidgets.QMainWindow):
 
         # set profile names connections
         self.profile_name_line_edit.returnPressed.connect(self.save_profile)
-        # self.profile_name_combobox.currentIndexChanged.connect(self.set_profile_combobox)
+        self.profile_name_combobox.currentIndexChanged.connect(self.profile_name_combobox.setCurrentIndex(0))
 
         # save/load profile buttons
         self.save_profile_button = self.findChild(QtWidgets.QPushButton, 'save_profile_button')
@@ -173,11 +172,9 @@ class UI(QtWidgets.QMainWindow):
 
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         pic_name = self.pic_name_line_edit.text()
-        print(pic_name)
-        if pic_name == '':
+        if not pic_name:
             pic_name = 'foo.jpg'
         pic_path = Path(self.paths['pictures'], pic_name)
-        print(f'{pic_path}')
         self.worker = WorkerThread(cam=self.cam, path=pic_path)
 
     def save_profile(self):
