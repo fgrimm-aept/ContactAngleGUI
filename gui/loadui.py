@@ -16,6 +16,7 @@ class WorkerThread(QtCore.QThread):
 
     def run(self):
         time.sleep(5)
+        print(f'{self.path}')
         self.cam.capture(f'{self.path}')
 
 
