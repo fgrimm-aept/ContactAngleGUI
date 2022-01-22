@@ -33,7 +33,7 @@ class QPlainTextEditLogger(logging.Handler):
         self.widget.appendPlainText(msg)
 
     # TODO: add statusbar or logging field with information about what is being done
-
+    # TODO: menu events (File, Help)
 
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
