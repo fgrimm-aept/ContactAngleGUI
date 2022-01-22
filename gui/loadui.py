@@ -71,6 +71,8 @@ class UI(QtWidgets.QMainWindow):
                                  'saturation': 0,
                                  'iso': 0,
                                  'quality': 75}
+        with open(Path(self.paths['profiles'], 'default.json'), 'w') as f_default:
+            json.dump(self.default_settings, f_default)
 
         self.current_settings = self.default_settings
 
