@@ -176,6 +176,7 @@ class UI(QtWidgets.QMainWindow):
         if pic_name is None:
             pic_name = 'foo.jpg'
         pic_path = Path(self.paths['pictures'], pic_name)
+        print(f'{pic_path}')
         self.worker = WorkerThread(cam=self.cam, path=pic_path)
 
     def save_profile(self):
