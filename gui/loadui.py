@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+from datetime import datetime
 from pathlib import Path
 
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
@@ -16,7 +17,8 @@ class WorkerThread(QtCore.QThread):
 
     def run(self):
         time.sleep(5)
-        self.cam.capture(f'{self.path}')
+        timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
+        self.cam.capture(f'{self.path}_{timestamp}')
 
 
 class QPlainTextEditLogger(logging.Handler):

@@ -699,7 +699,14 @@
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
          </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="sizeAdjustPolicy">
          <enum>QComboBox::AdjustToContents</enum>
@@ -937,7 +944,14 @@
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
          </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="insertPolicy">
          <enum>QComboBox::InsertAlphabetically</enum>
@@ -1240,7 +1254,14 @@
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
          </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
         </property>
        </widget>
       </item>
