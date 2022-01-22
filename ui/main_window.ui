@@ -1035,6 +1035,12 @@
       <height>720</height>
      </size>
     </property>
+    <property name="toolTip">
+     <string>Set the save directory for the pictures</string>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
     </property>
@@ -1454,6 +1460,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="whatsThis">
+         <string>/home/pi/Desktop/ContactAngleSystem/pictures</string>
         </property>
         <property name="text">
          <string/>
