@@ -233,9 +233,10 @@ class UI(QtWidgets.QMainWindow):
         if profile_name == 'default':
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
-            msg.setText('Can not overwrite this profile')
+            msg.setText('Can not overwrite default profile')
             msg.setWindowTitle("Error")
             msg.exec_()
+            return
         if not profile_name:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
@@ -272,6 +273,13 @@ class UI(QtWidgets.QMainWindow):
     def delete_profile(self):
 
         profile = self.profile_name_combobox.currentText()
+        if profile == 'default':
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText('Can not delete default profile')
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
         if not profile:
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
