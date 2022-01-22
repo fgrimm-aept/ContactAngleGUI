@@ -49,11 +49,11 @@ class UI(QtWidgets.QMainWindow):
         self.worker = WorkerThread(cam=self.cam)
 
         # Save Cam Settings in dict
-        self.default_settings = {'brightness': self.cam.brightness,
-                                 'sharpness': self.cam.sharpness,
-                                 'contrast': self.cam.contrast,
-                                 'saturation': self.cam.saturation,
-                                 'iso': self.cam.iso}
+        self.default_settings = {'brightness': 50,
+                                 'sharpness': 0,
+                                 'contrast': 0,
+                                 'saturation': 0,
+                                 'iso': 0}
 
         self.current_settings = self.default_settings
 
@@ -126,7 +126,7 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.addItem("800", 800)
 
         # iso connections
-        self.iso_combobox.currentIndexChanged.connect(self.set_iso)
+        self.iso_combobox.activated.connect(self.set_iso)
 
         # picture push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
@@ -178,7 +178,7 @@ class UI(QtWidgets.QMainWindow):
                                  'sharpness': self.sharpness_spinbox.value(),
                                  'contrast': self.contrast_spinbox.value(),
                                  'saturation': self.saturation_spinbox.value(),
-                                 'iso': self.iso_combobox.currentData()}
+                                 'iso': self.iso_combobox.currentIndex()}
         profile_name = self.profile_name_line_edit.text()
         if not profile_name:
             msg = QtWidgets.QMessageBox()
@@ -206,17 +206,18 @@ class UI(QtWidgets.QMainWindow):
         self.set_values()
 
     def delete_profile(self):
-        profile = self.profile_name_combobox.currentText()
-        path = Path(self.paths['profiles'], f'{profile}.json')
-        qm = QtWidgets.QMessageBox()
-
-        ret = qm.question(self, 'Warning', f'Are you sure you want to delete the profile: '
-                                           f'{profile}', qm.Yes | qm.No)
-
-        if ret == qm.Yes:
-            path.unlink()
-        else:
-            return
+        pass
+        # profile = self.profile_name_combobox.currentText()
+        # path = Path(self.paths['profiles'], f'{profile}.json')
+        # qm = QtWidgets.QMessageBox()
+        #
+        # ret = qm.question(self, 'Warning', f'Are you sure you want to delete the profile: '
+        #                                    f'{profile}', qm.Yes | qm.No)
+        #
+        # if ret == qm.Yes:
+        #     path.unlink()
+        # else:
+        #     return
 
     def eventFilter(self, a0: 'QObject', a1: 'QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
@@ -283,6 +284,7 @@ class UI(QtWidgets.QMainWindow):
         self.sharpness_spinbox.setValue(self.current_settings['sharpness'])
         self.contrast_spinbox.setValue(self.current_settings['contrast'])
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
+        self.iso_combobox.setCurrentIndex()
         all_elements = [(self.iso_combobox.itemText(i), self.iso_combobox.itemData(i))
                         for i in range(self.iso_combobox.count())]
         for i, elem in enumerate(all_elements):
