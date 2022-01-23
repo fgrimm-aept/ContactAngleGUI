@@ -8,7 +8,6 @@ import sys
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    print(app.keys())
     ui_window = UI()
     ui_window.showMaximized()
     app.exec_()
