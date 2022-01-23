@@ -25,11 +25,11 @@ class WorkerThread(QtCore.QThread):
     def run(self):
         time.sleep(5)
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
-        print(self.quality)
         if self.suffix == 'jpeg':
+            print('JPEG call')
             self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}', quality=self.quality)
         else:
-            print('I am not a jpeg pic')
+            print('Not JPEG call')
             self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}')
         self.TIMESTAMP.emit(timestamp)
 
@@ -444,8 +444,6 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.pos().y() + 90 + self.Y_OFFSET,
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
-        print('y', self.preview_frame.pos().y())
-        print('x', self.preview_frame.pos().x())
         if self.preview_button.isChecked():
             self.start_preview()
         else:
