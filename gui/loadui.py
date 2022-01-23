@@ -187,7 +187,7 @@ class UI(QtWidgets.QMainWindow):
         self.preview_shortcut_space.activated.connect(self.preview)
         self.take_pic_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_T), self)
         self.take_pic_shortcut.activated.connect(self.take_pic)
-        self.take_pic_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Control + QtCore.Qt.Key_Space),
+        self.take_pic_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Meta + QtCore.Qt.Key_Space),
                                                            self)
         self.take_pic_shortcut_space.activated.connect(self.take_pic)
 
