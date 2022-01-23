@@ -366,12 +366,18 @@ class UI(QtWidgets.QMainWindow):
         return False
 
     def move_preview_x(self, value):
-        self.PREVIEW_POS = (value, self.PREVIEW_POS[1], self.PREVIEW_POS[2], self.PREVIEW_POS[3])
-        self.cam.window = self.PREVIEW_POS
+        if self.cam.preview:
+            self.PREVIEW_POS = (value, self.PREVIEW_POS[1], self.PREVIEW_POS[2], self.PREVIEW_POS[3])
+            self.cam.window = self.PREVIEW_POS
+        else:
+            self.x_offset_slider.setValue(0)
 
     def move_preview_y(self, value):
-        self.PREVIEW_POS = (self.PREVIEW_POS[0], value, self.PREVIEW_POS[2], self.PREVIEW_POS[3])
-        self.cam.window = self.PREVIEW_POS
+        if self.cam.preview:
+            self.PREVIEW_POS = (self.PREVIEW_POS[0], value, self.PREVIEW_POS[2], self.PREVIEW_POS[3])
+            self.cam.window = self.PREVIEW_POS
+        else:
+            self.y_offset_slider.setValue(0)
 
     def toggle_quality(self):
         flag = self.pic_format_combobox.currentData()
