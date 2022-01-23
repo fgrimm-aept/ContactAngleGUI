@@ -901,6 +901,9 @@
         <property name="text">
          <string/>
         </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="0" column="0">
@@ -1598,13 +1601,13 @@
     <property name="title">
      <string>Preview Offsets</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
        <width>591</width>
-       <height>81</height>
+       <height>82</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">

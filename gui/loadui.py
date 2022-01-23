@@ -21,22 +21,30 @@ class WorkerThread(QtCore.QThread):
     def __init__(self, obj):
         # TODO: send data to worker thread through signal, slot not through __init__
         super().__init__()
+        self.obj = obj
         self.cam = obj.cam
-        self.file_path = Path(obj.pic_path, obj.pic_name)
-        self.suffix = obj.pic_suffix
+        self.pic_directory = Path(obj.pic_directory)
+        self.pic_name = Path(obj.pic_name)
+        self.pic_format = obj.pic_format
         self.quality = obj.quality
+        obj.CAMERA_SETTINGS.connect(self.set_settings)
+
+    def set_settings(self, settings):
+        self.pic_directory = settings['directory']
+        self.pic_name = settings['name']
+        self.pic_format = settings['format']
+        self.quality = settings['quality']
 
     def run(self):
         # TODO: Replace with QTimer instead of sleep()?
         #  https://doc.qt.io/qtforpython-5/overviews/timers.html#timers
         time.sleep(5)
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
-        if self.suffix == 'jpeg':
-            print('JPEG call')
-            self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}', quality=self.quality)
+        full_path = Path(self.pic_directory, f"{self.pic_name}_{timestamp}.{self.pic_format}")
+        if self.pic_format == 'jpeg':
+            self.cam.capture(f'{full_path}', quality=self.quality)
         else:
-            print('Not JPEG call')
-            self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}')
+            self.cam.capture(f'{full_path}')
         self.TIMESTAMP.emit(timestamp)
 
 
@@ -55,7 +63,7 @@ class QPlainTextEditLogger(logging.Handler):
 
 
 class UI(QtWidgets.QMainWindow):
-    CAMERA_SETTINGS = QtCore.pyqtSignal(tuple)
+    CAMERA_SETTINGS = QtCore.pyqtSignal(dict)
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
     PREVIEW_POS = (0, 0, 0, 0)
@@ -229,22 +237,23 @@ class UI(QtWidgets.QMainWindow):
         self.pic_format_combobox.addItem('bgr', False)
         self.pic_format_combobox.addItem('bgra', False)
 
-        # set status bar
-        self.full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
-                                                      f'{self.pic_format_combobox.currentText()}')
-        self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
-        self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
+        # init status bar with default values
+        full_path = Path(self.paths['pictures'], f'foo_{{timestamp}}.jpg')
+        self.pic_dir_line_edit.setStatusTip(f'{full_path.parent}')
+        self.pic_name_line_edit.setStatusTip(f'{full_path}')
 
-        self.take_pic_button.setStatusTip(f'{self.full_path}')
+        self.take_pic_button.setStatusTip(f'{full_path}')
+
+        # picture buttons connections
+        self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
+        self.pic_format_combobox.currentIndexChanged.connect(self.set_pic_format)
+        self.pic_name_line_edit.editingFinished.connect(self.set_pic_name)
+        self.pic_dir_button.clicked.connect(self.open_directory)
 
         # set status bar connections
         self.pic_format_combobox.currentIndexChanged.connect(self.set_statusbar)
         self.pic_dir_line_edit.textEdited.connect(self.set_statusbar)
         self.pic_name_line_edit.textEdited.connect(self.set_statusbar)
-
-        # picture buttons connections
-        self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
-        self.pic_dir_button.clicked.connect(self.open_directory)
 
         # Window Events
         self.RESIZED.connect(self.resize_window)
@@ -257,8 +266,8 @@ class UI(QtWidgets.QMainWindow):
 
         # Take Picture Events
         self.pic_name = 'foo'
-        self.pic_suffix = 'jpeg'
-        self.pic_path = Path(self.paths['pictures'])
+        self.pic_format = 'jpeg'
+        self.pic_directory = Path(self.paths['pictures'])
         self.timestamp = ''
         self.worker = WorkerThread(self)
         self.worker.TIMESTAMP.connect(self.set_timestamp)
@@ -276,29 +285,33 @@ class UI(QtWidgets.QMainWindow):
         # preview frame
         self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
 
+    def set_pic_format(self):
+        self.pic_format = self.pic_format_combobox.currentText()
+
+    def set_pic_name(self):
+        self.pic_name = self.pic_name_line_edit.text()
+
     def open_directory(self):
-        home_path = str(self.paths['pictures'])
+        home_path = str(self.pic_directory)
         self.open_directory_dialog.setDirectory(home_path)
         self.open_directory_dialog.open()
         self.open_directory_dialog.finished.connect(self.set_path)
 
-    def set_path(self, value):
-        print(value)
+    def set_directory(self, value):
+
         if value == 1:
-            path = self.open_directory_dialog.selectedFiles()
-            self.pic_path = self.paths['pictures'] = Path(path[0])
-            string = f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}"
+            self.pic_directory  = Path(self.open_directory_dialog.selectedFiles()[0])
+            string = f"{Path('..', self.pic_directory.parent.name, self.pic_directory.stem)}"
             self.pic_dir_line_edit.setText(string)
             self.set_statusbar()
         if value == 0:
             return
 
     def set_statusbar(self):
-        self.full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
-                                                      f'{self.pic_format_combobox.currentText()}')
-        self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
-        self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
-        self.take_pic_button.setStatusTip(f'{self.full_path}')
+        path = Path(self.pic_directory, f"{self.pic_name}_{{timestamp}}.{self.pic_format}")
+        self.pic_dir_line_edit.setStatusTip(f'{path}')
+        self.pic_name_line_edit.setStatusTip(f'{path}')
+        self.take_pic_button.setStatusTip(f'{path}')
 
     def save_profile(self):
 
@@ -307,9 +320,9 @@ class UI(QtWidgets.QMainWindow):
                                  'contrast': self.contrast_spinbox.value(),
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentIndex(),
-                                 'directory': self.pic_dir_line_edit.text(),
-                                 'filename': self.pic_name_line_edit.text(),
-                                 'suffix': self.pic_format_combobox.currentIndex()}
+                                 'directory': self.pic_directory,
+                                 'filename': self.pic_name,
+                                 'pic_format': self.pic_format}
         profile_name = self.profile_name_line_edit.text()
         if profile_name == 'default':
             msg = QtWidgets.QMessageBox()
@@ -462,32 +475,27 @@ class UI(QtWidgets.QMainWindow):
         self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
 
     def stop_preview(self):
-        # TODO: Remember X-OFFSET and Y-OFFSET and use it for next start_preview call
-        # self.x_offset_slider.setValue(0)
-        # self.y_offset_slider.setValue(0)
         self.cam.stop_preview()
 
     def take_pic(self):
 
         self.groupbox_settings.setDisabled(True)
-        settings = (self.full_path, )
+        settings = {'directory': self.self.pic_directory,
+                    'name': self.pic_name,
+                    'format': self.pic_format,
+                    'quality': self.quality}
         self.CAMERA_SETTINGS.emit(settings)
-        self.pic_name = self.pic_name_line_edit.text()  # TODO: change to grab full path
-        self.pic_suffix = self.pic_format_combobox.currentText()
-
-        if not self.pic_name:
-            self.pic_name = 'foo'
 
         self.take_pic_button.setDisabled(True)
         self.worker.start()
         self.worker.finished.connect(self.evt_worker_finished)
 
-    def set_timestamp(self, timestamp):
-        self.timestamp = timestamp
-
     def evt_worker_finished(self):
         self.groupbox_settings.setDisabled(False)
         self.take_pic_button.setDisabled(False)
+
+    def set_timestamp(self, timestamp):
+        self.timestamp = timestamp
 
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
         self.RESIZED.emit()
@@ -516,4 +524,4 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.setCurrentIndex(self.current_settings['iso'])
         self.pic_dir_line_edit.setText(self.current_settings['directory']),
         self.pic_name_line_edit.setText(self.current_settings['filename']),
-        self.pic_format_combobox.currentIndex(self.current_settings['suffix'])
+        self.pic_format_combobox.currentIndex(self.current_settings['pic_format'])
