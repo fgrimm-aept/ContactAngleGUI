@@ -368,14 +368,14 @@ class UI(QtWidgets.QMainWindow):
     def move_preview_x(self, value):
         if self.cam.preview:
             self.PREVIEW_POS = (value, self.PREVIEW_POS[1], self.PREVIEW_POS[2], self.PREVIEW_POS[3])
-            self.cam.window = self.PREVIEW_POS
+            self.cam.preview.window = self.PREVIEW_POS
         else:
             self.x_offset_slider.setValue(0)
 
     def move_preview_y(self, value):
         if self.cam.preview:
             self.PREVIEW_POS = (self.PREVIEW_POS[0], value, self.PREVIEW_POS[2], self.PREVIEW_POS[3])
-            self.cam.window = self.PREVIEW_POS
+            self.cam.preview.window = self.PREVIEW_POS
         else:
             self.y_offset_slider.setValue(0)
 
