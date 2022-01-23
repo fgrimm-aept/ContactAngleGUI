@@ -163,7 +163,7 @@ class UI(QtWidgets.QMainWindow):
         # camera push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
-        self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence('O'), self)
+        self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence('o'), self)
         self.preview_shortcut.activated.connect(self.preview)
 
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
