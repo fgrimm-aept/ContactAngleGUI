@@ -186,6 +186,7 @@ class UI(QtWidgets.QMainWindow):
         # camera push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
+        self.preview_button.setToolTip('Toggles camera Preview.\nShortcut: <P>, <Space>')
         self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_P), self)
         self.preview_shortcut.activated.connect(self.toggle_preview)
         self.preview_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Space), self)
