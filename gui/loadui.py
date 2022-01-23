@@ -334,7 +334,7 @@ class UI(QtWidgets.QMainWindow):
 
     def open_dropui(self):
         url = QtCore.QUrl(self.link)
-        QtGui.QDesktopServices.openURL(url)
+        QtGui.QDesktopServices.openUrl(url)
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
