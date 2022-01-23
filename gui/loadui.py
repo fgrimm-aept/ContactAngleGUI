@@ -264,7 +264,7 @@ class UI(QtWidgets.QMainWindow):
 
     def set_statusbar(self):
         self.full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
-                                                 f'{self.pic_format_combobox.currentText()}')
+                                                      f'{self.pic_format_combobox.currentText()}')
         self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
         self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
 
@@ -367,21 +367,21 @@ class UI(QtWidgets.QMainWindow):
 
     def move_preview_x(self, value):
         if self.cam.preview:
-            self.PREVIEW_POS = (self.PREVIEW_POS[0] + value,
-                                self.PREVIEW_POS[1],
-                                self.PREVIEW_POS[2],
-                                self.PREVIEW_POS[3])
-            self.cam.preview.window = self.PREVIEW_POS
+            preview_pos = (self.PREVIEW_POS[0] + value,
+                           self.PREVIEW_POS[1],
+                           self.PREVIEW_POS[2],
+                           self.PREVIEW_POS[3])
+            self.cam.preview.window = preview_pos
         else:
             self.x_offset_slider.setValue(0)
 
     def move_preview_y(self, value):
         if self.cam.preview:
-            self.PREVIEW_POS = (self.PREVIEW_POS[0],
-                                self.PREVIEW_POS[1] + value,
-                                self.PREVIEW_POS[2],
-                                self.PREVIEW_POS[3])
-            self.cam.preview.window = self.PREVIEW_POS
+            preview_pos = (self.PREVIEW_POS[0],
+                           self.PREVIEW_POS[1] + value,
+                           self.PREVIEW_POS[2],
+                           self.PREVIEW_POS[3])
+            self.cam.preview.window = preview_pos
         else:
             self.y_offset_slider.setValue(0)
 
@@ -474,5 +474,3 @@ class UI(QtWidgets.QMainWindow):
         self.pic_dir_line_edit.setText(self.current_settings['directory']),
         self.pic_name_line_edit.setText(self.current_settings['filename']),
         self.pic_format_combobox.currentIndex(self.current_settings['suffix'])
-
-
