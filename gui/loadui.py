@@ -190,7 +190,6 @@ class UI(QtWidgets.QMainWindow):
         # picture buttons
         self.pic_dir_label = self.findChild(QtWidgets.QLabel, 'pic_dir_label')
         self.pic_dir_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_dir_line_edit')
-        self.pic_dir_line_edit.setStatusTip(f'{self.paths["pictures"]}')
         self.pic_dir_line_edit.setText(f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}")
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         self.pic_name_line_edit.setText('foo')
@@ -211,6 +210,11 @@ class UI(QtWidgets.QMainWindow):
         self.pic_format_combobox.addItem('rgba', False)
         self.pic_format_combobox.addItem('bgr', False)
         self.pic_format_combobox.addItem('bgra', False)
+
+        # set status bar
+        self.pic_dir_line_edit.setStatusTip(f'{self.paths["pictures"]}')
+        self.pic_name_line_edit.setStatusTip(f'{self.pic_name_line_edit.currentText()}_{{timestamp}}.'
+                                             f'{self.pic_format_combobox.currentText()}')
 
         # picture buttons connections
         self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
