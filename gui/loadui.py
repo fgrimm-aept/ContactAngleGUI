@@ -1,6 +1,6 @@
-import sys
 import json
 import logging
+import sys
 import time
 from datetime import datetime
 from os import chown
@@ -310,6 +310,7 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.geometry().y() + 85 + self.Y_OFFSET,
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
+        self.picture_label = self.findChild(QtWidgets.QLabel, 'picture_label')
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
@@ -340,8 +341,13 @@ class UI(QtWidgets.QMainWindow):
         self.open_picture_dialog.open()
         self.open_picture_dialog.finished.connect(self.display_picture)
 
-    def display_picture(self):
-        pass
+    def display_picture(self, value):
+        if value == 1:
+            self.pic_directory = Path(self.open_directory_dialog.selectedFiles()[0])
+            img = QtGui.QPixmap(1280, 720)
+            self.picture_label.setPixmap(img)
+        if value == 0:
+            return
 
     def set_statusbar(self):
         path = Path(self.pic_directory, f"{self.pic_name}_{{timestamp}}.{self.pic_format}")
@@ -454,7 +460,6 @@ class UI(QtWidgets.QMainWindow):
     def closeEvent(self, a0):
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
-        print("Closing Down")
 
     def move_preview_x(self, value):
         if self.cam.preview:

@@ -1165,7 +1165,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="picture_label">
      <property name="geometry">
       <rect>
        <x>0</x>
