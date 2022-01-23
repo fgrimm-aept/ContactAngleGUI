@@ -349,6 +349,7 @@ class UI(QtWidgets.QMainWindow):
         self.stop_preview()
         home_path = str(self.pic_directory)
         self.open_picture_dialog.setDirectory(home_path)
+        print(self.open_picture_dialog.filter())
         self.open_picture_dialog.open()
         self.open_picture_dialog.finished.connect(self.display_picture)
 
