@@ -311,6 +311,9 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
         self.picture_label = self.findChild(QtWidgets.QLabel, 'picture_label')
+        self.preview_status = self.findChild(QtWidgets.QLabel, 'preview_status')  # 'Preview:'
+        self.preview_status_info = self.findChild(QtWidgets.QLabel, 'preview_status_info')  # 'On', 'Off'
+        self.preview_status_info.setStyleSheet("background-color: red;")
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
@@ -526,12 +529,16 @@ class UI(QtWidgets.QMainWindow):
             self.stop_preview()
 
     def start_preview(self):
+        self.preview_status_info.setText('ON')
+        self.preview_status_info.setStyleSheet("background-color: green;")
         self.x_offset_slider.setValue(self.X_OFFSET)
         self.y_offset_slider.setValue(self.Y_OFFSET)
         self.cam.start_preview(fullscreen=False, window=self.preview_pos)
         self.PREVIEW_RUNNING = True
 
     def stop_preview(self):
+        self.preview_status_info.setText('OFF')
+        self.preview_status_info.setStyleSheet("background-color: red;")
         self.cam.stop_preview()
         self.PREVIEW_RUNNING = False
 

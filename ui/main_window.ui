@@ -1909,14 +1909,16 @@
      <rect>
       <x>630</x>
       <y>800</y>
-      <width>151</width>
-      <height>41</height>
+      <width>261</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Arial</family>
-      <pointsize>16</pointsize>
+      <pointsize>26</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="autoFillBackground">
