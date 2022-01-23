@@ -69,6 +69,7 @@ class UI(QtWidgets.QMainWindow):
     PREVIEW_POS = (0, 0, 0, 0)
     X_OFFSET = 0
     Y_OFFSET = 0
+    PREVIEW_RUNNING = False
 
     def __init__(self):
         super().__init__()
@@ -271,7 +272,6 @@ class UI(QtWidgets.QMainWindow):
         self.FILE_DELETED.connect(self.set_profile_combobox)
 
         # set UI
-        self.start_preview()
         self.set_profile_combobox()
 
         # Take Picture Events
@@ -479,10 +479,10 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.frameGeometry().height())
         print(self.preview_button.isChecked())
         if self.preview_button.isChecked():
-            print('Start Preview')
+            self.PREVIEW_RUNNING = True
             self.start_preview()
         else:
-            print('Stop Preview')
+            self.PREVIEW_RUNNING = False
             self.stop_preview()
 
     def start_preview(self):
