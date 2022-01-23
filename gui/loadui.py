@@ -251,7 +251,9 @@ class UI(QtWidgets.QMainWindow):
 
         # offset slider connections
         self.x_offset_slider.sliderMoved.connect(self.move_preview_x)
+        self.x_offset_slider.valueChanged.connect(self.move_preview_x)
         self.y_offset_slider.sliderMoved.connect(self.move_preview_y)
+        self.y_offset_slider.valueChanged.connect(self.move_preview_y)
 
         # preview frame
         self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
