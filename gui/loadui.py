@@ -66,7 +66,7 @@ class UI(QtWidgets.QMainWindow):
     CAMERA_SETTINGS = QtCore.pyqtSignal(dict)
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
-    PREVIEW_POS = (0, 0, 0, 0)
+
     X_OFFSET = 0
     Y_OFFSET = 0
     PREVIEW_RUNNING = False
@@ -294,6 +294,10 @@ class UI(QtWidgets.QMainWindow):
 
         # preview frame
         self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
+        self.preview_pos = (self.preview_frame.geometry().x() + self.X_OFFSET,
+                            self.preview_frame.geometry().y() + 85 + self.Y_OFFSET,
+                            self.preview_frame.frameGeometry().width(),
+                            self.preview_frame.frameGeometry().height())
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
@@ -425,10 +429,10 @@ class UI(QtWidgets.QMainWindow):
     def move_preview_x(self, value):
         if self.cam.preview:
             self.X_OFFSET = value
-            preview_pos = (self.PREVIEW_POS[0] + value,
-                           self.PREVIEW_POS[1],
-                           self.PREVIEW_POS[2],
-                           self.PREVIEW_POS[3])
+            preview_pos = (self.preview_pos[0] + value,
+                           self.preview_pos[1],
+                           self.preview_pos[2],
+                           self.preview_pos[3])
             self.cam.preview.window = preview_pos
         else:
             self.X_OFFSET = 0
@@ -437,10 +441,10 @@ class UI(QtWidgets.QMainWindow):
     def move_preview_y(self, value):
         if self.cam.preview:
             self.Y_OFFSET = value
-            preview_pos = (self.PREVIEW_POS[0],
-                           self.PREVIEW_POS[1] + value,
-                           self.PREVIEW_POS[2],
-                           self.PREVIEW_POS[3])
+            preview_pos = (self.preview_pos[0],
+                           self.preview_pos[1] + value,
+                           self.preview_pos[2],
+                           self.preview_pos[3])
             self.cam.preview.window = preview_pos
         else:
             self.Y_OFFSET = 0
@@ -473,7 +477,7 @@ class UI(QtWidgets.QMainWindow):
     def preview(self):
         print("Preview:")
         # possible way to resize window and set preview window accordingly
-        self.PREVIEW_POS = (self.preview_frame.geometry().x() + self.X_OFFSET,
+        self.preview_pos = (self.preview_frame.geometry().x() + self.X_OFFSET,
                             self.preview_frame.geometry().y() + 85 + self.Y_OFFSET,
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
@@ -488,7 +492,7 @@ class UI(QtWidgets.QMainWindow):
     def start_preview(self):
         self.x_offset_slider.setValue(self.X_OFFSET)
         self.y_offset_slider.setValue(self.Y_OFFSET)
-        self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
+        self.cam.start_preview(fullscreen=False, window=self.preview_pos)
         self.PREVIEW_RUNNING = True
 
     def stop_preview(self):
