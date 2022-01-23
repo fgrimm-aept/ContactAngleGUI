@@ -212,6 +212,11 @@ class UI(QtWidgets.QMainWindow):
         self.pic_format_combobox.addItem('bgra', False)
 
         # set status bar
+        self.full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
+                                                      f'{self.pic_format_combobox.currentText()}')
+        self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
+        self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
+
         self.pic_format_combobox.currentIndexChanged.connect(self.set_statusbar)
         self.pic_dir_line_edit.textEdited.connect(self.set_statusbar)
         self.pic_name_line_edit.textEdited.connect(self.set_statusbar)
@@ -244,10 +249,10 @@ class UI(QtWidgets.QMainWindow):
         self.pic_dir_line_edit.setText(f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}")
 
     def set_statusbar(self):
-        full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
+        self.full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
                                                  f'{self.pic_format_combobox.currentText()}')
-        self.pic_dir_line_edit.setStatusTip(f'{full_path.parent}')
-        self.pic_name_line_edit.setStatusTip(f'{full_path}')
+        self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
+        self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
 
     def save_profile(self):
 
