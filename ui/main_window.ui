@@ -1351,14 +1351,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>190</width>
+          <width>141</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>300</width>
-          <height>300</height>
+          <width>120</width>
+          <height>80</height>
          </size>
         </property>
         <property name="font">
@@ -1383,21 +1383,21 @@
       <item>
        <widget class="QPushButton" name="pic_button">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>190</width>
+          <width>141</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>300</width>
-          <height>300</height>
+          <width>120</width>
+          <height>80</height>
          </size>
         </property>
         <property name="font">
@@ -1422,21 +1422,21 @@
       <item>
        <widget class="QPushButton" name="load_pic_button">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>190</width>
+          <width>141</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>300</width>
-          <height>300</height>
+          <width>120</width>
+          <height>80</height>
          </size>
         </property>
         <property name="font">
@@ -1455,6 +1455,45 @@
         </property>
         <property name="text">
          <string>&amp;Load Picture</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="open_dropui_button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>141</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Open &amp;Dropui</string>
         </property>
        </widget>
       </item>
@@ -1933,7 +1972,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="preview_status_info">
+      <widget class="QLabel" name="preview_status_2">
        <property name="font">
         <font>
          <family>Arial</family>
