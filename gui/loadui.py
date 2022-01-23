@@ -202,6 +202,7 @@ class UI(QtWidgets.QMainWindow):
         self.open_directory_dialog.setWindowTitle('Open picture save directory')
         self.open_directory_dialog.setFileMode(QtWidgets.QFileDialog.Directory)
         self.open_directory_dialog.setOption(QtWidgets.QFileDialog.ShowDirsOnly, True)
+        self.open_directory_dialog.setOption(QtWidgets.QFileDialog.DontResolveSymlinks, True)
         self.open_directory_dialog.setViewMode(QtWidgets.QFileDialog.Detail)
         self.pic_name_label = self.findChild(QtWidgets.QLabel, 'pic_name_label')
         self.pic_format_combobox = self.findChild(QtWidgets.QComboBox, 'pic_format_combobox')

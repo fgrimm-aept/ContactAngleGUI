@@ -4,12 +4,11 @@ from gui.loadui import UI
 from PyQt5 import QtWidgets
 import sys
 # from picamera import PiCamera
-import time
 
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    print(app.style())
+    print(app.keys())
     ui_window = UI()
     ui_window.showMaximized()
     app.exec_()
