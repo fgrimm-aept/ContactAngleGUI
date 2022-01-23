@@ -46,9 +46,9 @@ class QPlainTextEditLogger(logging.Handler):
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
-    PREVIEW_POS = (630, 252, 1280, 720)
+    PREVIEW_POS = (630, 161, 1280, 720)
     X_OFFSET = 0
-    Y_OFFSET = 0
+    Y_OFFSET = 91
 
     def __init__(self):
         super().__init__()
