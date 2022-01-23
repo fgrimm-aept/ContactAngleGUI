@@ -261,6 +261,7 @@ class UI(QtWidgets.QMainWindow):
     def open_directory(self):
         home_path = str(self.paths['pictures'])
         self.open_directory_dialog.setDirectory(home_path)
+        self.open_directory_dialog.setModal(True)
         self.open_directory_dialog.open()
         self.open_directory_dialog.finished.connect(self.set_path)
 
