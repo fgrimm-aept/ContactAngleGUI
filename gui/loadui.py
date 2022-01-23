@@ -8,6 +8,8 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from picamera import PiCamera
 
 
+# TODO: QSettings benutzen um root -> XOFFSET,YOFFSET und user -> XOFFSET,YOFFSET zu speichern?
+
 class WorkerThread(QtCore.QThread):
     TIMESTAMP = QtCore.pyqtSignal(str)
 
