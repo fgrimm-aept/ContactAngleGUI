@@ -1904,29 +1904,53 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QLabel" name="preview_status">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>800</y>
-      <width>261</width>
+      <x>620</x>
+      <y>830</y>
+      <width>346</width>
       <height>81</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>26</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="text">
-     <string>PREVIEW: ON</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="preview_status">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>26</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>PREVIEW:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="preview_status_info">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>26</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>OFF</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
