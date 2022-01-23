@@ -202,7 +202,7 @@ class UI(QtWidgets.QMainWindow):
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
         self.load_pic_button.setToolTip('Load a picture to be displayed.\n Shortcut: "L"')
         self.open_picture_dialog = QtWidgets.QFileDialog(self)
-        self.open_picture_dialog.setNameFilters(["Images (*.png *.jpg)"])
+        self.open_picture_dialog.setNameFilters(["Images (*.png *.jpe?g)"])
         self.open_picture_dialog.setWindowTitle('Open Picture')
         self.open_picture_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
         self.open_picture_dialog.setOption(QtWidgets.QFileDialog.DontResolveSymlinks, True)
