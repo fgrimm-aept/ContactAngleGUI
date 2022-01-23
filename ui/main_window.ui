@@ -49,6 +49,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>Settings</string>
     </property>
@@ -66,6 +69,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="sizeConstraint">
@@ -100,6 +106,9 @@
           <height>37</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="minimum">
          <number>-100</number>
         </property>
@@ -125,6 +134,9 @@
       </item>
       <item row="3" column="2">
        <spacer name="horizontalSpacer_8">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -159,6 +171,9 @@
           <height>37</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="maximum">
          <number>100</number>
         </property>
@@ -181,6 +196,9 @@
       </item>
       <item row="0" column="2">
        <spacer name="horizontalSpacer_5">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -223,6 +241,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>ISO:</string>
         </property>
@@ -259,6 +280,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Contrast:</string>
         </property>
@@ -286,6 +310,9 @@
           <width>320</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="minimum">
          <number>-100</number>
@@ -329,6 +356,9 @@
           <width>320</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="minimum">
          <number>-100</number>
@@ -384,6 +414,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -419,6 +452,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Reset Values</string>
@@ -457,6 +493,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="sizeAdjustPolicy">
          <enum>QComboBox::AdjustToContents</enum>
         </property>
@@ -464,6 +503,9 @@
       </item>
       <item row="1" column="2">
        <spacer name="horizontalSpacer_7">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -480,6 +522,9 @@
       </item>
       <item row="4" column="2">
        <spacer name="horizontalSpacer_13">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -525,6 +570,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Brightness:</string>
         </property>
@@ -560,6 +608,9 @@
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Saturation:</string>
@@ -600,6 +651,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -616,6 +670,9 @@
       </item>
       <item row="2" column="2">
        <spacer name="horizontalSpacer_6">
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -661,6 +718,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -703,6 +763,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Sharpness:</string>
         </property>
@@ -742,6 +805,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -766,6 +832,9 @@
        <width>591</width>
        <height>91</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="leftMargin">
@@ -802,6 +871,9 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Filename:</string>
         </property>
@@ -835,6 +907,9 @@
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the filename for the picture.&lt;/p&gt;&lt;p&gt;A timestamp will be appended at the end.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="0" column="2">
@@ -861,6 +936,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Open Directory</string>
@@ -898,6 +976,9 @@
         <property name="whatsThis">
          <string/>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -930,6 +1011,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Directory:</string>
@@ -968,6 +1052,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -980,6 +1067,9 @@
        <width>591</width>
        <height>51</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
@@ -1009,6 +1099,9 @@
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Quality:</string>
@@ -1049,6 +1142,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
@@ -1082,6 +1178,9 @@
           <width>320</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="minimum">
          <number>0</number>
@@ -1124,6 +1223,9 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <layout class="QVBoxLayout" name="verticalLayout"/>
    </widget>
    <widget class="QFrame" name="preview_frame">
@@ -1159,6 +1261,9 @@
     <property name="whatsThis">
      <string/>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
     </property>
@@ -1173,6 +1278,9 @@
        <width>1280</width>
        <height>720</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <property name="text">
       <string/>
@@ -1205,6 +1313,9 @@
     <property name="focusPolicy">
      <enum>Qt::StrongFocus</enum>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>Picture</string>
     </property>
@@ -1222,6 +1333,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <property name="sizeConstraint">
@@ -1257,6 +1371,9 @@
         </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>&amp;Preview</string>
@@ -1294,6 +1411,9 @@
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>&amp;Take Picture</string>
         </property>
@@ -1330,6 +1450,9 @@
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>&amp;Load Picture</string>
         </property>
@@ -1361,6 +1484,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>Profile</string>
     </property>
@@ -1372,6 +1498,9 @@
        <width>591</width>
        <height>125</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="sizeConstraint">
@@ -1401,6 +1530,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Save Settings</string>
@@ -1439,6 +1571,9 @@
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="insertPolicy">
          <enum>QComboBox::InsertAlphabetically</enum>
         </property>
@@ -1468,6 +1603,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Delete Profile</string>
@@ -1499,6 +1637,9 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Save Profile:</string>
         </property>
@@ -1528,6 +1669,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Load Profile:</string>
@@ -1559,6 +1703,9 @@
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Load Settings</string>
         </property>
@@ -1588,6 +1735,9 @@
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string/>
@@ -1620,6 +1770,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>Preview Offsets</string>
     </property>
@@ -1631,6 +1784,9 @@
        <width>591</width>
        <height>82</height>
       </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0">
@@ -1646,6 +1802,9 @@
           <width>135</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>X-Offset</string>
@@ -1672,6 +1831,9 @@
           <height>37</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="minimum">
          <number>-100</number>
         </property>
@@ -1696,6 +1858,9 @@
           <width>135</width>
           <height>37</height>
          </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
         </property>
         <property name="text">
          <string>Y-Offset</string>
@@ -1722,6 +1887,9 @@
           <height>37</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
         <property name="minimum">
          <number>-100</number>
         </property>
@@ -1735,6 +1903,28 @@
       </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QLabel" name="preview_status">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>800</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>PREVIEW: ON</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
