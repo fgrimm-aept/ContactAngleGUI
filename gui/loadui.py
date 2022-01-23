@@ -327,7 +327,7 @@ class UI(QtWidgets.QMainWindow):
                                  'iso': self.iso_combobox.currentIndex(),
                                  'directory': self.pic_directory,
                                  'filename': self.pic_name,
-                                 'pic_format': self.pic_format}
+                                 'pic_format': self.pic_format_combobox.currentIndex()}
         profile_name = self.profile_name_line_edit.text()
         if profile_name == 'default':
             msg = QtWidgets.QMessageBox()
