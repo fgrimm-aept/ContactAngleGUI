@@ -275,6 +275,7 @@ class UI(QtWidgets.QMainWindow):
             self.pic_path = self.paths['pictures'] = Path(path[0])
             string = f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}"
             self.pic_dir_line_edit.setText(string)
+            self.set_statusbar()
         if value == 0:
             return
 
