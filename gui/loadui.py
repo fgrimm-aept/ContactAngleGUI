@@ -270,7 +270,7 @@ class UI(QtWidgets.QMainWindow):
         self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
 
     def on_shortcut(self):
-        print('Working')
+        self.preview()
 
     def open_directory(self):
         home_path = str(self.paths['pictures'])
