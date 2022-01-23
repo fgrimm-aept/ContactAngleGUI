@@ -471,7 +471,7 @@ class UI(QtWidgets.QMainWindow):
         self.quality = value
 
     def preview(self):
-        print("I am Groot")
+        print("Preview:")
         # possible way to resize window and set preview window accordingly
         self.PREVIEW_POS = (self.preview_frame.geometry().x() + self.X_OFFSET,
                             self.preview_frame.geometry().y() + 90 + self.Y_OFFSET,
@@ -479,10 +479,10 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.frameGeometry().height())
         print(self.preview_button.isChecked())
         if self.preview_button.isChecked():
-            print('Start')
+            print('Start Preview')
             self.start_preview()
         else:
-            print('Stop')
+            print('Stop Preview')
             self.stop_preview()
 
     def start_preview(self):
@@ -494,7 +494,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.stop_preview()
 
     def take_pic(self):
-
+        print('Taking Pic')
         self.groupbox_settings.setDisabled(True)
         settings = {'directory': self.pic_directory,
                     'name': self.pic_name,
