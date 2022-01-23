@@ -442,8 +442,8 @@ class UI(QtWidgets.QMainWindow):
 
     def stop_preview(self):
         # TODO: Remember X-OFFSET and Y-OFFSET and use it for next start_preview call
-        self.x_offset_slider.setValue(0)
-        self.y_offset_slider.setValue(0)
+        # self.x_offset_slider.setValue(0)
+        # self.y_offset_slider.setValue(0)
         self.cam.stop_preview()
 
     def take_pic(self):
