@@ -343,7 +343,7 @@ class UI(QtWidgets.QMainWindow):
 
     def display_picture(self, value):
         if value == 1:
-            path = self.open_directory_dialog.selectedFile()
+            path = self.open_directory_dialog.selectedFiles()
             print(path)
             img = QtGui.QPixmap(f'{path}')
             self.picture_label.setPixmap(img)
