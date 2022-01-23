@@ -333,7 +333,8 @@ class UI(QtWidgets.QMainWindow):
         self.link = 'https://www.chemeng.ntua.gr/dropui/9UAJFkq2xlj2Wv7s'
 
     def open_dropui(self):
-        webbrowser.open(self.link)
+        url = QtCore.QUrl(self.link)
+        QtGui.QDesktopServices.openURL(url)
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
