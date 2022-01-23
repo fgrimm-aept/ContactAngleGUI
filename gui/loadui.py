@@ -1,6 +1,6 @@
-import webbrowser
 import json
 import logging
+import subprocess
 import sys
 import time
 from datetime import datetime
@@ -333,8 +333,7 @@ class UI(QtWidgets.QMainWindow):
         self.link = 'https://www.chemeng.ntua.gr/dropui/9UAJFkq2xlj2Wv7s'
 
     def open_dropui(self):
-        url = QtCore.QUrl(self.link)
-        QtGui.QDesktopServices.openUrl(url)
+        subprocess.Popen(['chromium-webbrowser', self.link], user=1000)
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
