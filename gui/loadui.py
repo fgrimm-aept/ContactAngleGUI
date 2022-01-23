@@ -478,8 +478,10 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
         if self.preview_button.isChecked():
+            print('Start')
             self.start_preview()
         else:
+            print('Stop')
             self.stop_preview()
 
     def start_preview(self):
