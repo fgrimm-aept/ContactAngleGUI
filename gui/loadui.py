@@ -48,7 +48,7 @@ class UI(QtWidgets.QMainWindow):
     FILE_DELETED = QtCore.pyqtSignal()
     PREVIEW_POS = (630, 161, 1280, 720)
     X_OFFSET = 0
-    Y_OFFSET = 70
+    Y_OFFSET = 90
 
     def __init__(self):
         super().__init__()
