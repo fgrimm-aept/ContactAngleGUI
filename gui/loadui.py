@@ -164,7 +164,7 @@ class UI(QtWidgets.QMainWindow):
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
         self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence('o'), self)
-        self.preview_shortcut.activated.connect(self.preview)
+        self.preview_shortcut.activated.connect(self.on_shortcut)
 
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
@@ -268,6 +268,9 @@ class UI(QtWidgets.QMainWindow):
 
         # preview frame
         self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
+
+    def on_shortcut(self):
+        print('Working')
 
     def open_directory(self):
         home_path = str(self.paths['pictures'])
