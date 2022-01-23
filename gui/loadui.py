@@ -1,3 +1,4 @@
+import sys
 import json
 import logging
 import time
@@ -449,6 +450,12 @@ class UI(QtWidgets.QMainWindow):
             self.PREVIEW_RUNNING = False
             self.preview_button.setChecked(False)
         return False
+
+    def closeEvent(self):
+        self.cam.close()
+        sys.stdout = sys.__stdout__
+        sys.stderr = sys.__stderr__
+        print("Closing Down")
 
     def move_preview_x(self, value):
         if self.cam.preview:
