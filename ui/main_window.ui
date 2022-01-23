@@ -1478,7 +1478,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Profile Name:</string>
+         <string>Save Profile:</string>
         </property>
        </widget>
       </item>
@@ -1508,7 +1508,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Profile Name:</string>
+         <string>Load Profile:</string>
         </property>
        </widget>
       </item>
