@@ -10,6 +10,7 @@ from picamera import PiCamera
 
 # TODO: QSettings benutzen um root -> XOFFSET,YOFFSET und user -> XOFFSET,YOFFSET zu speichern?
 # TODO: Fix setting directory for cam picture
+# TODO: Set Tooltips for all elements (at least for quality)
 
 class WorkerThread(QtCore.QThread):
     TIMESTAMP = QtCore.pyqtSignal(str)
