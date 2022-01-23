@@ -95,7 +95,7 @@ class UI(QtWidgets.QMainWindow):
                                  'quality': 75,
                                  'directory': f'{self.paths["pictures"]}',
                                  'filename': 'foo',
-                                 'pic_format': 'jpeg'}
+                                 'pic_format': 0}
         with open(Path(self.paths['profiles'], 'default.json'), 'w') as f_default:
             json.dump(self.default_settings, f_default)
 
