@@ -245,6 +245,14 @@ class UI(QtWidgets.QMainWindow):
         self.worker = WorkerThread(self)
         self.worker.TIMESTAMP.connect(self.set_timestamp)
 
+        # offset sliders
+        self.x_offset_slider = self.findChild(QtWidgets.QSlider, 'x_offset_slider')
+        self.y_offset_slider = self.findChild(QtWidgets.QSlider, 'y_offset_slider')
+
+        # offset slider connections
+        self.x_offset_slider.sliderMoved.connect(self.move_preview_x)
+        self.y_offset_slider.sliderMoved.connect(self.move_preview_y)
+
         # preview frame
         self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
 
@@ -356,6 +364,12 @@ class UI(QtWidgets.QMainWindow):
             self.cam.stop_preview()
             self.preview_button.setChecked(False)
         return False
+
+    def move_preview_x(self):
+        pass
+
+    def move_preview_y(self):
+        pass
 
     def toggle_quality(self):
         flag = self.pic_format_combobox.currentData()

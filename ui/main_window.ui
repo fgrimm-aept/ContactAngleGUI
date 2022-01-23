@@ -1569,6 +1569,145 @@
      </layout>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="preview_groupbox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>860</y>
+      <width>611</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="title">
+     <string>Preview Offsets</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>591</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>135</horstretch>
+          <verstretch>37</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>135</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>X-Offset</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSlider" name="x_offset_slider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>320</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>320</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>-50</number>
+        </property>
+        <property name="maximum">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>135</horstretch>
+          <verstretch>37</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>135</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Y-Offset</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSlider" name="y_offset_slider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>320</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>320</width>
+          <height>37</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>-50</number>
+        </property>
+        <property name="maximum">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
