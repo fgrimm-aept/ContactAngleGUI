@@ -9,6 +9,7 @@ from picamera import PiCamera
 
 
 # TODO: QSettings benutzen um root -> XOFFSET,YOFFSET und user -> XOFFSET,YOFFSET zu speichern?
+# TODO: Fix setting directory for cam picture
 
 class WorkerThread(QtCore.QThread):
     TIMESTAMP = QtCore.pyqtSignal(str)
@@ -162,6 +163,9 @@ class UI(QtWidgets.QMainWindow):
         # camera push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
+        self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence('Space'), self)
+        self.preview_shortcut.activated.connect(self.preview)
+
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
         self.reset_button = self.findChild(QtWidgets.QPushButton, 'reset_button')
