@@ -212,9 +212,9 @@ class UI(QtWidgets.QMainWindow):
         self.pic_format_combobox.addItem('bgra', False)
 
         # set status bar
-        self.pic_dir_line_edit.setStatusTip(f'{self.paths["pictures"]}')
-        self.pic_name_line_edit.setStatusTip(f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
-                                             f'{self.pic_format_combobox.currentText()}')
+        self.pic_format_combobox.currentIndexChanged.connect(self.set_statusbar)
+        self.pic_dir_line_edit.textEdited.connect(self.set_statusbar)
+        self.pic_name_line_edit.textEdited.connect(self.set_statusbar)
 
         # picture buttons connections
         self.pic_format_combobox.currentIndexChanged.connect(self.toggle_quality)
@@ -242,6 +242,12 @@ class UI(QtWidgets.QMainWindow):
         path = self.open_directory_dialog.getExistingDirectory(self, caption='Open directory', directory=home_path)
         self.pic_path = self.paths['pictures'] = Path(path)
         self.pic_dir_line_edit.setText(f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}")
+
+    def set_statusbar(self):
+        full_path = Path(self.paths['pictures'], f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
+                                                 f'{self.pic_format_combobox.currentText()}')
+        self.pic_dir_line_edit.setStatusTip(f'{full_path.parent}')
+        self.pic_name_line_edit.setStatusTip(f'{full_path}')
 
     def save_profile(self):
 
