@@ -69,10 +69,10 @@ class UI(QtWidgets.QMainWindow):
     CAMERA_SETTINGS = QtCore.pyqtSignal(dict)
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
-
     X_OFFSET = 0
     Y_OFFSET = 0
     PREVIEW_RUNNING = False
+    PROGRAM_START_TIME = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
 
     def __init__(self):
         super().__init__()
@@ -290,7 +290,7 @@ class UI(QtWidgets.QMainWindow):
         self.pic_name = 'foo'
         self.pic_format = 'jpeg'
         self.pic_directory = Path(self.paths['pictures'])
-        self.timestamp = ''
+        self.timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
         self.worker = WorkerThread(self)
         self.worker.TIMESTAMP.connect(self.set_timestamp)
 
