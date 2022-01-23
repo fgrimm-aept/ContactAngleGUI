@@ -202,6 +202,7 @@ class UI(QtWidgets.QMainWindow):
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
         self.load_pic_button.setToolTip('Load a picture to be displayed.\n Shortcut: "L"')
         self.open_picture_dialog = QtWidgets.QFileDialog(self)
+        self.open_picture_dialog.setNameFilters(["Images (*.png *.jpg)"])
         self.open_picture_dialog.setWindowTitle('Open Picture')
         self.open_picture_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
         self.open_picture_dialog.setOption(QtWidgets.QFileDialog.DontResolveSymlinks, True)
@@ -349,14 +350,12 @@ class UI(QtWidgets.QMainWindow):
         self.stop_preview()
         home_path = str(self.pic_directory)
         self.open_picture_dialog.setDirectory(home_path)
-        print(self.open_picture_dialog.filter())
         self.open_picture_dialog.open()
         self.open_picture_dialog.finished.connect(self.display_picture)
 
     def display_picture(self, value):
         if value == 1:
             path = Path(self.open_picture_dialog.selectedFiles()[0])
-            print(path)
             img = QtGui.QPixmap(f'{path}')
             self.picture_label.setPixmap(img)
         if value == 0:
