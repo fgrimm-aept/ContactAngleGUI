@@ -452,7 +452,6 @@ class UI(QtWidgets.QMainWindow):
         return False
 
     def closeEvent(self, a0):
-        self.cam.close()
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
         print("Closing Down")
