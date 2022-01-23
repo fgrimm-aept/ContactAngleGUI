@@ -1186,6 +1186,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
     <property name="title">
      <string>Picture</string>
     </property>

@@ -23,6 +23,8 @@ class WorkerThread(QtCore.QThread):
         self.quality = obj.quality
 
     def run(self):
+        # TODO: Replace with QTimer instead of sleep()?
+        #  https://doc.qt.io/qtforpython-5/overviews/timers.html#timers
         time.sleep(5)
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
         if self.suffix == 'jpeg':
@@ -462,6 +464,7 @@ class UI(QtWidgets.QMainWindow):
 
     def take_pic(self):
 
+        self.groupbox_settings.setDisabled(True)
         self.pic_name = self.pic_name_line_edit.text()  # TODO: change to grab full path
         self.pic_suffix = self.pic_format_combobox.currentText()
 
@@ -476,6 +479,7 @@ class UI(QtWidgets.QMainWindow):
         self.timestamp = timestamp
 
     def evt_worker_finished(self):
+        self.groupbox_settings.setDisabled(False)
         self.take_pic_button.setDisabled(False)
 
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
