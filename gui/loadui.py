@@ -423,7 +423,7 @@ class UI(QtWidgets.QMainWindow):
     def preview(self):
         # possible way to resize window and set preview window accordingly
         self.PREVIEW_POS = (self.preview_frame.pos().x() + self.X_OFFSET,
-                            self.preview_frame.pos().y() + 88 + self.Y_OFFSET,
+                            self.preview_frame.pos().y() + 87 + self.Y_OFFSET,
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
         print('y', self.preview_frame.pos().y())
