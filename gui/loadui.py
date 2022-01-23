@@ -265,6 +265,7 @@ class UI(QtWidgets.QMainWindow):
         self.open_directory_dialog.finished.connect(self.set_path)
 
     def set_path(self, value):
+        print(value)
         if value == 1:
             path = self.open_directory_dialog.selectedFiles()
             self.pic_path = self.paths['pictures'] = Path(path[0])
