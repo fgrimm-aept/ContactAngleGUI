@@ -12,6 +12,7 @@ class WorkerThread(QtCore.QThread):
     TIMESTAMP = QtCore.pyqtSignal(str)
 
     def __init__(self, obj):
+        # TODO: send data to worker thread through signal, slot not through __init__
         super().__init__()
         self.cam = obj.cam
         self.file_path = Path(obj.pic_path, obj.pic_name)
