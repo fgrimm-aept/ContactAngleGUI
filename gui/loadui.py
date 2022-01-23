@@ -313,6 +313,7 @@ class UI(QtWidgets.QMainWindow):
         self.picture_label = self.findChild(QtWidgets.QLabel, 'picture_label')
         self.preview_status = self.findChild(QtWidgets.QLabel, 'preview_status')  # 'Preview:'
         self.preview_status_info = self.findChild(QtWidgets.QLabel, 'preview_status_info')  # 'On', 'Off'
+        self.preview_status_info.setAlignment(QtCore.Qt.AlignCenter)
 
         # color palette
         self.red = self.preview_status_info.palette()
