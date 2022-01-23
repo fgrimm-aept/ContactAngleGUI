@@ -295,12 +295,12 @@ class UI(QtWidgets.QMainWindow):
         home_path = str(self.pic_directory)
         self.open_directory_dialog.setDirectory(home_path)
         self.open_directory_dialog.open()
-        self.open_directory_dialog.finished.connect(self.set_path)
+        self.open_directory_dialog.finished.connect(self.set_directory)
 
     def set_directory(self, value):
 
         if value == 1:
-            self.pic_directory  = Path(self.open_directory_dialog.selectedFiles()[0])
+            self.pic_directory = Path(self.open_directory_dialog.selectedFiles()[0])
             string = f"{Path('..', self.pic_directory.parent.name, self.pic_directory.stem)}"
             self.pic_dir_line_edit.setText(string)
             self.set_statusbar()
