@@ -399,6 +399,7 @@ class UI(QtWidgets.QMainWindow):
                            self.PREVIEW_POS[3])
             self.cam.preview.window = preview_pos
         else:
+            self.X_OFFSET = 0
             self.x_offset_slider.setValue(0)
 
     def move_preview_y(self, value):
@@ -410,6 +411,7 @@ class UI(QtWidgets.QMainWindow):
                            self.PREVIEW_POS[3])
             self.cam.preview.window = preview_pos
         else:
+            self.Y_OFFSET = 0
             self.y_offset_slider.setValue(0)
 
     def toggle_quality(self):
