@@ -318,6 +318,7 @@ class UI(QtWidgets.QMainWindow):
 
         if value == 1:
             self.pic_directory = Path(self.open_directory_dialog.selectedFiles()[0])
+            chown(self.pic_directory, 1000, 1000)
             string = f"{Path('..', self.pic_directory.parent.name, self.pic_directory.stem)}"
             self.pic_dir_line_edit.setText(string)
             self.set_statusbar()
