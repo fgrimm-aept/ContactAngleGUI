@@ -527,7 +527,8 @@ class UI(QtWidgets.QMainWindow):
         self.contrast_spinbox.setValue(self.current_settings['contrast'])
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
         self.iso_combobox.setCurrentIndex(self.current_settings['iso'])
-        _dir = f"{Path('..', self.current_settings['directory'].parent.name, self.current_settings['directory'].stem)}"
-        self.pic_dir_line_edit.setText(_dir),
+        _dir = Path(self.current_settings['directory'])
+        _dir_str = Path('..', _dir.parent.name, _dir.stem)
+        self.pic_dir_line_edit.setText(f"{_dir}")
         self.pic_name_line_edit.setText(self.current_settings['filename']),
         self.pic_format_combobox.setCurrentIndex(self.current_settings['pic_format'])
