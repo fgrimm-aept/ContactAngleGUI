@@ -1243,7 +1243,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Preview</string>
+         <string>&amp;Preview</string>
         </property>
        </widget>
       </item>
@@ -1276,7 +1276,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Take Picture</string>
+         <string>&amp;Take Picture</string>
         </property>
        </widget>
       </item>
@@ -1309,7 +1309,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Load Picture</string>
+         <string>&amp;Load Picture</string>
         </property>
        </widget>
       </item>
