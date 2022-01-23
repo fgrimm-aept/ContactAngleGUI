@@ -12,6 +12,8 @@ from picamera import PiCamera
 # TODO: Fix setting directory for cam picture
 # TODO: Set Tooltips for all elements (at least for quality)
 # TODO: Fix Shortcuts
+# TODO: Fail safe einbauen für den Fall das man ein profil lädt mit einem unbekannten Pfad
+#  (z.B. nicht mehr vorhandener USB-Stick als Pfad)
 
 class WorkerThread(QtCore.QThread):
     TIMESTAMP = QtCore.pyqtSignal(str)
@@ -53,6 +55,7 @@ class QPlainTextEditLogger(logging.Handler):
 
 
 class UI(QtWidgets.QMainWindow):
+    CAMERA_SETTINGS = QtCore.pyqtSignal(tuple)
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
     PREVIEW_POS = (0, 0, 0, 0)
@@ -467,6 +470,8 @@ class UI(QtWidgets.QMainWindow):
     def take_pic(self):
 
         self.groupbox_settings.setDisabled(True)
+        settings = (self.full_path, )
+        self.CAMERA_SETTINGS.emit(settings)
         self.pic_name = self.pic_name_line_edit.text()  # TODO: change to grab full path
         self.pic_suffix = self.pic_format_combobox.currentText()
 
