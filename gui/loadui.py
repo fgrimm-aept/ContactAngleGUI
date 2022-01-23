@@ -48,7 +48,7 @@ class UI(QtWidgets.QMainWindow):
     FILE_DELETED = QtCore.pyqtSignal()
     PREVIEW_POS = (630, 161, 1280, 720)
     X_OFFSET = 0
-    Y_OFFSET = 91
+    Y_OFFSET = 0
 
     def __init__(self):
         super().__init__()
@@ -423,7 +423,7 @@ class UI(QtWidgets.QMainWindow):
     def preview(self):
         # possible way to resize window and set preview window accordingly
         self.PREVIEW_POS = (self.preview_frame.pos().x() + self.X_OFFSET,
-                            self.preview_frame.pos().y() + self.Y_OFFSET,
+                            self.preview_frame.pos().y() + 91 + self.Y_OFFSET,
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
         print('y', self.preview_frame.pos().y())
