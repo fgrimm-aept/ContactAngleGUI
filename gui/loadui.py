@@ -187,7 +187,7 @@ class UI(QtWidgets.QMainWindow):
         # camera push buttons
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
-        self.preview_button.setToolTip('Toggles camera Preview.\nShortcut: <P>, <Space>')
+        self.preview_button.setToolTip('Toggles camera Preview.\nShortcut: "P", "Space"')
         self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_P), self)
         self.preview_shortcut.activated.connect(self.toggle_preview)
         self.preview_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Space), self)
@@ -198,9 +198,9 @@ class UI(QtWidgets.QMainWindow):
         self.load_pic_shortcut.activated.connect(self.open_picture)
 
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
-        self.take_pic_button.setToolTip('Takes a picture with the current settings.\n Shortcut: <T>')
+        self.take_pic_button.setToolTip('Takes a picture with the current settings.\n Shortcut: "T"')
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
-        self.load_pic_button.setToolTip('Load a picture to be displayed.\n Shortcut: <L>')
+        self.load_pic_button.setToolTip('Load a picture to be displayed.\n Shortcut: "L"')
         self.open_picture_dialog = QtWidgets.QFileDialog(self)
         self.open_picture_dialog.setWindowTitle('Open Picture')
         self.open_picture_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
@@ -451,7 +451,7 @@ class UI(QtWidgets.QMainWindow):
             self.preview_button.setChecked(False)
         return False
 
-    def closeEvent(self):
+    def closeEvent(self, a0):
         self.cam.close()
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
