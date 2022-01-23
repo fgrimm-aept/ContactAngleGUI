@@ -8,7 +8,7 @@ import sys
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    print(app.style().objectName())
+    app.setStyle('fusion')
     ui_window = UI()
     ui_window.showMaximized()
     app.exec_()
