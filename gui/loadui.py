@@ -261,7 +261,10 @@ class UI(QtWidgets.QMainWindow):
                                  'sharpness': self.sharpness_spinbox.value(),
                                  'contrast': self.contrast_spinbox.value(),
                                  'saturation': self.saturation_spinbox.value(),
-                                 'iso': self.iso_combobox.currentIndex()}
+                                 'iso': self.iso_combobox.currentIndex(),
+                                 'directory': self.pic_dir_line_edit.text(),
+                                 'filename': self.pic_name_line_edit.text(),
+                                 'suffix': self.pic_format_combobox.currentIndex()}
         profile_name = self.profile_name_line_edit.text()
         if profile_name == 'default':
             msg = QtWidgets.QMessageBox()
@@ -434,3 +437,8 @@ class UI(QtWidgets.QMainWindow):
         self.contrast_spinbox.setValue(self.current_settings['contrast'])
         self.saturation_spinbox.setValue(self.current_settings['saturation'])
         self.iso_combobox.setCurrentIndex(self.current_settings['iso'])
+        self.pic_dir_line_edit.setText(self.current_settings['directory']),
+        self.pic_name_line_edit.setText(self.current_settings['filename']),
+        self.pic_format_combobox.currentIndex(self.current_settings['suffix'])
+
+
