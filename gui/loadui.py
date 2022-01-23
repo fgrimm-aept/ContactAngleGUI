@@ -378,6 +378,7 @@ class UI(QtWidgets.QMainWindow):
 
     def move_preview_x(self, value):
         if self.cam.preview:
+            self.X_OFFSET = value
             preview_pos = (self.PREVIEW_POS[0] + value,
                            self.PREVIEW_POS[1],
                            self.PREVIEW_POS[2],
@@ -388,6 +389,7 @@ class UI(QtWidgets.QMainWindow):
 
     def move_preview_y(self, value):
         if self.cam.preview:
+            self.Y_OFFSET = value
             preview_pos = (self.PREVIEW_POS[0],
                            self.PREVIEW_POS[1] + value,
                            self.PREVIEW_POS[2],
@@ -434,10 +436,14 @@ class UI(QtWidgets.QMainWindow):
             self.stop_preview()
 
     def start_preview(self):
+        self.x_offset_slider.setValue(self.X_OFFSET)
+        self.y_offset_slider.setValue(self.Y_OFFSET)
         self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
 
     def stop_preview(self):
         # TODO: Remember X-OFFSET and Y-OFFSET and use it for next start_preview call
+        self.x_offset_slider.setValue(0)
+        self.y_offset_slider.setValue(0)
         self.cam.stop_preview()
 
     def take_pic(self):
