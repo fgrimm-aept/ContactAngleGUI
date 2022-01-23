@@ -2,6 +2,7 @@ import json
 import logging
 import time
 from datetime import datetime
+from os import chown
 from pathlib import Path
 
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
@@ -45,6 +46,7 @@ class WorkerThread(QtCore.QThread):
             self.cam.capture(f'{full_path}', quality=self.quality)
         else:
             self.cam.capture(f'{full_path}')
+        chown(full_path, 1000, 1000)
         self.TIMESTAMP.emit(timestamp)
 
 
@@ -97,8 +99,10 @@ class UI(QtWidgets.QMainWindow):
                                  'directory': f'{self.paths["pictures"]}',
                                  'filename': 'foo',
                                  'pic_format': 0}
-        with open(Path(self.paths['profiles'], 'default.json'), 'w') as f_default:
+        path = Path(self.paths['profiles'], 'default.json')
+        with open(path, 'w') as f_default:
             json.dump(self.default_settings, f_default)
+            chown(path, 1000, 1000)
 
         self.current_settings = self.default_settings
 
@@ -356,6 +360,7 @@ class UI(QtWidgets.QMainWindow):
         path = Path(self.paths['profiles'], f'{profile_name}.json')
         with open(path, 'w') as save_file:
             json.dump(self.current_settings, save_file)
+            chown(path, 1000, 1000)
         self.set_profile_combobox()
 
     def set_profile_combobox(self):
