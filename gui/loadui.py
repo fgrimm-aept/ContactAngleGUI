@@ -325,7 +325,7 @@ class UI(QtWidgets.QMainWindow):
                                  'contrast': self.contrast_spinbox.value(),
                                  'saturation': self.saturation_spinbox.value(),
                                  'iso': self.iso_combobox.currentIndex(),
-                                 'directory': self.pic_directory,
+                                 'directory': f'{self.pic_directory}',
                                  'filename': self.pic_name,
                                  'pic_format': self.pic_format_combobox.currentIndex()}
         profile_name = self.profile_name_line_edit.text()
