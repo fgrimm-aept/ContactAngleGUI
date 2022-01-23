@@ -25,7 +25,7 @@ class WorkerThread(QtCore.QThread):
         if self.suffix == 'jpeg':
             self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}', quality=self.quality)
         else:
-            self.cam.capture(f'{self.path}_{timestamp}.{self.suffix}')
+            self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}')
         self.TIMESTAMP.emit(timestamp)
 
 
@@ -190,6 +190,7 @@ class UI(QtWidgets.QMainWindow):
         # picture buttons
         self.pic_dir_label = self.findChild(QtWidgets.QLabel, 'pic_dir_label')
         self.pic_dir_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_dir_line_edit')
+        self.pic_dir_line_edit.setStatusTip(f'{self.paths["pictures"]}')
         self.pic_dir_line_edit.setText(f"{Path('..', self.paths['pictures'].parent.name, self.paths['pictures'].stem)}")
         self.pic_name_line_edit = self.findChild(QtWidgets.QLineEdit, 'pic_name_line_edit')
         self.pic_name_line_edit.setText('foo')
