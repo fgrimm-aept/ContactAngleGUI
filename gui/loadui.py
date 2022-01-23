@@ -26,6 +26,7 @@ class WorkerThread(QtCore.QThread):
         if self.suffix == 'jpeg':
             self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}', quality=self.quality)
         else:
+            print('I am not a jpeg pic')
             self.cam.capture(f'{self.file_path}_{timestamp}.{self.suffix}')
         self.TIMESTAMP.emit(timestamp)
 
@@ -220,6 +221,8 @@ class UI(QtWidgets.QMainWindow):
         self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
         self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
 
+        self.take_pic_button.setStatusTip(f'{self.full_path}')
+
         # set status bar connections
         self.pic_format_combobox.currentIndexChanged.connect(self.set_statusbar)
         self.pic_dir_line_edit.textEdited.connect(self.set_statusbar)
@@ -280,6 +283,7 @@ class UI(QtWidgets.QMainWindow):
                                                       f'{self.pic_format_combobox.currentText()}')
         self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
         self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
+        self.take_pic_button.setStatusTip(f'{self.full_path}')
 
     def save_profile(self):
 
