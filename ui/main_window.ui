@@ -1972,7 +1972,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="preview_status_2">
+      <widget class="QLabel" name="preview_status_info">
        <property name="font">
         <font>
          <family>Arial</family>
