@@ -243,6 +243,9 @@ class UI(QtWidgets.QMainWindow):
         self.worker = WorkerThread(self)
         self.worker.TIMESTAMP.connect(self.set_timestamp)
 
+        # preview frame
+        self.preview_frame = self.findChild(QtWidgets.QFrame, 'preview_frame')
+
     def open_directory(self):
         home_path = str(self.paths['pictures'])
         path = self.open_directory_dialog.getExistingDirectory(self, caption='Open directory', directory=home_path)
@@ -378,10 +381,10 @@ class UI(QtWidgets.QMainWindow):
 
     def preview(self):
         # possible way to resize window and set preview window accordingly
-        # self.PREVIEW_POS = (self.pos().x(),
-        #                     self.pos().y(),
-        #                     self.frameGeometry().width(),
-        #                     self.frameGeometry().height())
+        self.PREVIEW_POS = (self.preview_frame.pos().x(),
+                            self.preview_frame.pos().y(),
+                            self.preview_frame.frameGeometry().width(),
+                            self.preview_frame.frameGeometry().height())
         # print(self.PREVIEW_POS)
         if self.preview_button.isChecked():
             self.start_preview()
@@ -415,7 +418,7 @@ class UI(QtWidgets.QMainWindow):
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
         self.RESIZED.emit()
         # Possible way to be able to resize window
-        # super(UI, self).resizeEvent(event)
+        super(UI, self).resizeEvent(event)
 
     def resize_window(self):
         self.showMaximized()
