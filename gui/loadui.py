@@ -46,9 +46,9 @@ class QPlainTextEditLogger(logging.Handler):
 class UI(QtWidgets.QMainWindow):
     RESIZED = QtCore.pyqtSignal()
     FILE_DELETED = QtCore.pyqtSignal()
-    PREVIEW_POS = (630, 161, 1280, 720)
+    PREVIEW_POS = (630, 252, 1280, 720)
     X_OFFSET = 0
-    Y_OFFSET = 91
+    Y_OFFSET = 0
 
     def __init__(self):
         super().__init__()
@@ -261,7 +261,6 @@ class UI(QtWidgets.QMainWindow):
     def open_directory(self):
         home_path = str(self.paths['pictures'])
         self.open_directory_dialog.setDirectory(home_path)
-        self.open_directory_dialog.setModal(True)
         self.open_directory_dialog.open()
         self.open_directory_dialog.finished.connect(self.set_path)
 
@@ -438,6 +437,7 @@ class UI(QtWidgets.QMainWindow):
         self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
 
     def stop_preview(self):
+        # TODO: Remember X-OFFSET and Y-OFFSET and use it for next start_preview call
         self.cam.stop_preview()
 
     def take_pic(self):
