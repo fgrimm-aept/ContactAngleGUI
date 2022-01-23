@@ -217,6 +217,7 @@ class UI(QtWidgets.QMainWindow):
         self.pic_dir_line_edit.setStatusTip(f'{self.full_path.parent}')
         self.pic_name_line_edit.setStatusTip(f'{self.full_path}')
 
+        # set status bar connections
         self.pic_format_combobox.currentIndexChanged.connect(self.set_statusbar)
         self.pic_dir_line_edit.textEdited.connect(self.set_statusbar)
         self.pic_name_line_edit.textEdited.connect(self.set_statusbar)
