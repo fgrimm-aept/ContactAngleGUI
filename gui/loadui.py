@@ -529,4 +529,4 @@ class UI(QtWidgets.QMainWindow):
         self.iso_combobox.setCurrentIndex(self.current_settings['iso'])
         self.pic_dir_line_edit.setText(self.current_settings['directory']),
         self.pic_name_line_edit.setText(self.current_settings['filename']),
-        self.pic_format_combobox.currentIndex(self.current_settings['pic_format'])
+        self.pic_format_combobox.setCurrentIndex(self.current_settings['pic_format'])
