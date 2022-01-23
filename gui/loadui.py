@@ -313,7 +313,13 @@ class UI(QtWidgets.QMainWindow):
         self.picture_label = self.findChild(QtWidgets.QLabel, 'picture_label')
         self.preview_status = self.findChild(QtWidgets.QLabel, 'preview_status')  # 'Preview:'
         self.preview_status_info = self.findChild(QtWidgets.QLabel, 'preview_status_info')  # 'On', 'Off'
-        self.preview_status_info.setStyleSheet("background-color: red;")
+
+        # color palette
+        self.red = self.preview_status_info.palette()
+        self.red.setColor(self.preview_status_info.backgroundRole(), QtCore.Qt.red)
+        self.green = self.preview_status_info.palette()
+        self.green.setColor(self.preview_status_info.backgroundRole(), QtCore.Qt.green)
+        self.preview_status_info.setPalette(self.red)
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
@@ -530,7 +536,7 @@ class UI(QtWidgets.QMainWindow):
 
     def start_preview(self):
         self.preview_status_info.setText('ON')
-        self.preview_status_info.setStyleSheet("background-color: green;")
+        self.preview_status_info.setPalette(self.green)
         self.x_offset_slider.setValue(self.X_OFFSET)
         self.y_offset_slider.setValue(self.Y_OFFSET)
         self.cam.start_preview(fullscreen=False, window=self.preview_pos)
@@ -538,7 +544,7 @@ class UI(QtWidgets.QMainWindow):
 
     def stop_preview(self):
         self.preview_status_info.setText('OFF')
-        self.preview_status_info.setStyleSheet("background-color: red;")
+        self.preview_status_info.setPalette(self.red)
         self.cam.stop_preview()
         self.PREVIEW_RUNNING = False
 
