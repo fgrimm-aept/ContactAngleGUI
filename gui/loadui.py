@@ -213,7 +213,7 @@ class UI(QtWidgets.QMainWindow):
 
         # set status bar
         self.pic_dir_line_edit.setStatusTip(f'{self.paths["pictures"]}')
-        self.pic_name_line_edit.setStatusTip(f'{self.pic_name_line_edit.currentText()}_{{timestamp}}.'
+        self.pic_name_line_edit.setStatusTip(f'{self.pic_name_line_edit.text()}_{{timestamp}}.'
                                              f'{self.pic_format_combobox.currentText()}')
 
         # picture buttons connections
