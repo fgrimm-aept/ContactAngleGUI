@@ -480,7 +480,7 @@ class UI(QtWidgets.QMainWindow):
     def take_pic(self):
 
         self.groupbox_settings.setDisabled(True)
-        settings = {'directory': self.self.pic_directory,
+        settings = {'directory': self.pic_directory,
                     'name': self.pic_name,
                     'format': self.pic_format,
                     'quality': self.quality}
