@@ -506,13 +506,12 @@ class UI(QtWidgets.QMainWindow):
         self.quality = value
 
     def preview(self):
-        print("Preview:")
+
         # possible way to resize window and set preview window accordingly
         self.preview_pos = (self.preview_frame.geometry().x() + self.X_OFFSET,
                             self.preview_frame.geometry().y() + 85 + self.Y_OFFSET,
                             self.preview_frame.frameGeometry().width(),
                             self.preview_frame.frameGeometry().height())
-        print(self.preview_button.isChecked())
         if self.preview_button.isChecked():
 
             self.start_preview()
@@ -539,7 +538,6 @@ class UI(QtWidgets.QMainWindow):
             self.start_preview()
 
     def take_pic(self):
-        print('Taking Pic')
         self.groupbox_settings.setDisabled(True)
         settings = {'directory': self.pic_directory,
                     'name': self.pic_name,
