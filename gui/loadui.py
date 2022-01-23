@@ -501,10 +501,10 @@ class UI(QtWidgets.QMainWindow):
 
     def toggle_preview(self):
         if self.PREVIEW_RUNNING:
-            self.preview_button.isChecked(False)
+            self.preview_button.setChecked(False)
             self.stop_preview()
         elif not self.PREVIEW_RUNNING:
-            self.preview_button.isChecked(True)
+            self.preview_button.setChecked(True)
             self.start_preview()
 
     def take_pic(self):
