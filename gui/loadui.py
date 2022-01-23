@@ -337,7 +337,6 @@ class UI(QtWidgets.QMainWindow):
 
     def open_picture(self):
         home_path = str(self.pic_directory)
-        print(home_path)
         self.open_picture_dialog.setDirectory(home_path)
         self.open_picture_dialog.open()
         self.open_picture_dialog.finished.connect(self.display_picture)
@@ -345,6 +344,7 @@ class UI(QtWidgets.QMainWindow):
     def display_picture(self, value):
         if value == 1:
             path = Path(self.open_directory_dialog.selectedFiles()[0])
+            print(path)
             img = QtGui.QPixmap(f'{path}')
             self.picture_label.setPixmap(img)
         if value == 0:
