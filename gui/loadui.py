@@ -92,7 +92,10 @@ class UI(QtWidgets.QMainWindow):
                                  'contrast': 0,
                                  'saturation': 0,
                                  'iso': 0,
-                                 'quality': 75}
+                                 'quality': 75,
+                                 'directory': self.paths['pictures'],
+                                 'filename': 'foo',
+                                 'pic_format': 'jpeg'}
         with open(Path(self.paths['profiles'], 'default.json'), 'w') as f_default:
             json.dump(self.default_settings, f_default)
 
@@ -312,6 +315,8 @@ class UI(QtWidgets.QMainWindow):
         self.pic_dir_line_edit.setStatusTip(f'{path}')
         self.pic_name_line_edit.setStatusTip(f'{path}')
         self.take_pic_button.setStatusTip(f'{path}')
+        self.pic_dir_button.setStatusTip(f'{path}')
+        self.pic_format_combobox.setStatusTip(f'{path}')
 
     def save_profile(self):
 
