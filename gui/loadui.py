@@ -43,9 +43,9 @@ class WorkerThread(QtCore.QThread):
         timestamp = datetime.now().strftime('%Y_%m_%dT%H_%M_%S')
         full_path = Path(self.pic_directory, f"{self.pic_name}_{timestamp}.{self.pic_format}")
         if self.pic_format == 'jpeg':
-            self.cam.capture(f'{full_path}', quality=self.quality)
+            self.cam.capture(f'{full_path}', quality=self.quality, format=f'{self.pic_format}')
         else:
-            self.cam.capture(f'{full_path}')
+            self.cam.capture(f'{full_path}', format=f'{self.pic_format}')
         chown(full_path, 1000, 1000)
         self.TIMESTAMP.emit(timestamp)
 
@@ -194,16 +194,23 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_T), self)
         self.take_pic_shortcut.activated.connect(self.take_pic)
         self.load_pic_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_L), self)
-        self.load_pic_shortcut.activated.connect(self.load_pic)
+        self.load_pic_shortcut.activated.connect(self.open_picture)
 
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
+        self.take_pic_button.setToolTip('Takes a picture with the current settings.\n Shortcut: <T>')
         self.load_pic_button = self.findChild(QtWidgets.QPushButton, 'load_pic_button')
+        self.load_pic_button.setToolTip('Load a picture to be displayed.\n Shortcut: <L>')
+        self.open_picture_dialog = QtWidgets.QFileDialog(self)
+        self.open_picture_dialog.setWindowTitle('Open Picture')
+        self.open_picture_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
+        self.open_picture_dialog.setOption(QtWidgets.QFileDialog.DontResolveSymlinks, True)
+        self.open_picture_dialog.setViewMode(QtWidgets.QFileDialog.Detail)
         self.reset_button = self.findChild(QtWidgets.QPushButton, 'reset_button')
 
         # camera push buttons connections
         self.preview_button.clicked.connect(self.preview)
         self.take_pic_button.clicked.connect(self.take_pic)
-        self.load_pic_button.clicked.connect(self.load_pic)
+        self.load_pic_button.clicked.connect(self.open_picture)
         self.reset_button.clicked.connect(self.reset_values)
 
         # set profile names
@@ -326,6 +333,15 @@ class UI(QtWidgets.QMainWindow):
         if value == 0:
             return
 
+    def open_picture(self):
+        home_path = str(self.pic_directory)
+        self.open_picture_dialog.setDirectory(home_path)
+        self.open_picture_dialog.open()
+        self.open_picture_dialog.finished.connect(self.display_picture)
+
+    def display_picture(self):
+        pass
+
     def set_statusbar(self):
         path = Path(self.pic_directory, f"{self.pic_name}_{{timestamp}}.{self.pic_format}")
         self.pic_dir_line_edit.setStatusTip(f'{path}')
@@ -426,9 +442,11 @@ class UI(QtWidgets.QMainWindow):
     def eventFilter(self, a0: 'QtCore.QObject', a1: 'QtCore.QEvent') -> bool:
         if a1.type() == QtCore.QEvent.WindowDeactivate:
             self.cam.stop_preview()
+            self.PREVIEW_RUNNING = False
             self.preview_button.setChecked(False)
         if a1.type() == QtCore.QEvent.WindowStateChange:
             self.cam.stop_preview()
+            self.PREVIEW_RUNNING = False
             self.preview_button.setChecked(False)
         return False
 
@@ -540,9 +558,6 @@ class UI(QtWidgets.QMainWindow):
 
     def resize_window(self):
         self.showMaximized()
-
-    def load_pic(self):
-        pass
 
     def reset_values(self):
         self.brightness_spinbox.setValue(self.default_settings['brightness'])
