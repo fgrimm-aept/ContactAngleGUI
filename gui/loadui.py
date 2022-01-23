@@ -183,12 +183,12 @@ class UI(QtWidgets.QMainWindow):
         self.preview_button = self.findChild(QtWidgets.QPushButton, 'preview_button')
         self.preview_button.setCheckable(True)
         self.preview_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_P), self)
-        self.preview_shortcut.activated.connect(self.preview)
+        self.preview_shortcut.activated.connect(self.toggle_preview)
         self.preview_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Space), self)
-        self.preview_shortcut_space.activated.connect(self.preview)
+        self.preview_shortcut_space.activated.connect(self.toogle_preview)
         self.take_pic_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_T), self)
         self.take_pic_shortcut.activated.connect(self.take_pic)
-        self.take_pic_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_Meta + QtCore.Qt.Key_Space),
+        self.take_pic_shortcut_space = QtWidgets.QShortcut(QtGui.QKeySequence(f'Ctrl + {QtCore.Qt.Key_Space}'),
                                                            self)
         self.take_pic_shortcut_space.activated.connect(self.take_pic)
 
@@ -479,19 +479,27 @@ class UI(QtWidgets.QMainWindow):
                             self.preview_frame.frameGeometry().height())
         print(self.preview_button.isChecked())
         if self.preview_button.isChecked():
-            self.PREVIEW_RUNNING = True
+
             self.start_preview()
         else:
-            self.PREVIEW_RUNNING = False
+
             self.stop_preview()
 
     def start_preview(self):
         self.x_offset_slider.setValue(self.X_OFFSET)
         self.y_offset_slider.setValue(self.Y_OFFSET)
         self.cam.start_preview(fullscreen=False, window=self.PREVIEW_POS)
+        self.PREVIEW_RUNNING = True
 
     def stop_preview(self):
         self.cam.stop_preview()
+        self.PREVIEW_RUNNING = False
+
+    def toggle_preview(self):
+        if self.PREVIEW_RUNNING:
+            self.stop_preview()
+        elif not self.PREVIEW_RUNNING:
+            self.start_preview()
 
     def take_pic(self):
         print('Taking Pic')
