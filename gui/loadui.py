@@ -82,12 +82,12 @@ class UI(QtWidgets.QMainWindow):
         self.cam = PiCamera()
 
         # load the ui file
-        ui_path = Path(Path.cwd(), 'ui', 'main_window.ui')
+        ui_path = Path('/home/pi/Desktop/ContactAngleSystem/scripts/', 'ui', 'main_window.ui')
         uic.loadUi(ui_path, self)
 
         # Directories Setup
-        self.paths = {'profiles': Path(Path.cwd(), 'profiles'),
-                      'pictures': Path(Path.cwd(), 'pictures')}
+        self.paths = {'profiles': Path('/home/pi/Desktop/ContactAngleSystem', 'profiles'),
+                      'pictures': Path('/home/pi/Desktop/ContactAngleSystem', 'pictures')}
         for path in self.paths.values():
             path.mkdir(parents=True, exist_ok=True)
 
