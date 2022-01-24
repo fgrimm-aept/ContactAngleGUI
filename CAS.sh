@@ -1,1 +1,1 @@
-sudo python main.py
+sudo python /home/pi/Desktop/ContactAngleSystem/scripts/main.py
