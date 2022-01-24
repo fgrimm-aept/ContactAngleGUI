@@ -1351,13 +1351,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>141</width>
+          <width>191</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
+          <width>193</width>
           <height>80</height>
          </size>
         </property>
@@ -1390,13 +1390,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>141</width>
+          <width>191</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
+          <width>193</width>
           <height>80</height>
          </size>
         </property>
@@ -1429,13 +1429,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>141</width>
+          <width>191</width>
           <height>80</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
+          <width>193</width>
           <height>80</height>
          </size>
         </property>
@@ -1455,48 +1455,6 @@
         </property>
         <property name="text">
          <string>&amp;Load Picture</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="open_dropui_button">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>141</width>
-          <height>80</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>80</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>12</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="autoFillBackground">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Open &amp;Dropui</string>
         </property>
        </widget>
       </item>

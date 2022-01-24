@@ -1,6 +1,6 @@
 import json
 import logging
-import subprocess
+# import subprocess
 import sys
 import time
 from datetime import datetime
@@ -198,8 +198,8 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_shortcut.activated.connect(self.take_pic)
         self.load_pic_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_L), self)
         self.load_pic_shortcut.activated.connect(self.open_picture)
-        self.open_dropui_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_D), self)
-        self.open_dropui_shortcut.activated.connect(self.open_dropui)
+        # self.open_dropui_shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.Key_D), self)
+        # self.open_dropui_shortcut.activated.connect(self.open_dropui)
 
         self.take_pic_button = self.findChild(QtWidgets.QPushButton, 'pic_button')
         self.take_pic_button.setToolTip('Takes a picture with the current settings.\n Shortcut: "T"')
@@ -211,8 +211,8 @@ class UI(QtWidgets.QMainWindow):
         self.open_picture_dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
         self.open_picture_dialog.setOption(QtWidgets.QFileDialog.DontResolveSymlinks, True)
         self.open_picture_dialog.setViewMode(QtWidgets.QFileDialog.Detail)
-        self.open_dropui_button = self.findChild(QtWidgets.QPushButton, 'open_dropui_button')
-        self.open_dropui_button.setToolTip('Opens DropUI Website.\n Shortcut: "D"')
+        # self.open_dropui_button = self.findChild(QtWidgets.QPushButton, 'open_dropui_button')
+        # self.open_dropui_button.setToolTip('Opens DropUI Website.\n Shortcut: "D"')
         self.reset_button = self.findChild(QtWidgets.QPushButton, 'reset_button')
 
         # camera push buttons connections
@@ -220,7 +220,7 @@ class UI(QtWidgets.QMainWindow):
         self.take_pic_button.clicked.connect(self.take_pic)
         self.load_pic_button.clicked.connect(self.open_picture)
         self.reset_button.clicked.connect(self.reset_values)
-        self.open_dropui_button.clicked.connect(self.open_dropui)
+        # self.open_dropui_button.clicked.connect(self.open_dropui)
 
         # set profile names
         self.profile_name_save_label = self.findChild(QtWidgets.QLabel, 'profile_name_save_label')
@@ -331,10 +331,10 @@ class UI(QtWidgets.QMainWindow):
         self.preview_status_info.setPalette(self.red)
 
         # Dropui Link
-        self.link = 'https://www.chemeng.ntua.gr/dropui/9UAJFkq2xlj2Wv7s'
+        # self.link = 'https://www.chemeng.ntua.gr/dropui/9UAJFkq2xlj2Wv7s'
 
-    def open_dropui(self):
-        subprocess.Popen(['/usr/bin/chromium-browser', '--no-sandbox',self.link])
+    # def open_dropui(self):
+    #     subprocess.Popen(['/usr/bin/chromium-browser', '--no-sandbox',self.link])
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
