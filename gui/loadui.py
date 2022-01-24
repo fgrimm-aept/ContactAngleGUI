@@ -90,6 +90,7 @@ class UI(QtWidgets.QMainWindow):
                       'pictures': Path('/home/pi/Desktop/ContactAngleSystem', 'pictures')}
         for path in self.paths.values():
             path.mkdir(parents=True, exist_ok=True)
+            chown(path, 1000, 1000)
 
         # Save Cam Settings in dict
         self.default_settings = {'brightness': 50,
