@@ -333,7 +333,7 @@ class UI(QtWidgets.QMainWindow):
         self.link = 'https://www.chemeng.ntua.gr/dropui/9UAJFkq2xlj2Wv7s'
 
     def open_dropui(self):
-        subprocess.Popen(['chromium-webbrowser', self.link], user=1000)
+        subprocess.Popen(['/usr/bin/chromium-browser', '--no-sandbox',self.link])
 
     def set_pic_format(self):
         self.pic_format = self.pic_format_combobox.currentText()
